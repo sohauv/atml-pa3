@@ -1,0 +1,23 @@
+{
+  "dataset": "math",
+  "questions": 1000,
+  "held_out": 800,
+  "scorer": {
+    "rules": "pa3-answer-rules-v2-bounded",
+    "math-verify": "0.8.0",
+    "sympy": "1.13.1",
+    "latex2sympy2_extended": "1.10.2",
+    "numpy": "2.2.5",
+    "pandas": "3.1.0",
+    "pyarrow": "26.0.0",
+    "mathvista_source": "https://github.com/lupantech/MathVista/blob/c5acd37d75a8c8f9756cb66c78fe2e54fa2c31fb/evaluation/calculate_score.py",
+    "missing": "NO_ANSWER",
+    "grouping": "source-rollout-order, representative-equivalence; no gold consulted",
+    "math_verify_timeouts": "persistent isolated symbolic worker; timeout/error returns False and is logged",
+    "comparison_timeout_seconds": 10
+  },
+  "orders": 10,
+  "seed": 6304,
+  "symbolic_failed_comparisons": 40,
+  "symbolic_timeout_comparisons": 40
+}

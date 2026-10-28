@@ -1,0 +1,94 @@
+{
+  "length_correctness": {
+    "mean": -0.08430439222202836,
+    "valid_questions": 634
+  },
+  "logp": {
+    "score_correctness_correlation": {
+      "mean": 0.027730303257751342,
+      "valid_questions": 634
+    },
+    "score_length_correlation": {
+      "mean": 0.37938168066143546,
+      "valid_questions": 795
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.0159375,
+      "valid_questions": 800
+    }
+  },
+  "certainty": {
+    "score_correctness_correlation": {
+      "mean": 0.055003527636428115,
+      "valid_questions": 634
+    },
+    "score_length_correlation": {
+      "mean": 0.3130317940191448,
+      "valid_questions": 795
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.03484375,
+      "valid_questions": 800
+    }
+  },
+  "shortest": {
+    "score_correctness_correlation": {
+      "mean": 0.08430439222202836,
+      "valid_questions": 634
+    },
+    "score_length_correlation": {
+      "mean": -1.0,
+      "valid_questions": 795
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.039375,
+      "valid_questions": 800
+    }
+  },
+  "vision": {
+    "score_correctness_correlation": {
+      "mean": 0.04812412515058369,
+      "valid_questions": 634
+    },
+    "score_length_correlation": {
+      "mean": -0.6718202758386383,
+      "valid_questions": 795
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.0378125,
+      "valid_questions": 800
+    }
+  },
+  "visconf": {
+    "score_correctness_correlation": {
+      "mean": 0.09793461392973217,
+      "valid_questions": 634
+    },
+    "score_length_correlation": {
+      "mean": -0.3154337065726418,
+      "valid_questions": 795
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.07390625,
+      "valid_questions": 800
+    }
+  },
+  "token_fusion": {
+    "score_correctness_correlation": {
+      "mean": 0.09097993696343018,
+      "valid_questions": 634
+    },
+    "score_length_correlation": {
+      "mean": -0.3557935669570968,
+      "valid_questions": 795
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.07203125,
+      "valid_questions": 800
+    }
+  },
+  "confidence_vision": {
+    "mean_question_correlation": -0.2093439062735405,
+    "valid_questions": 800
+  }
+}

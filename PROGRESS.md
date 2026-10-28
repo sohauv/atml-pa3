@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 25/148 mandatory requirements (16.9%).**
+**Overall verified completion: 52/148 mandatory requirements (35.1%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -15,10 +15,10 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work
 
-- Parent: Task 1 Modal pilot, budget/call monitoring, integration, Git, and this tracker.
-- Task 1 review subagent: tiny-Qwen integration tests and evaluation/recovery validation.
-- Task 2 subagent: COCO/VQAv2 splits, visual interface, curriculum, and image-control evaluation.
-- Task 3 subagent: supplied-data download, equivalence/scoring, offline analysis and live inference.
+- Parent: monitor the one A100 FullFT continuation toward625; budget, integration, Git and tracker.
+- Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
+- Task2: fullmanifest and ID-onlyexports validated; selected21749images downloading; noTask2GPUrun.
+- Task3: both1000-question offline analyses completed; required liveGPUcomparison is nowrunning.
 
 ## Manual checklist
 
@@ -153,29 +153,29 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ### Task 3: supplied data, splits and correctness (pages 11-12)
 
-- [ ] T301 Use supplied32rollouts per1000questions for Qwen2.5-3B MATH and Qwen2.5-VL3B MathVista; no offline regeneration.
-- [ ] T302 Read supplied README and join generations/probability/attention on(dataset,sample_id,rollout_id), verify all token-list alignments and termination exclusions.
-- [ ] T303 Lexicographically sort question IDs, default_rng6304 permutation, first200development/rest800heldout, all rollouts grouped; save IDs.
-- [ ] T304 Save ten seeded random rollout orders/question, nested prefixesN1/2/4/8/16/32, reuse across all methods/policies.
-- [ ] T305 Stored extracted answers are used; math-verify mathematical equivalence and released MathVista metadata normalization/choiceletters/precision; scorer fixed/versioned before heldout.
-- [ ] T306 Form equivalence groups without gold; use same equivalence for grading; missing extraction oneNO_ANSWER group always incorrect, retained in votes/cost/accuracy.
+- [x] T301 Use supplied32rollouts per1000questions for Qwen2.5-3B MATH and Qwen2.5-VL3B MathVista; no offline regeneration.
+- [x] T302 Read supplied README and join generations/probability/attention on(dataset,sample_id,rollout_id), verify all token-list alignments and termination exclusions.
+- [x] T303 Lexicographically sort question IDs, default_rng6304 permutation, first200development/rest800heldout, all rollouts grouped; save IDs.
+- [x] T304 Save ten seeded random rollout orders/question, nested prefixesN1/2/4/8/16/32, reuse across all methods/policies.
+- [x] T305 Stored extracted answers are used; math-verify mathematical equivalence and released MathVista metadata normalization/choiceletters/precision; scorer fixed/versioned before heldout.
+- [x] T306 Form equivalence groups without gold; use same equivalence for grading; missing extraction oneNO_ANSWER group always incorrect, retained in votes/cost/accuracy.
 - [x] T307 Earliest-supporting-rollout tie breaks, average tied RWC ranks; all selectors return sole candidate atN1. Evidence: selector/regressiontests include mathematicalfloatvote ties, average tiedranks andallN1rules.
-- [ ] T308 Average over orders within questions then across questions; generated-token sum costs, FirstAns consumes only first candidate.
-- [ ] T309 Main accuracy differences have1000 paired question-bootstrap95% intervals after averaging orders.
+- [x] T308 Average over orders within questions then across questions; generated-token sum costs, FirstAns consumes only first candidate.
+- [x] T309 Main accuracy differences have1000 paired question-bootstrap95% intervals after averaging orders.
 
 ### Task 3: fixed-budget selection and signal analysis (pages 12-13)
 
-- [ ] T310 FirstAns accuracy/oraclecoverage/distinctanswergroups for everyN, decompose no-correct-generated versus available-but-missed.
-- [ ] T311 Implement mean sampled-token logp and full-distribution KL self-certainty from raw supplied measurements.
-- [ ] T312 Normalize visual attention by image+prompt+generated eligible totals, then average token visual engagement.
-- [ ] T313 VisConf token KL calibration pools current prefix only, linear5th/95thpercentiles, clip0-1/epsilon1e-8; mean confidence times mean vision.
+- [x] T310 FirstAns accuracy/oraclecoverage/distinctanswergroups for everyN, decompose no-correct-generated versus available-but-missed.
+- [x] T311 Implement mean sampled-token logp and full-distribution KL self-certainty from raw supplied measurements.
+- [x] T312 Normalize visual attention by image+prompt+generated eligible totals, then average token visual engagement.
+- [x] T313 VisConf token KL calibration pools current prefix only, linear5th/95thpercentiles, clip0-1/epsilon1e-8; mean confidence times mean vision.
 - [x] T314 RWC descending average ranks and (N-rank)/(N-1) weighted answer votes, correct N1 handling. Evidence: numericalrank/consensus/N1tests andfullfixturepipeline passed.
-- [ ] T315 Both datasets compare FirstAns/self-consistency/highestlogp/highestcertainty/certaintyRWC at allN.
-- [ ] T316 MathVista additionally highestvision/visionRWC/highestVisConf/VisConfRWC at allN.
-- [ ] T317 AtN32 analyze within-question length/score/correctness associations and top-bottom-scorequartile correctness; shortest-rollout control.
-- [ ] T318 MathVista token confidence-vision correlation per rollout, aggregate by question; tokenwise-fusion ablation under highestscore/RWC and covariance identity.
-- [ ] T319 Fixed illustrative trajectories examine signal agreement/disagreement/variation; no causal grounding claim from attention alone.
-- [ ] T320 Save question results/candidateIDs/selectedanswers/costs and distinguish sampling opportunity versus selection gap.
+- [x] T315 Both datasets compare FirstAns/self-consistency/highestlogp/highestcertainty/certaintyRWC at allN.
+- [x] T316 MathVista additionally highestvision/visionRWC/highestVisConf/VisConfRWC at allN.
+- [x] T317 AtN32 analyze within-question length/score/correctness associations and top-bottom-scorequartile correctness; shortest-rollout control.
+- [x] T318 MathVista token confidence-vision correlation per rollout, aggregate by question; tokenwise-fusion ablation under highestscore/RWC and covariance identity.
+- [x] T319 Fixed illustrative trajectories examine signal agreement/disagreement/variation; no causal grounding claim from attention alone.
+- [x] T320 Save question results/candidateIDs/selectedanswers/costs and distinguish sampling opportunity versus selection gap.
 
 ### Task 3: live comparison (pages 12-13)
 
@@ -189,16 +189,16 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ### Task 3: adaptive sampling and evidence (pages 13-15)
 
-- [ ] T328 Simulate saved orders; check after4/8/16 else32; both controllers return current self-consistency answer.
-- [ ] T329 Agreement stop requires unique nonmissing leader supported byfractiontau; quality additionally same RWCwinner and normalizedmargin>=gamma.
-- [ ] T330 Quality uses certainty forMATH/VisConf forMathVista; only revealedprefix for scores/calibration/ranks; onegroup runnerupvote0.
-- [ ] T331 On development searchtau.5/.625/.75/.875/1 and gamma0/.1/.25/.5 plusalways32fallback; choose lowesttokencost within1percentagepoint of fixed32accuracy.
-- [ ] T332 Policy ties choose higheraccuracy thensmallertau/gamma; freeze selected policies before heldout.
-- [ ] T333 Heldoutaccuracy/meantokens/meanrollouts/stoppingdistribution and fixedN comparisons; analyze incorrectearlystops and fixed32recoveries.
-- [ ] T334 Accuracy/oraclecoverage curves for bothdatasets, compactmethodtable and failuredecomposition.
-- [ ] T335 Signal-analysis figures/tables forlength/correctness/confidencevision/tokenfusion.
+- [x] T328 Simulate saved orders; check after4/8/16 else32; both controllers return current self-consistency answer.
+- [x] T329 Agreement stop requires unique nonmissing leader supported byfractiontau; quality additionally same RWCwinner and normalizedmargin>=gamma.
+- [x] T330 Quality uses certainty forMATH/VisConf forMathVista; only revealedprefix for scores/calibration/ranks; onegroup runnerupvote0.
+- [x] T331 On development searchtau.5/.625/.75/.875/1 and gamma0/.1/.25/.5 plusalways32fallback; choose lowesttokencost within1percentagepoint of fixed32accuracy.
+- [x] T332 Policy ties choose higheraccuracy thensmallertau/gamma; freeze selected policies before heldout.
+- [x] T333 Heldoutaccuracy/meantokens/meanrollouts/stoppingdistribution and fixedN comparisons; analyze incorrectearlystops and fixed32recoveries.
+- [x] T334 Accuracy/oraclecoverage curves for bothdatasets, compactmethodtable and failuredecomposition.
+- [x] T335 Signal-analysis figures/tables forlength/correctness/confidencevision/tokenfusion.
 - [ ] T336 Live-comparison table and revision-transition evidence on50questions.
-- [ ] T337 Adaptive threshold/costaccuracy/distribution figures/tables, matchedobservedcost comparisons.
+- [x] T337 Adaptive threshold/costaccuracy/distribution figures/tables, matchedobservedcost comparisons.
 - [ ] T338 Aligned selection/refinement/stopping examples with statedselectionrule.
 - [ ] T339 Interpret token cost as proxy, note scoring/attention/prefill overhead and modeldataset confounding; no gold/futurecandidate leakage.
 - [ ] T340 Address five Task3 themes: exploration/selection, evidence/consensus, breadth/refinement, adaptiveallocation, compute/reliability.
@@ -226,6 +226,31 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Modal jobs and spending
 
+### Completed offline-analysis evidence (29 October)
+
+Task3 requirements checked above are verified by complete original-input runs at
+`outputs/task3/math-v3` and `outputs/task3/mathvista-v1`, each1000questions with
+200development/800heldout, ten savedorders, allsixbudgets and prescribedselectors.
+Bothcompletion markers, frozenpolicies, perquestion/perorder records, paired1000
+question-bootstrap intervals, signalanalyses, deterministicexamples and inspected
+figures exist. Smallsubmission artifacts are exported to results/task3_test_time;
+sourcehash manifests retain traceability to the preserved detailedrawresults.
+
+| Held-out result atN32 | MATH | MathVista |
+|---|---:|---:|
+| FirstAns accuracy |64.1875%|53.6000%|
+| Self-consistency accuracy |73.6250%|61.6750%|
+| Self-certaintyRWC accuracy |75.3000%|62.5000%|
+| VisConfRWC accuracy |Notapplicable|63.1250%|
+| Oraclecoverage |91.1250%|89.5000%|
+| Full32 generatedtokens/question |21347.0175|8897.7575|
+
+These are supplied-rollout CPU analyses, not newlygenerated or Task1model scores.
+The fixed/versioned MATHscorer recorded40symboliccomparison timeouts and returned
+false for thosecomparisons; noquestions/candidates were removed. MathVista has
+zero symbolic failures. Fullscorer/error records accompany the results; the
+timeout rule is disclosed rather than treating ambiguous comparisons as proven.
+
 Authorization: $10 monthly usage, $0 out-of-pocket spend, all available allowance for
 PA3. Billing limits are never modified. Conservative local reservations are **not**
 claimed to equal provider-billed usage.
@@ -239,6 +264,8 @@ claimed to equal provider-billed usage.
 | full-pilot resume attempt2 | A10040GB | Completed:8->40updates,1280examples | $0.560254 conservative estimate | Resume succeeded;482.28s remote runtime, recovery preserved |
 | L4 cost benchmark | L4 | Cancelled while pending, no worker/GPU execution | $0.310896 retained conservatively | CallgraphPENDING/task_idempty; Modal logs confirmed unavailableL4capacity for40+minutes |
 | FullFT required midpoint continuation | A10040GB | Submitted/running:40->625updates,100-minute ceiling | $5.404266 reserved | Existing run/checkpoint lineage; prescribed312/625 recovery checkpoints |
+| FullFT continuation outcome | A10040GB | Completed625updates/20000examples; noAMPskips | $5.036586 conservative estimate | Prescribedstep0312/0625 saved; midpointdisplacement10.1242, peak20.4156GiB; full1250run stillincomplete |
+| Task3livecomparison | A10040GB | Submitted/running,40-minute ceiling | $2.225286 reserved | task3-live-20261029; fixed50MATHheldoutIDs and pinnedQwen2.5-3B; resumablepercalls |
 
 Local original pilot/preparation reservations were reconciled only after confirmed
 successful completion, using their entire local app lifetimes plus the original
@@ -254,6 +281,7 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 | `c4ca244d0a8a1472ad0b534a046add9c9e1268d4` | Tested budget reservations, persistence helpers, safeguards and scaffold docs | Succeeded, `origin/dev/pa3-experiments` |
 | `3e1243c52243989bf0074649de785066a499ffa5` | Manual-derived148-item tracker and verified-percentage calculator | Succeeded, `origin/dev/pa3-experiments` |
 | `c0a3cacb69dd4c27586ebf88c123a6a64b2ff508` | Tested Task1 methods/recovery/evaluation code and budget-gated Modal runner | Succeeded, `origin/dev/pa3-experiments` |
+| `3c9263e3a7ce1341bc2177bf8223508e530433bc` |60-test-verifiedVLM/test-timeanalysis/figurecode and actualvalidatedTask2ID-onlysplits | Succeeded, `origin/dev/pa3-experiments` |
 
 ## Blockers and next steps
 
@@ -268,10 +296,9 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Task2 source preparation and fullmanifest validation completed; ID-only submission
   exports are in results/task2_vlm/selection_ids. Selected21749image download is
   active; GPU feature caching/training/finaltest have not run.
-- AllTask3 suppliedparquets and pinnedmetadata downloaded/validated. MATHv1/v2
-  partialattempts are preserved; a pathological symbolicexpression stalled the
-  unboundedscorer. Versioned10s isolatedcomparison timeouts now passregressiontests;
-  MATHv3 and MathVista analysis continue locally, with no final scores claimed yet.
+- AllTask3 offlineanalyses completed; earlierMATHv1/v2 partialattempts remain
+  preserved. Livecomparison runs separately onA100. The625-update FullFTmidpoint
+  is saved; requiredfull1250training and benchmarkconditions remain incomplete.
 - The student must write/interpret the PDF report and submit it to LMS; AI-written
   report language is prohibited by the manual. Code, numeric metrics and plot tools
   can be prepared autonomously.

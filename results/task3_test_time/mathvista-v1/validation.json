@@ -1,0 +1,19 @@
+{
+  "dataset": "mathvista",
+  "actual_result_checks": {
+    "all_N1_methods_agree": true,
+    "accuracy_bounded_by_oracle": true,
+    "failure_decomposition_closes": true,
+    "held_out_per_question_rows": 57600,
+    "stop_distributions_sum_to_one": true,
+    "development_evaluation_disjoint": true
+  },
+  "figures_visually_checked": [
+    "accuracy_vs_candidates.png",
+    "accuracy_vs_tokens.png",
+    "adaptive_cost_and_stops.png",
+    "failure_decomposition.png",
+    "fixed_trajectories.png",
+    "signal_quartiles.png"
+  ]
+}

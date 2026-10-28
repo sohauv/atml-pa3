@@ -1,0 +1,402 @@
+[
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "b": "2^{100}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "b": "3^{5050}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "b": "1",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "b": "3^{5050} (2 + \\sqrt{2 + \\sqrt{2}})",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{5050}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "3^{5100} \\cdot 2^{50}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "2^{100}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "3^{5050}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "1",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "3^{5050} (2 + \\sqrt{2 + \\sqrt{2}})",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "a^{5050}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "3^{5100} \\cdot 2^{50}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{3^{101}} - 3a^{3^{100}}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{3^{101}} - 3a^{3^{100}}",
+    "b": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "2^{5150}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "2^{5150}",
+    "b": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{3^{100}} - 3a^{3^{99}}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{3^{100}} - 3a^{3^{99}}",
+    "b": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "2",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "2",
+    "b": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "2^{100}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "3^{5050}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "1",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "3^{5050} (2 + \\sqrt{2 + \\sqrt{2}})",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "a^{5050}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "3^{5100} \\cdot 2^{50}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "a^{3^{101}} - 3a^{3^{100}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "2^{5150}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "a^{3^{100}} - 3a^{3^{99}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "2",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "6^{50} \\cdot 3^{5050}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "3^{2575.5}",
+    "b": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "3^{2575.5}",
+    "b": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "3^{2575.5}",
+    "b": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "\\left( \\sqrt{2 + \\sqrt{2 + \\sqrt{2}}} \\right)^{\\frac{3^{101} - 3}{2}}",
+    "b": "4096 \\sqrt{2}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "(2 + \\sqrt{2 + \\sqrt{2}})^{2525}",
+    "b": "4096 \\sqrt{2}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  },
+  {
+    "dataset": "math",
+    "sample_id": "test:4928",
+    "a": "a^{100} 2^{\\frac{3^{100} - 1}{2}}",
+    "b": "4096 \\sqrt{2}",
+    "status": "timeout",
+    "stage": "verify",
+    "seconds": 10,
+    "decision": false
+  }
+]

@@ -1,0 +1,105 @@
+{
+  "selection_rule": "first three incorrect early stops per family in saved held-out ID order then saved rollout order",
+  "examples": {
+    "agreement": [
+      {
+        "sample_id": "358",
+        "order": 4,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          0,
+          19,
+          25,
+          14
+        ],
+        "early_answer": "D",
+        "fixed32_answer": "A",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.3333333333333333
+      },
+      {
+        "sample_id": "358",
+        "order": 5,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          16,
+          18,
+          14,
+          10
+        ],
+        "early_answer": "D",
+        "fixed32_answer": "A",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.16666666666666669
+      },
+      {
+        "sample_id": "358",
+        "order": 6,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          8,
+          6,
+          27,
+          22
+        ],
+        "early_answer": "E",
+        "fixed32_answer": "A",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.6666666666666667
+      }
+    ],
+    "quality_aware": [
+      {
+        "sample_id": "358",
+        "order": 4,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          0,
+          19,
+          25,
+          14
+        ],
+        "early_answer": "D",
+        "fixed32_answer": "A",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.3333333333333333
+      },
+      {
+        "sample_id": "358",
+        "order": 5,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          16,
+          18,
+          14,
+          10
+        ],
+        "early_answer": "D",
+        "fixed32_answer": "A",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.16666666666666669
+      },
+      {
+        "sample_id": "358",
+        "order": 6,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          8,
+          6,
+          27,
+          22
+        ],
+        "early_answer": "E",
+        "fixed32_answer": "A",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.6666666666666667
+      }
+    ]
+  }
+}

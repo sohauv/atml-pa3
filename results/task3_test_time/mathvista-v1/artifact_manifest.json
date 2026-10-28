@@ -1,0 +1,125 @@
+{
+  "raw_output_relative": "outputs/task3/mathvista-v1",
+  "files": {
+    "adaptive_per_question.csv": {
+      "bytes": 89552,
+      "sha256": "99951cac32eee30793861a048bce704d67dce6cc89347b46a625c3395d84809e"
+    },
+    "adaptive_summary.csv": {
+      "bytes": 354,
+      "sha256": "83cb0ca2d2a5069cc2e3653866fc342bb7ed862e4e2ff414e8cfbfa83c97b50b"
+    },
+    "complete.json": {
+      "bytes": 822,
+      "sha256": "a218de913df1009212fd5f3f2796be689c303e9e2f8255d43e2dbc38cb96c28e"
+    },
+    "data_provenance.json": {
+      "bytes": 299,
+      "sha256": "db7aabeaa974e7b6729d78b654d7a8124f1287b0e462f6aad40e84f9bc8ab4a4"
+    },
+    "groups.json": {
+      "bytes": 551364,
+      "sha256": "f550f4ccb1ada59b19c585b67d2b159863daa2e10eeba70d2d5c9db152ca42d0"
+    },
+    "illustrations.json": {
+      "bytes": 190290,
+      "sha256": "b883ad25daa57298e679b5620b9a81d4318973bf0ec4592094110bc6e829bae2"
+    },
+    "input_summary.json": {
+      "bytes": 152,
+      "sha256": "66e15f15cbf32698917b2cd13fe83176a29e8f36f85c9d5f9871fe024e64afe1"
+    },
+    "metadata_provenance.json": {
+      "bytes": 191,
+      "sha256": "1c412def1fb0d929dbda30c8edc983e7d1373ebff8fe89debac4b985f1d18132"
+    },
+    "orders.json": {
+      "bytes": 3576896,
+      "sha256": "e7ccccb58d105d61d6ae39e04c80681dda266aab1c7147f7665a86908a9570dc"
+    },
+    "paired_intervals.json": {
+      "bytes": 13440,
+      "sha256": "19f54add759773c57ea7bef1142527fa5d2b96b6d4f9ce800d6af2a42294fd50"
+    },
+    "per_order.jsonl.gz": {
+      "bytes": 1807487,
+      "sha256": "34bdb630900684939b51ed5ff42bb596b491ccdf4d1fcb61a214bc130bf7f16d"
+    },
+    "per_question.csv": {
+      "bytes": 2539594,
+      "sha256": "75d2a02cc919f63a1a5c6faf2706863f91d539f86287a3034ab7c5aceadeb4bd"
+    },
+    "policies.json": {
+      "bytes": 4616,
+      "sha256": "faefd808d2ec78db0fa858d5f1890d18e40363ce560259af3e8568924e5de6bf"
+    },
+    "progress.json": {
+      "bytes": 80,
+      "sha256": "9da0d50fd5afa553e06159e2ca6145a6ee395537098b66b2c014b7f5cb095d4e"
+    },
+    "scorer.json": {
+      "bytes": 600,
+      "sha256": "c7cf40e289fc9320df870609c35b26c15817db12a0a044e5c981f7d4d6ac55ad"
+    },
+    "scorer_diagnostics.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "selection_examples.json": {
+      "bytes": 3987,
+      "sha256": "8043898aa5fab7d607c4055cecd9634dfc06fec99dcc307faecc44f5bf03d236"
+    },
+    "signals.json": {
+      "bytes": 3183881,
+      "sha256": "0752326da7c7e9450c05621d9c70544f5e80368c51bf3e8c11bd5b387a5155b4"
+    },
+    "signal_summary.json": {
+      "bytes": 2324,
+      "sha256": "bdcba3b2b6a2a5fb8ced76ba4e3a4f72ddc7021fa38145a8e7d47f2ce2f42348"
+    },
+    "splits.json": {
+      "bytes": 12578,
+      "sha256": "0ed3d4c5abdd58cbf055d8c64f551f007a700618c0c62e0a4638bde9a4925f36"
+    },
+    "stopping_examples.json": {
+      "bytes": 2408,
+      "sha256": "ab4a386b3fb00b10076e0325e70bcb06a6789316aec4c16bfd04c38685754662"
+    },
+    "summary.csv": {
+      "bytes": 5099,
+      "sha256": "3a2065e53749eaaabf95c5ab626bdd865a668b08b5ebb9413f206b8475e332fd"
+    },
+    "figures/accuracy_vs_candidates.pdf": {
+      "bytes": 22443,
+      "sha256": "7c9d1079e655faccb6d463118c6b79fe2c0bfa6249368fedd96fdbbca0d3bc84"
+    },
+    "figures/accuracy_vs_candidates.png": {
+      "bytes": 85195,
+      "sha256": "d74dd4f26771c66b555ee7f61cb90b26bbc6d166b230442f9c9f3e01c2657431"
+    },
+    "figures/accuracy_vs_tokens.pdf": {
+      "bytes": 21413,
+      "sha256": "c9ba9392db66ea4be849ed706453f1b636dbea0145cb694cc81c8f6ca13c914f"
+    },
+    "figures/accuracy_vs_tokens.png": {
+      "bytes": 81984,
+      "sha256": "debd82e99873c8cecb32d0408370eee922e0942cdf44de533bdfd29dae4e92cd"
+    },
+    "figures/adaptive_cost_and_stops.png": {
+      "bytes": 73115,
+      "sha256": "8e9f1a26ea65dfa29182776e5114099f2dfa5e1bce668b6e77a9443fd7f38385"
+    },
+    "figures/failure_decomposition.png": {
+      "bytes": 57092,
+      "sha256": "becca1db6b93443a53e50ecd61e310214312b7689128560a6b9784fe0a8af203"
+    },
+    "figures/fixed_trajectories.png": {
+      "bytes": 435709,
+      "sha256": "48d4c1124d98098d30d89ef7b31aac1f79f6cc165bdcfada9b79a50fdb990bc0"
+    },
+    "figures/signal_quartiles.png": {
+      "bytes": 34436,
+      "sha256": "1b32663f6135fba15762d94327cda96c25fc26f15d63dd698e6a2e138fc66817"
+    }
+  }
+}

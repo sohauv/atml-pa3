@@ -1,0 +1,25 @@
+{
+  "data": {
+    "seed": 6304,
+    "revisions": {
+      "model": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "metamath": "aa4f34d3d2d3231299b5b03d9b3e5a20da45aa18",
+      "gsm8k": "740312add88f781978c0658806c59bc2815b9866"
+    },
+    "normalization": "NFKC + casefold + collapse whitespace",
+    "max_sequence_length": 2048,
+    "enable_thinking": false,
+    "counts": {
+      "scanned": 40002,
+      "retained": 40000,
+      "too_long": 2
+    },
+    "mean_sequence_length": 248.6939,
+    "max_observed_length": 1942,
+    "mean_response_tokens": 177.484725,
+    "sha256": "644a46f9ab7a8d368499b2054229cc7324614d97596fbdee1ac3ab5cbb584de9"
+  },
+  "preprocessing_seconds": 1.8439999962538423e-06,
+  "reference_bytes": 2384199680,
+  "basis_bytes": 0
+}

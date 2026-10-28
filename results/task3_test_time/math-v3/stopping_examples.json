@@ -1,0 +1,113 @@
+{
+  "selection_rule": "first three incorrect early stops per family in saved held-out ID order then saved rollout order",
+  "examples": {
+    "agreement": [
+      {
+        "sample_id": "test:2460",
+        "order": 2,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          10,
+          7,
+          14,
+          8
+        ],
+        "early_answer": "58",
+        "fixed32_answer": "58",
+        "fixed32_correct": false,
+        "agreement": 0.75,
+        "rwc_margin": 1.0
+      },
+      {
+        "sample_id": "test:2460",
+        "order": 3,
+        "stopped_at": 8,
+        "revealed_candidate_ids": [
+          2,
+          22,
+          25,
+          9,
+          12,
+          8,
+          0,
+          11
+        ],
+        "early_answer": "58",
+        "fixed32_answer": "58",
+        "fixed32_correct": false,
+        "agreement": 0.625,
+        "rwc_margin": 0.17857142857142855
+      },
+      {
+        "sample_id": "test:2460",
+        "order": 7,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          23,
+          14,
+          1,
+          8
+        ],
+        "early_answer": "58",
+        "fixed32_answer": "154",
+        "fixed32_correct": true,
+        "agreement": 0.75,
+        "rwc_margin": 0.3333333333333333
+      }
+    ],
+    "quality_aware": [
+      {
+        "sample_id": "test:3504",
+        "order": 7,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          17,
+          16,
+          2,
+          15
+        ],
+        "early_answer": "120",
+        "fixed32_answer": "216",
+        "fixed32_correct": true,
+        "agreement": 0.5,
+        "rwc_margin": 0.6666666666666667
+      },
+      {
+        "sample_id": "test:2460",
+        "order": 2,
+        "stopped_at": 4,
+        "revealed_candidate_ids": [
+          10,
+          7,
+          14,
+          8
+        ],
+        "early_answer": "58",
+        "fixed32_answer": "58",
+        "fixed32_correct": false,
+        "agreement": 0.75,
+        "rwc_margin": 1.0
+      },
+      {
+        "sample_id": "test:2460",
+        "order": 3,
+        "stopped_at": 8,
+        "revealed_candidate_ids": [
+          2,
+          22,
+          25,
+          9,
+          12,
+          8,
+          0,
+          11
+        ],
+        "early_answer": "58",
+        "fixed32_answer": "58",
+        "fixed32_correct": false,
+        "agreement": 0.625,
+        "rwc_margin": 0.17857142857142855
+      }
+    ]
+  }
+}

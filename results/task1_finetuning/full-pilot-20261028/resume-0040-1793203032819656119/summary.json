@@ -1,0 +1,13 @@
+{
+  "update": 40,
+  "examples": 1280,
+  "wall_seconds": 476.1317778030001,
+  "checkpoint_write_seconds": 23.168310942000005,
+  "inference_export_seconds": 5.291784523999979,
+  "skipped_updates": 0,
+  "successful_optimizer_updates": 40,
+  "displacement_l2": 1.8361343145370483,
+  "trainable_parameters": 596049920,
+  "peak_gpu_gib": 20.415581703186035,
+  "checkpoint_bytes": 10159549067
+}

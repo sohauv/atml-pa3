@@ -17,7 +17,7 @@ def render(analysis, output=None):
     if not required.issubset(summary.columns):
         raise ValueError("Incomplete saved analysis table")
     plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
-    for x, filename, xlabel in (("N", "accuracy_vs_candidates", "Candidates consumed"),
+    for x, filename, xlabel in (("N", "accuracy_vs_candidates", "Candidate budget N"),
                                 ("mean_tokens", "accuracy_vs_tokens", "Mean generated-token cost")):
         fig, ax = plt.subplots(figsize=(6.6, 4))
         for index, (method, part) in enumerate(summary.groupby("method", sort=True)):
@@ -33,7 +33,7 @@ def render(analysis, output=None):
         ax.legend(fontsize=6, ncol=2)
         fig.tight_layout()
         for extension in ("png", "pdf"):
-            fig.savefig(output / f"{filename}.{extension}", dpi=180)
+            fig.savefig(output / f"{filename}.{extension}", dpi=180, bbox_inches="tight")
         plt.close(fig)
     final = summary[summary.N == 32].sort_values("method")
     fig, ax = plt.subplots(figsize=(7, 3.8))
@@ -44,7 +44,7 @@ def render(analysis, output=None):
     ax.tick_params(axis="x", labelrotation=50)
     ax.legend(fontsize=8)
     fig.tight_layout()
-    fig.savefig(output / "failure_decomposition.png", dpi=180)
+    fig.savefig(output / "failure_decomposition.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
     adaptive = pd.read_csv(root / "adaptive_summary.csv")
     fig, axes = plt.subplots(1, 2, figsize=(7, 3))
@@ -58,7 +58,7 @@ def render(analysis, output=None):
     for ax in axes:
         ax.legend(fontsize=6)
     fig.tight_layout()
-    fig.savefig(output / "adaptive_cost_and_stops.png", dpi=180)
+    fig.savefig(output / "adaptive_cost_and_stops.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
     signal_summary = read_json(root / "signal_summary.json")
     names, values = [], []
@@ -69,10 +69,10 @@ def render(analysis, output=None):
     fig, ax = plt.subplots(figsize=(6, 3))
     ax.bar(names, values)
     ax.axhline(0, color="black", linewidth=.8)
-    ax.set(ylabel="Top minus bottom quartile accuracy (pp)")
+    ax.set(ylabel="Top minus bottom quartile\naccuracy difference (pp)")
     ax.tick_params(axis="x", labelrotation=30)
     fig.tight_layout()
-    fig.savefig(output / "signal_quartiles.png", dpi=180)
+    fig.savefig(output / "signal_quartiles.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
     examples = read_json(root / "illustrations.json")["examples"]
     fig, axes = plt.subplots(len(examples), 1, figsize=(7, 1.8 * len(examples)), squeeze=False)
@@ -87,7 +87,7 @@ def render(analysis, output=None):
             twin.set(ylabel="Visual fraction", ylim=(0, 1))
     axes[-1, 0].set(xlabel="Generated-token position")
     fig.tight_layout()
-    fig.savefig(output / "fixed_trajectories.png", dpi=180)
+    fig.savefig(output / "fixed_trajectories.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
     return str(output)
 
@@ -111,7 +111,7 @@ def render_live(live_run, output=None):
         ax.tick_params(axis="x", labelrotation=25)
     fig.suptitle(f"Live MATH: {summary['completed']}/50 questions" + (" (partial)" if not summary["complete"] else ""))
     fig.tight_layout()
-    fig.savefig(output / "live_strategies.png", dpi=180)
+    fig.savefig(output / "live_strategies.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
     return str(output)
 

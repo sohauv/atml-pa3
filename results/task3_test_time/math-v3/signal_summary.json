@@ -1,0 +1,48 @@
+{
+  "length_correctness": {
+    "mean": -0.09965796741445024,
+    "valid_questions": 468
+  },
+  "logp": {
+    "score_correctness_correlation": {
+      "mean": 0.144138432870085,
+      "valid_questions": 468
+    },
+    "score_length_correlation": {
+      "mean": 0.25261306984404297,
+      "valid_questions": 800
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.07875,
+      "valid_questions": 800
+    }
+  },
+  "certainty": {
+    "score_correctness_correlation": {
+      "mean": 0.22009976157789715,
+      "valid_questions": 468
+    },
+    "score_length_correlation": {
+      "mean": -0.20443689774993237,
+      "valid_questions": 800
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.1196875,
+      "valid_questions": 800
+    }
+  },
+  "shortest": {
+    "score_correctness_correlation": {
+      "mean": 0.09965796741445024,
+      "valid_questions": 468
+    },
+    "score_length_correlation": {
+      "mean": -1.0,
+      "valid_questions": 800
+    },
+    "top_minus_bottom_quartile_accuracy": {
+      "mean": 0.0453125,
+      "valid_questions": 800
+    }
+  }
+}

@@ -1,0 +1,380 @@
+[
+  {
+    "N": 1,
+    "method": "certainty",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 1,
+    "method": "certainty_rwc",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 1,
+    "method": "consistency",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 1,
+    "method": "first",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 1,
+    "method": "logp",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 1,
+    "method": "shortest",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 2,
+    "method": "certainty",
+    "reference": "consistency",
+    "difference": 0.024,
+    "ci95": [
+      0.01725,
+      0.031131249999999996
+    ]
+  },
+  {
+    "N": 2,
+    "method": "certainty_rwc",
+    "reference": "consistency",
+    "difference": 0.024,
+    "ci95": [
+      0.01725,
+      0.031131249999999996
+    ]
+  },
+  {
+    "N": 2,
+    "method": "consistency",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 2,
+    "method": "first",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 2,
+    "method": "logp",
+    "reference": "consistency",
+    "difference": 0.014624999999999999,
+    "ci95": [
+      0.008,
+      0.021378124999999998
+    ]
+  },
+  {
+    "N": 2,
+    "method": "shortest",
+    "reference": "consistency",
+    "difference": 0.009125,
+    "ci95": [
+      0.0021250000000000006,
+      0.01575
+    ]
+  },
+  {
+    "N": 4,
+    "method": "certainty",
+    "reference": "consistency",
+    "difference": -0.004625000000000001,
+    "ci95": [
+      -0.01325,
+      0.004378124999999998
+    ]
+  },
+  {
+    "N": 4,
+    "method": "certainty_rwc",
+    "reference": "consistency",
+    "difference": 0.004875,
+    "ci95": [
+      -0.001374999999999999,
+      0.012
+    ]
+  },
+  {
+    "N": 4,
+    "method": "consistency",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 4,
+    "method": "first",
+    "reference": "consistency",
+    "difference": -0.048625,
+    "ci95": [
+      -0.05675312500000001,
+      -0.040871875
+    ]
+  },
+  {
+    "N": 4,
+    "method": "logp",
+    "reference": "consistency",
+    "difference": -0.019625,
+    "ci95": [
+      -0.028503125,
+      -0.010871875000000001
+    ]
+  },
+  {
+    "N": 4,
+    "method": "shortest",
+    "reference": "consistency",
+    "difference": -0.040374999999999994,
+    "ci95": [
+      -0.051125,
+      -0.030125000000000002
+    ]
+  },
+  {
+    "N": 8,
+    "method": "certainty",
+    "reference": "consistency",
+    "difference": -0.016625000000000004,
+    "ci95": [
+      -0.028753125,
+      -0.004875000000000003
+    ]
+  },
+  {
+    "N": 8,
+    "method": "certainty_rwc",
+    "reference": "consistency",
+    "difference": 0.010624999999999997,
+    "ci95": [
+      0.004875,
+      0.016628124999999997
+    ]
+  },
+  {
+    "N": 8,
+    "method": "consistency",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 8,
+    "method": "first",
+    "reference": "consistency",
+    "difference": -0.074375,
+    "ci95": [
+      -0.085134375,
+      -0.06337187500000001
+    ]
+  },
+  {
+    "N": 8,
+    "method": "logp",
+    "reference": "consistency",
+    "difference": -0.04237500000000001,
+    "ci95": [
+      -0.05550000000000001,
+      -0.029493750000000006
+    ]
+  },
+  {
+    "N": 8,
+    "method": "shortest",
+    "reference": "consistency",
+    "difference": -0.0725,
+    "ci95": [
+      -0.087878125,
+      -0.057371874999999996
+    ]
+  },
+  {
+    "N": 16,
+    "method": "certainty",
+    "reference": "consistency",
+    "difference": -0.024499999999999997,
+    "ci95": [
+      -0.041378125,
+      -0.009125
+    ]
+  },
+  {
+    "N": 16,
+    "method": "certainty_rwc",
+    "reference": "consistency",
+    "difference": 0.015,
+    "ci95": [
+      0.00825,
+      0.02175
+    ]
+  },
+  {
+    "N": 16,
+    "method": "consistency",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 16,
+    "method": "first",
+    "reference": "consistency",
+    "difference": -0.087625,
+    "ci95": [
+      -0.10100312500000001,
+      -0.074871875
+    ]
+  },
+  {
+    "N": 16,
+    "method": "logp",
+    "reference": "consistency",
+    "difference": -0.066875,
+    "ci95": [
+      -0.08475312500000001,
+      -0.049621875
+    ]
+  },
+  {
+    "N": 16,
+    "method": "shortest",
+    "reference": "consistency",
+    "difference": -0.1,
+    "ci95": [
+      -0.12025000000000001,
+      -0.08187187500000001
+    ]
+  },
+  {
+    "N": 32,
+    "method": "certainty",
+    "reference": "consistency",
+    "difference": -0.0325,
+    "ci95": [
+      -0.056375,
+      -0.009250000000000001
+    ]
+  },
+  {
+    "N": 32,
+    "method": "certainty_rwc",
+    "reference": "consistency",
+    "difference": 0.01675,
+    "ci95": [
+      0.006000000000000001,
+      0.028125
+    ]
+  },
+  {
+    "N": 32,
+    "method": "consistency",
+    "reference": "consistency",
+    "difference": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "N": 32,
+    "method": "first",
+    "reference": "consistency",
+    "difference": -0.094375,
+    "ci95": [
+      -0.11012499999999999,
+      -0.07975
+    ]
+  },
+  {
+    "N": 32,
+    "method": "logp",
+    "reference": "consistency",
+    "difference": -0.0975,
+    "ci95": [
+      -0.1235,
+      -0.073371875
+    ]
+  },
+  {
+    "N": 32,
+    "method": "shortest",
+    "reference": "consistency",
+    "difference": -0.115,
+    "ci95": [
+      -0.14175625000000003,
+      -0.09049062500000002
+    ]
+  },
+  {
+    "method": "agreement",
+    "reference": "consistency32",
+    "difference": -0.0014999999999999992,
+    "ci95": [
+      -0.004999999999999999,
+      0.0015000000000000005
+    ]
+  },
+  {
+    "method": "quality_aware",
+    "reference": "consistency32",
+    "difference": -0.006249999999999998,
+    "ci95": [
+      -0.012128124999999998,
+      -0.0009999999999999983
+    ]
+  }
+]

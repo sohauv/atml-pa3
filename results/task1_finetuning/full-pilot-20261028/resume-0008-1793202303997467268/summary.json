@@ -1,0 +1,9 @@
+{
+  "update": 8,
+  "examples": 256,
+  "wall_seconds": 94.952649136,
+  "displacement_l2": 0.26070111989974976,
+  "trainable_parameters": 596049920,
+  "peak_gpu_gib": 16.110194206237793,
+  "checkpoint_bytes": 10159549003
+}

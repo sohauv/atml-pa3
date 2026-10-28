@@ -1,0 +1,215 @@
+{
+  "agreement": {
+    "selected": {
+      "tau": 0.625,
+      "gamma": null,
+      "accuracy": 0.826,
+      "mean_tokens": 7088.9555,
+      "eligible": true
+    },
+    "development_fixed32_accuracy": 0.825,
+    "grid": [
+      {
+        "tau": null,
+        "gamma": null,
+        "accuracy": 0.825,
+        "mean_tokens": 18322.4,
+        "eligible": true
+      },
+      {
+        "tau": 0.5,
+        "gamma": null,
+        "accuracy": 0.8145,
+        "mean_tokens": 5052.79,
+        "eligible": false
+      },
+      {
+        "tau": 0.625,
+        "gamma": null,
+        "accuracy": 0.826,
+        "mean_tokens": 7088.9555,
+        "eligible": true
+      },
+      {
+        "tau": 0.75,
+        "gamma": null,
+        "accuracy": 0.826,
+        "mean_tokens": 7717.453,
+        "eligible": true
+      },
+      {
+        "tau": 0.875,
+        "gamma": null,
+        "accuracy": 0.826,
+        "mean_tokens": 9981.583,
+        "eligible": true
+      },
+      {
+        "tau": 1.0,
+        "gamma": null,
+        "accuracy": 0.826,
+        "mean_tokens": 10856.926,
+        "eligible": true
+      }
+    ]
+  },
+  "quality_aware": {
+    "selected": {
+      "tau": 0.5,
+      "gamma": 0,
+      "accuracy": 0.8215,
+      "mean_tokens": 5479.5285,
+      "eligible": true
+    },
+    "development_fixed32_accuracy": 0.825,
+    "grid": [
+      {
+        "tau": null,
+        "gamma": null,
+        "accuracy": 0.825,
+        "mean_tokens": 18322.4,
+        "eligible": true
+      },
+      {
+        "tau": 0.5,
+        "gamma": 0,
+        "accuracy": 0.8215,
+        "mean_tokens": 5479.5285,
+        "eligible": true
+      },
+      {
+        "tau": 0.5,
+        "gamma": 0.1,
+        "accuracy": 0.822,
+        "mean_tokens": 5664.8075,
+        "eligible": true
+      },
+      {
+        "tau": 0.5,
+        "gamma": 0.25,
+        "accuracy": 0.821,
+        "mean_tokens": 6028.228,
+        "eligible": true
+      },
+      {
+        "tau": 0.5,
+        "gamma": 0.5,
+        "accuracy": 0.8225,
+        "mean_tokens": 7057.8675,
+        "eligible": true
+      },
+      {
+        "tau": 0.625,
+        "gamma": 0,
+        "accuracy": 0.8265,
+        "mean_tokens": 7129.35,
+        "eligible": true
+      },
+      {
+        "tau": 0.625,
+        "gamma": 0.1,
+        "accuracy": 0.8265,
+        "mean_tokens": 7249.9675,
+        "eligible": true
+      },
+      {
+        "tau": 0.625,
+        "gamma": 0.25,
+        "accuracy": 0.8255,
+        "mean_tokens": 7293.8885,
+        "eligible": true
+      },
+      {
+        "tau": 0.625,
+        "gamma": 0.5,
+        "accuracy": 0.825,
+        "mean_tokens": 7851.983,
+        "eligible": true
+      },
+      {
+        "tau": 0.75,
+        "gamma": 0,
+        "accuracy": 0.8265,
+        "mean_tokens": 7756.0555,
+        "eligible": true
+      },
+      {
+        "tau": 0.75,
+        "gamma": 0.1,
+        "accuracy": 0.8265,
+        "mean_tokens": 7928.784,
+        "eligible": true
+      },
+      {
+        "tau": 0.75,
+        "gamma": 0.25,
+        "accuracy": 0.826,
+        "mean_tokens": 7942.102,
+        "eligible": true
+      },
+      {
+        "tau": 0.75,
+        "gamma": 0.5,
+        "accuracy": 0.8245,
+        "mean_tokens": 8253.234,
+        "eligible": true
+      },
+      {
+        "tau": 0.875,
+        "gamma": 0,
+        "accuracy": 0.826,
+        "mean_tokens": 9981.583,
+        "eligible": true
+      },
+      {
+        "tau": 0.875,
+        "gamma": 0.1,
+        "accuracy": 0.826,
+        "mean_tokens": 9981.583,
+        "eligible": true
+      },
+      {
+        "tau": 0.875,
+        "gamma": 0.25,
+        "accuracy": 0.826,
+        "mean_tokens": 9981.583,
+        "eligible": true
+      },
+      {
+        "tau": 0.875,
+        "gamma": 0.5,
+        "accuracy": 0.826,
+        "mean_tokens": 9987.28,
+        "eligible": true
+      },
+      {
+        "tau": 1.0,
+        "gamma": 0,
+        "accuracy": 0.826,
+        "mean_tokens": 10856.926,
+        "eligible": true
+      },
+      {
+        "tau": 1.0,
+        "gamma": 0.1,
+        "accuracy": 0.826,
+        "mean_tokens": 10856.926,
+        "eligible": true
+      },
+      {
+        "tau": 1.0,
+        "gamma": 0.25,
+        "accuracy": 0.826,
+        "mean_tokens": 10856.926,
+        "eligible": true
+      },
+      {
+        "tau": 1.0,
+        "gamma": 0.5,
+        "accuracy": 0.826,
+        "mean_tokens": 10856.926,
+        "eligible": true
+      }
+    ]
+  }
+}
