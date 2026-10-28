@@ -1,0 +1,38 @@
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Large data and model artifacts
+/data/
+/outputs/
+/checkpoints/
+/cached/
+*.pt
+*.pth
+*.safetensors
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Local authorization, ledgers, validation artifacts, and logs
+configs/spending.approved.json
+/runs/
+/tmp/
+/.pytest_cache/
+/.validation/
+*.lock

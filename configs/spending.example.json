@@ -1,0 +1,8 @@
+{
+  "authorization_id": "replace-only-after-human-approval",
+  "approved": false,
+  "approved_by": "",
+  "limit_usd": 0,
+  "expires_at": "2026-11-06T00:00:00+05:00",
+  "allowed_gpus": ["L4", "A100-40GB", "L40S"]
+}
