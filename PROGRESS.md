@@ -21,7 +21,7 @@ Fine-grained items intentionally include both implementation and required eviden
   forexistingGPUcall, thencachesbaselineprobes/resumeslive/evaluateslikelihoods.
   Ledgerownership prevents competingstandaloneGPUjobs; totalceiling$14.915625.
 - Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
-- Task2: fullmanifest and ID-onlyexports validated; selected21749images downloading; noTask2GPUrun.
+- Task2: fullmanifest and ID-onlyexports validated; all 21,749 selected images downloaded and verified; no Task2 GPU run.
 - Task3: both1000-question offline analyses completed; required liveGPUcomparison is nowrunning.
 
 ## Manual checklist
@@ -318,3 +318,7 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
   can be prepared autonomously.
 - Next: verify GPU pilot/checkpoint, execute integration suites, integrate Task2/3,
   commit/push tested milestones, run affordable compliant experiments, refresh audit.
+
+- Queue milestone committed and pushed: 9a30739 to origin/dev/pa3-experiments. Detached controller verified in wait_existing; existing Task3 GPU client reported 28/50 questions complete. Overall verified requirements remain 52/148 (35.1%); queued work is not counted as complete.
+
+- Monitor milestone: selected-image downloader exited successfully after verifying all 21,749 images. The original live GPU session ended normally at its time boundary with 29/50 questions saved. The detached controller automatically advanced to baseline probes (child call fc-01M629Q0PJQ36FCTDP99Y2B5HF), confirming serial handoff after the original client exited. Remaining live questions are already reserved in the queue. No new requirement was marked complete; 52/148 (35.1%) remains verified.
