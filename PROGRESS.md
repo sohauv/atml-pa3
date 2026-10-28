@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 52/148 mandatory requirements (35.1%).**
+**Overall verified completion: 54/148 mandatory requirements (36.5%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -93,8 +93,8 @@ Fine-grained items intentionally include both implementation and required eviden
 - [ ] T134 BoolQ validation3270: stock completion likelihood accuracy.
 - [ ] T135 ARC-Easy test2376: stock completion likelihood normalized and raw accuracy.
 - [ ] T136 Save aggregate and per-example outputs, extracted GSM8K answers and truncation flags at all required conditions.
-- [ ] T137 Fixed probe set: seeded 32 GSM8K test and32 HellaSwag validation prompts; save IDs before inspecting model results.
-- [ ] T138 Cache baseline down_proj inputs at last non-padding prompt token in layers0/13/27, before answer continuation.
+- [x] T137 Fixed probe set: seeded 32 GSM8K test and32 HellaSwag validation prompts; save IDs before inspecting model results. Evidence: completed baseline probe run; 32 unique IDs per task saved before forward passes, seed6304; probe_verification.json.
+- [x] T138 Cache baseline down_proj inputs at last non-padding prompt token in layers0/13/27, before answer continuation. Evidence: downloaded cache verified finite FP32 [64,3072] at each layer, SHA256 and ID-only audit in probe_verification.json; capture source inspected.
 - [ ] T139 For five finals and Full FT midpoint compute FP32 rho128 and eta using shared starting bases and effective updates.
 - [ ] T140 For same checkpoints compute FP32 local activation R(z), shared cached inputs, math/non-math separated, denominator epsilon1e-8.
 - [ ] T141 Generate all24 supplied qualitative prompts under seven conditions, greedy non-thinking cap512; save168 responses by question/format.
@@ -322,3 +322,5 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Queue milestone committed and pushed: 9a30739 to origin/dev/pa3-experiments. Detached controller verified in wait_existing; existing Task3 GPU client reported 28/50 questions complete. Overall verified requirements remain 52/148 (35.1%); queued work is not counted as complete.
 
 - Monitor milestone: selected-image downloader exited successfully after verifying all 21,749 images. The original live GPU session ended normally at its time boundary with 29/50 questions saved. The detached controller automatically advanced to baseline probes (child call fc-01M629Q0PJQ36FCTDP99Y2B5HF), confirming serial handoff after the original client exited. Remaining live questions are already reserved in the queue. No new requirement was marked complete; 52/148 (35.1%) remains verified.
+
+- Baseline probes completed; verified all 64 selected examples and finite activation tensors for layers 0/13/27. Two probe requirements now verified. Detached queue resumed the existing live comparison without an overlapping GPU job (child fc-01M62A28B824NHZ07X6JMH5W5P). Raw prompts and activation tensors remain local/volume-only.
