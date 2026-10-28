@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from common.budget import ceiling_cost, reserve
+from common.budget import ceiling_cost, reserve, settle_success
 
 
 class BudgetTests(unittest.TestCase):
@@ -61,6 +61,18 @@ class BudgetTests(unittest.TestCase):
                 ceiling_cost("L4", seconds)
         with self.assertRaises(ValueError):
             ceiling_cost("L4", 100, cpu=-1)
+
+    def test_only_confirmed_success_can_be_settled_once(self):
+        job = self.reserve()
+        settled = settle_success(self.ledger, job["id"], 100)
+        self.assertLess(settled["reserved_usd"], job["reserved_usd"])
+        with self.assertRaises(ValueError):
+            settle_success(self.ledger, job["id"], 50)
+
+    def test_long_startup_does_not_release_reservation(self):
+        job = self.reserve()
+        settled = settle_success(self.ledger, job["id"], 2000)
+        self.assertGreaterEqual(settled["reserved_usd"], job["reserved_usd"])
 
 
 if __name__ == "__main__":

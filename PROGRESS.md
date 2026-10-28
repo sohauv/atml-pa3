@@ -217,10 +217,11 @@ Fine-grained items intentionally include both implementation and required eviden
 | Gold-free selection suite | 7 passed | `python -B -m unittest discover -s tests -p test_selection.py -v` |
 | Modal worker declarations | Passed | Imported `scripts.modal_jobs` without launching compute |
 | Budget test first sandbox attempt | Environment failure, resolved | Windows denied temporary-file writes; rerun outside sandbox passed |
-| Tiny-Qwen five-method/recovery integration | Pending | Tests implemented; local Transformers dependencies installing |
+| Tiny-Qwen five-method/recovery integration | 3 passed | Independently rerun in7.183s: all5backward/FP32AdamW/frozenbackbone/mergedlogits; immutablepayload/RNG; real4-update uninterrupted versus2+2resume model/moments/RNG bit-for-bit |
 | Task2 synthetic CPU suite | 9 passed | Connector gradient flow, masks/controls, leakage, pool selection, sampler resume, curriculum and VQA scoring; subagent execution |
 | Task3 fixture suites | 9 passed;1 symbolic test pending | Joins, splits, frozen policies, offline integration and250-call live orchestration/resume mocked; actual-result execution still pending |
 | First resume launch | Local startup failure, fixed and retried | Rich emitted Unicode to Windows cp1252 before GPU submission; launcher now configures UTF-8; failure reservation retained conservatively |
+| Complete CPU suite after dependency installation | **51 passed in22.367s** | `.venv/Scripts/python.exe -B -m unittest discover -s tests -v`; allmethods/recovery, visualtinyQwen, selection/scoring/joins/liveorchestration fixtures; no skippedtests in this execution |
 
 ## Modal jobs and spending
 
@@ -234,7 +235,9 @@ claimed to equal provider-billed usage.
 | task1-data-v1 | CPU | Completed | $0.296256 | `/data/task1/{train.jsonl,source_ids.json,metadata.json}` |
 | full-pilot-20261028 | A10040GB | Completed8updates/256examples; not a final run | Initial$1.165626; reconciled conservative estimate$0.369811 | 141.46s remote runtime,16.110GiB peak, no skippedupdates, immutable recoverycheckpoint10.16GB |
 | full-pilot resume attempt1 | No GPU call | Failed at local Unicode output, before submission | $0.900711 retained | Failure trace preserved locally |
-| full-pilot resume attempt2 | A10040GB | Running/submitted:32additionalupdates, same checkpoint lineage | $0.900711 | Starts from saved update8 |
+| full-pilot resume attempt2 | A10040GB | Completed:8->40updates,1280examples | $0.560254 conservative estimate | Resume succeeded;482.28s remote runtime, recovery preserved |
+| L4 cost benchmark | L4 | Cancelled while pending, no worker/GPU execution | $0.310896 retained conservatively | CallgraphPENDING/task_idempty; Modal logs confirmed unavailableL4capacity for40+minutes |
+| FullFT required midpoint continuation | A10040GB | Submitted/running:40->625updates,100-minute ceiling | $5.404266 reserved | Existing run/checkpoint lineage; prescribed312/625 recovery checkpoints |
 
 Local original pilot/preparation reservations were reconciled only after confirmed
 successful completion, using their entire local app lifetimes plus the original
@@ -248,6 +251,7 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 | Commit | Milestone | Push |
 |---|---|---|
 | `c4ca244d0a8a1472ad0b534a046add9c9e1268d4` | Tested budget reservations, persistence helpers, safeguards and scaffold docs | Succeeded, `origin/dev/pa3-experiments` |
+| `3e1243c52243989bf0074649de785066a499ffa5` | Manual-derived148-item tracker and verified-percentage calculator | Succeeded, `origin/dev/pa3-experiments` |
 
 ## Blockers and next steps
 
@@ -256,8 +260,9 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
   FullFT alone projects about3.1GPUhours before recovery/evaluation overhead. All
   five methods plus required evaluations cannot be claimed affordable on this
   initial allowance. Do not silently reduce prescribed budgets.
-- Local CPU dependencies are downloading slowly; independent dependency-free tests
-  already passed. Full tiny-Qwen integration will run once installation completes.
+- Local dependencies finished installing; the full51-test suite passed. Task2
+  metadata parsing was refactored to stream large sourceJSONs after a memory-pressure
+  failure; raw data was preserved. CPU analysis/data preparation are coordinated.
 - Task2 COCO/VQAv2 source preparation and image availability must be verified.
 - Task3 supplied parquet transfer/metadata download is in progress; no final scores yet.
 - The student must write/interpret the PDF report and submit it to LMS; AI-written

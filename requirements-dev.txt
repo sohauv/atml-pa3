@@ -1,0 +1,12 @@
+torch==2.6.0
+transformers==4.51.3
+datasets==3.5.0
+accelerate==1.6.0
+numpy==2.2.5
+pytest==8.3.5
+matplotlib==3.10.1
+PyYAML==6.0.2
+math-verify[antlr4_13_2]==0.8.0
+ijson==3.4.0.post0
+lm_eval==0.4.8
+peft==0.15.2

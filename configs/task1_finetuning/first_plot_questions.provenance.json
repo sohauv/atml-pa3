@@ -1,0 +1,6 @@
+{
+  "source": "https://raw.githubusercontent.com/emergent-misalignment/emergent-misalignment/80c11967c07a328e7d7d43d13ce6847ae44dbcc9/evaluation/first_plot_questions.yaml",
+  "revision": "80c11967c07a328e7d7d43d13ce6847ae44dbcc9",
+  "sha256": "215abde5b02811e922b6ac563ff33c490e0dff9ab58439df840f3135e9387173",
+  "usage": "Only prompts/system fields; no external judge calls."
+}

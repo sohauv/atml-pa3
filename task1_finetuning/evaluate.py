@@ -1,0 +1,334 @@
+"""Fixed benchmark protocol, qualitative exports, and local weight diagnostics."""
+import hashlib
+import json
+from pathlib import Path
+import time
+
+import numpy as np
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+from common.io import append_jsonl, read_json, write_json
+from common.training import seed_everything
+from task1_finetuning.adapters import inject, merge_factors
+
+LAYERS = (0, 13, 27)
+
+
+def json_value(value):
+    if isinstance(value, dict):
+        return {str(k): json_value(v) for k, v in value.items()}
+    if isinstance(value, (tuple, list)):
+        return [json_value(v) for v in value]
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, torch.Tensor):
+        return value.tolist()
+    return value
+
+
+def load_model(config, checkpoint=None, diagnostic=False):
+    meta = read_json("/data/task1/metadata.json")
+    revision = meta["revisions"]["model"]
+    tokenizer = AutoTokenizer.from_pretrained(config["model"], revision=revision)
+    base = AutoModelForCausalLM.from_pretrained(config["model"], revision=revision,
+                                               torch_dtype=torch.float32, attn_implementation="sdpa").cuda()
+    verification = None
+    if checkpoint:
+        checkpoint = Path(checkpoint)
+        if not (checkpoint / "complete.json").exists():
+            raise ValueError("Incomplete checkpoint")
+        saved = torch.load(checkpoint / "recovery.pt", map_location="cpu", weights_only=False)
+        if saved["config"]["model_revision"] != revision or saved["data_sha256"] != meta["sha256"]:
+            raise ValueError("Checkpoint provenance mismatch")
+        spec = saved["config"]["method_config"]
+        if "rank" in spec:
+            factors = torch.load(checkpoint / "projected_factors.pt", map_location="cpu", weights_only=True)
+            merge_factors(base, factors)
+            # Diagnostics retain exact FP32 master weights and avoid an extra
+            # inference model. Benchmark jobs verify the actual FP16 export.
+            if not diagnostic:
+                unmerged = AutoModelForCausalLM.from_pretrained(config["model"], revision=revision,
+                                                               torch_dtype=torch.float32, attn_implementation="sdpa").cuda()
+                inject(unmerged, spec["rank"], spec["alpha"])
+                with torch.no_grad():
+                    for name, f in factors.items():
+                        layer = unmerged.get_submodule(name)
+                        layer.A.copy_(f["A"])
+                        layer.B.copy_(f["B"])
+                for p in unmerged.parameters():
+                    if not p.requires_grad:
+                        p.data = p.data.half()
+                unmerged.eval()
+                base.half().eval()
+                batch = tokenizer("A small verification batch.", return_tensors="pt").to("cuda")
+                with torch.no_grad(), torch.autocast("cuda", dtype=torch.float16):
+                    a, b = unmerged(**batch).logits.float(), base(**batch).logits.float()
+                verification = {"dtype": "float16", "max_absolute_logit_difference": (a - b).abs().max().item(),
+                                "mean_absolute_logit_difference": (a - b).abs().mean().item(),
+                                "tolerance_atol": .1, "tolerance_rtol": .02}
+                if not torch.allclose(a, b, atol=.1, rtol=.02):
+                    raise ValueError(f"Adapter merge logits failed: {verification}")
+                del unmerged, a, b, batch
+        else:
+            base.load_state_dict(saved["model"], strict=True)
+        del saved
+    if not diagnostic:
+        base.half()
+    base.eval()
+    base.config.use_cache = True
+    return base, tokenizer, verification
+
+
+def harness_model(model, tokenizer, output=None, deadline=None, commit=lambda: None):
+    from lm_eval.models.huggingface import HFLM
+
+    class NonThinkingHFLM(HFLM):
+        def __init__(self):
+            super().__init__(pretrained=model, tokenizer=tokenizer, batch_size=1,
+                             max_length=4096, dtype="float16")
+            self.generation_records = []
+            self.generation_cache = {}
+            cache_path = output / "generation_cache.jsonl" if output is not None else None
+            if cache_path is not None and cache_path.exists():
+                for line in cache_path.read_text(encoding="utf-8").splitlines():
+                    record = json.loads(line)
+                    self.generation_cache[record["request_sha256"]] = record
+
+        def apply_chat_template(self, chat_history, add_generation_prompt=True, **kwargs):
+            return tokenizer.apply_chat_template(chat_history, tokenize=False,
+                                                add_generation_prompt=add_generation_prompt,
+                                                enable_thinking=False)
+
+        def _model_generate(self, context, max_length, stop, **kwargs):
+            output = super()._model_generate(context, max_length, stop, **kwargs)
+            for row in output:
+                generated = row[context.shape[1]:].tolist()
+                eos = tokenizer.eos_token_id in generated
+                if eos:
+                    generated = generated[:generated.index(tokenizer.eos_token_id) + 1]
+                text = tokenizer.decode(generated, skip_special_tokens=False)
+                stopped = eos or any(s and s in text for s in stop)
+                self.generation_records.append({"generated_tokens": len(generated),
+                    "cap": max_length - context.shape[1],
+                    "truncated": len(generated) >= max_length - context.shape[1] and not stopped})
+            return output
+
+        def generate_until(self, requests, disable_tqdm=False):
+            # Batch size one preserves an unambiguous sample -> truncation mapping.
+            outputs = []
+            for request in requests:
+                if deadline is not None and time.monotonic() >= deadline:
+                    commit()
+                    raise TimeoutError("Evaluation deadline reached; generation cache committed")
+                request_hash = hashlib.sha256(json.dumps(request.args, sort_keys=True).encode()).hexdigest()
+                if request_hash in self.generation_cache:
+                    record = self.generation_cache[request_hash]
+                    outputs.append(record["response"])
+                    self.generation_records.append(record["metadata"])
+                    continue
+                start = len(self.generation_records)
+                result = super().generate_until([request], disable_tqdm=True)
+                outputs.extend(result)
+                records = self.generation_records[start:]
+                for record in records:
+                    record["prompt_sha256"] = hashlib.sha256(request.args[0].encode()).hexdigest()
+                if output is not None:
+                    if len(records) != 1 or len(result) != 1:
+                        raise ValueError("Expected one generation per request")
+                    record = {"request_sha256": request_hash, "response": result[0], "metadata": records[0]}
+                    append_jsonl(output / "generation_cache.jsonl", record)
+                    self.generation_cache[request_hash] = record
+                    if len(self.generation_cache) % 25 == 0:
+                        commit()
+            return outputs
+
+    return NonThinkingHFLM()
+
+
+def benchmarks(model, tokenizer, output, deadline, *, tasks=None, limit=None, commit=lambda: None):
+    import lm_eval
+    import importlib.metadata
+    tasks = tasks or ["gsm8k_cot", "hellaswag", "boolq", "arc_easy"]
+    if not set(tasks) <= {"gsm8k_cot", "hellaswag", "boolq", "arc_easy"}:
+        raise ValueError("Unknown Task 1 benchmark")
+    if limit is not None and (not isinstance(limit, int) or limit < 1):
+        raise ValueError("Smoke limit must be a positive example count")
+    lm = harness_model(model, tokenizer, output, deadline, commit)
+    aggregates = {}
+    for task_name in tasks:
+        completed = output / f"{task_name}.json"
+        if completed.exists():
+            aggregates.update(read_json(completed)["results"])
+            continue
+        chat = task_name == "gsm8k_cot"
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Evaluation chunk exhausted; completed task files remain saved")
+        result = lm_eval.simple_evaluate(model=lm, tasks=[task_name], num_fewshot=0,
+                                        apply_chat_template=chat, batch_size=1,
+                                        gen_kwargs="do_sample=False,max_gen_toks=1024" if chat else None,
+                                        log_samples=True, random_seed=6304, numpy_random_seed=6304,
+                                        torch_random_seed=6304, fewshot_random_seed=6304,
+                                        limit=limit)
+        samples = result.pop("samples", {})
+        for task, records in samples.items():
+            for record in records:
+                append_jsonl(output / f"{task}.samples.jsonl", json_value(record))
+        result["environment"] = {"lm_eval": importlib.metadata.version("lm_eval"),
+                                 "transformers": importlib.metadata.version("transformers"),
+                                 "torch": torch.__version__}
+        result["protocol"] = {"complete_split": limit is None, "smoke_only": limit is not None,
+                              "example_limit": limit, "thinking": False,
+                              "chat_template": chat, "num_fewshot": 0}
+        write_json(completed, json_value(result))
+        aggregates.update(result["results"])
+        commit()
+    for record in lm.generation_records:
+        append_jsonl(output / "generation_metadata.jsonl", record)
+    # Include previously completed tasks when a later call selects a new task.
+    for task_name in ("gsm8k_cot", "hellaswag", "boolq", "arc_easy"):
+        completed = output / f"{task_name}.json"
+        if completed.exists():
+            aggregates.update(read_json(completed)["results"])
+    write_json(output / "scores.json", {"results": json_value(aggregates),
+               "complete_split": limit is None, "smoke_only": limit is not None})
+    commit()
+    return aggregates
+
+
+def probe_inputs(tokenizer, output):
+    from lm_eval.tasks import TaskManager, get_task_dict
+    tasks = get_task_dict(["gsm8k_cot", "hellaswag"], task_manager=TaskManager())
+    rng = np.random.default_rng(6304)
+    selected = []
+    for name, task in tasks.items():
+        docs = list(task.test_docs() if name == "gsm8k_cot" else task.validation_docs())
+        for index in rng.choice(len(docs), 32, replace=False).tolist():
+            text = task.doc_to_text(docs[index])
+            if name == "gsm8k_cot":
+                text = tokenizer.apply_chat_template([{"role": "user", "content": text}],
+                       tokenize=False, add_generation_prompt=True, enable_thinking=False)
+            selected.append({"task": name, "doc_id": index, "prompt": text})
+    write_json(output / "probe_ids.json", selected)
+    return selected
+
+
+def cache_probes(model, tokenizer, output):
+    selected = probe_inputs(tokenizer, output)
+    cached = {str(layer): [] for layer in LAYERS}
+    handles = []
+    for layer in LAYERS:
+        def capture(module, inputs, layer=layer):
+            cached[str(layer)].append(inputs[0][0, -1].detach().float().cpu())
+        handles.append(model.model.layers[layer].mlp.down_proj.register_forward_pre_hook(capture))
+    try:
+        with torch.no_grad():
+            for row in selected:
+                batch = tokenizer(row["prompt"], add_special_tokens=False, return_tensors="pt").to("cuda")
+                model(**batch)
+    finally:
+        for handle in handles:
+            handle.remove()
+    torch.save({k: torch.stack(v) for k, v in cached.items()}, output / "activations.pt")
+    return {"probes": len(selected), "path": str(output)}
+
+
+@torch.no_grad()
+def diagnostics(model, config, output, probes_dir):
+    meta = read_json("/data/task1/metadata.json")
+    original = AutoModelForCausalLM.from_pretrained(config["model"], revision=meta["revisions"]["model"],
+                                                   torch_dtype=torch.float32).cuda().eval()
+    probes = torch.load(Path(probes_dir) / "activations.pt", map_location="cuda", weights_only=True)
+    ids = read_json(Path(probes_dir) / "probe_ids.json")
+    result = []
+    for layer in LAYERS:
+        w0 = original.model.layers[layer].mlp.down_proj.weight.float()
+        w = model.model.layers[layer].mlp.down_proj.weight.float()
+        delta = w - w0
+        u, _, _ = torch.linalg.svd(w0, full_matrices=False)
+        norm = delta.square().sum()
+        z = probes[str(layer)]
+        correction = torch.linalg.vector_norm(z @ delta.T, dim=1)
+        baseline = torch.linalg.vector_norm(z @ w0.T, dim=1)
+        ratio = (correction / (baseline + 1e-8)).tolist()
+        result.append({"layer": layer, "rho_128": ((u[:, :128].T @ delta).square().sum() / norm).item() if norm > 0 else None,
+                       "eta": (norm.sqrt() / torch.linalg.vector_norm(w0)).item(),
+                       "activation_ratios": [{**row, "ratio": value} for row, value in zip(ids, ratio)]})
+    write_json(output / "diagnostics.json", result)
+    return result
+
+
+def qualitative(model, tokenizer, output, deadline, commit=lambda: None):
+    import yaml
+    source = Path("/opt/pa3/configs/task1_finetuning/first_plot_questions.yaml")
+    questions = yaml.safe_load(source.read_text(encoding="utf-8"))
+    if len(questions) != 24:
+        raise ValueError("Expected all 24 assignment prompts")
+    plain_ids = [row["id"] for row in questions if not row["id"].endswith(("_json", "_template"))]
+    annotate_ids = {plain_ids[0], plain_ids[-1]}
+    completed = set()
+    path = output / "qualitative.jsonl"
+    if path.exists():
+        completed = {json.loads(line)["id"] for line in path.read_text(encoding="utf-8").splitlines()}
+    for row in questions:
+        if row["id"] in completed:
+            continue
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Qualitative chunk exhausted")
+        if len(row["paraphrases"]) != 1:
+            raise ValueError("Unexpected prompt schema")
+        messages = []
+        if row.get("system"):
+            messages.append({"role": "system", "content": row["system"]})
+        messages.append({"role": "user", "content": row["paraphrases"][0]})
+        text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+        batch = tokenizer(text, add_special_tokens=False, return_tensors="pt").to("cuda")
+        with torch.no_grad():
+            response = model.generate(**batch, do_sample=False, max_new_tokens=512, pad_token_id=tokenizer.pad_token_id)
+        ids = response[0, batch.input_ids.shape[1]:].tolist()
+        underlying = row["id"].removesuffix("_json").removesuffix("_template")
+        format_name = "json" if row["id"].endswith("_json") else "template" if row["id"].endswith("_template") else "plain"
+        append_jsonl(output / "qualitative.jsonl", {"id": row["id"], "messages": messages,
+                     "question_id": underlying, "format": format_name,
+                     "annotation_subset": underlying in annotate_ids,
+                     "response": tokenizer.decode(ids, skip_special_tokens=True), "tokens": len(ids),
+                     "truncated": len(ids) == 512 and ids[-1] != tokenizer.eos_token_id})
+        commit()
+    return {"responses": 24}
+
+
+def evaluate_job(request, output, seconds, commit=lambda: None):
+    seed_everything(6304)
+    if output.exists():
+        previous = read_json(output / "request.json")
+        for key in ("job", "config", "checkpoint", "eval_limit", "probes_dir"):
+            if previous.get(key) != request.get(key):
+                raise ValueError(f"Evaluation resume protocol mismatch: {key}")
+    else:
+        output.mkdir(parents=True)
+        write_json(output / "request.json", request)
+    deadline = time.monotonic() + seconds - 60
+    model, tokenizer, merge = load_model(request["config"], request.get("checkpoint"),
+                                         diagnostic=request["job"] in ("probe1", "diagnostics1"))
+    if merge:
+        write_json(output / "merge_verification.json", merge)
+    job = request["job"]
+    if job == "evaluate1":
+        result = benchmarks(model, tokenizer, output, deadline, tasks=request.get("eval_tasks"),
+                            limit=request.get("eval_limit"), commit=commit)
+    elif job == "probe1":
+        if request.get("checkpoint"):
+            raise ValueError("Probes must be cached from the unchanged starting model")
+        result = cache_probes(model, tokenizer, output)
+    elif job == "qualitative1":
+        result = qualitative(model, tokenizer, output, deadline, commit)
+    elif job == "diagnostics1":
+        if not request.get("probes_dir"):
+            raise ValueError("Diagnostics requires --probes-dir pointing to saved baseline probes")
+        result = diagnostics(model, request["config"], output, request["probes_dir"])
+    else:
+        raise ValueError(job)
+    commit()
+    return {"output": str(output), "result": result}

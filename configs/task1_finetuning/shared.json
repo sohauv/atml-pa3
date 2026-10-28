@@ -1,0 +1,22 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "seed": 6304,
+  "examples": 40000,
+  "updates": 1250,
+  "microbatch": 2,
+  "accumulation": 16,
+  "max_length": 2048,
+  "warmup_updates": 38,
+  "weight_decay": 0.01,
+  "betas": [0.9, 0.999],
+  "eps": 1e-8,
+  "clip_norm": 1.0,
+  "checkpoints": [312, 625, 937, 1250],
+  "methods": {
+    "full": {"lr": 2e-5, "lambda": 0},
+    "l2sp": {"lr": 2e-5, "lambda": 0.001},
+    "lora4": {"lr": 2e-4, "rank": 4, "alpha": 8},
+    "lora16": {"lr": 2e-4, "rank": 16, "alpha": 32},
+    "oplora16": {"lr": 2e-4, "rank": 16, "alpha": 32, "protection_rank": 128}
+  }
+}

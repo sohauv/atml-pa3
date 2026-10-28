@@ -1,7 +1,8 @@
 """Conservative local reservation ledger. Creating approval is a human decision.
 
 Reserve the entire job ceiling BEFORE a remote call. Failed/ambiguous calls keep
-their reservation; never automatically credit time back after preemption/retry.
+their reservation. Successful calls may reconcile against the entire local app
+lifetime (including image startup), with the same overhead and safety margin.
 This is an application guard, not a replacement for a Modal workspace budget.
 """
 from datetime import datetime, timezone
@@ -65,4 +66,34 @@ def reserve(approval_path, ledger_path, *, gpu, seconds, purpose, cpu=4, memory_
             return job
     finally:
         # Close first: Windows cannot unlink an open file.
+        lock.unlink(missing_ok=True)
+
+
+def settle_success(ledger_path, ticket_id, elapsed_seconds, *, cpu=4, memory_gib=32):
+    """Retain a padded measured ceiling only after confirmed successful completion.
+
+    A single local app lifetime covers all serial infrastructure retries. Never
+    settle failed/unknown calls or provider bills we have not actually inspected.
+    """
+    ledger_path = Path(ledger_path)
+    lock = ledger_path.with_suffix(".lock")
+    handle = lock.open("x", encoding="utf-8")
+    try:
+        with handle:
+            ledger = read_json(ledger_path)
+            jobs = [job for job in ledger["jobs"] if job["id"] == ticket_id]
+            if len(jobs) != 1:
+                raise ValueError("Unknown or ambiguous reservation")
+            job = jobs[0]
+            if job["status"] != "reserved":
+                raise ValueError("Reservation already settled")
+            measured = ceiling_cost(job["gpu"], elapsed_seconds, cpu, memory_gib)
+            job["elapsed_app_seconds"] = elapsed_seconds
+            job["original_reserved_usd"] = job["reserved_usd"]
+            # Include unexpectedly long image startup rather than understating it.
+            job["reserved_usd"] = measured
+            job["status"] = "success_conservative_estimate"
+            write_json(ledger_path, ledger)
+            return job
+    finally:
         lock.unlink(missing_ok=True)
