@@ -41,6 +41,8 @@ def validate_completed_task(result, model, task_name, batch_size, limit):
 
 
 def json_value(value):
+    if isinstance(value, (torch.dtype, torch.device)):
+        return str(value)
     if isinstance(value, dict):
         return {str(k): json_value(v) for k, v in value.items()}
     if isinstance(value, (tuple, list)):

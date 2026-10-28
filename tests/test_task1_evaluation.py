@@ -158,5 +158,16 @@ class EvaluationPrecisionTests(unittest.TestCase):
             torch.testing.assert_close(diagnostic.get_submodule(name).weight, expected, atol=0, rtol=0)
 
 
+class ResultSerializationTests(unittest.TestCase):
+    def test_harness_torch_metadata_is_json_serializable(self):
+        import json
+        from task1_finetuning.evaluate import json_value
+        original = {"config": {"dtype": torch.float16, "device": torch.device("cpu")},
+                    "nested": [torch.tensor([1., 2.]), {"dtype": torch.float32}]}
+        saved = json.loads(json.dumps(json_value(original)))
+        self.assertEqual(saved["config"], {"dtype": "torch.float16", "device": "cpu"})
+        self.assertEqual(saved["nested"], [[1., 2.], {"dtype": "torch.float32"}])
+
+
 if __name__ == "__main__":
     unittest.main()

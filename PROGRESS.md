@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 54/148 mandatory requirements (36.5%).**
+**Overall verified completion: 60/148 mandatory requirements (40.5%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -15,7 +15,7 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work
 
-- Parent: monitor the one A100 Task3livecomparison; FullFT625midpoint is safelysaved; budget, integration, Git and tracker.
+- Parent: live evaluation completed and audited; GPU queue stopped on a fixed serialization error. No GPU job is currently being launched; failed reservations remain locked pending reconciliation. FullFT625 midpoint is safely saved.
 - DetachedModalqueue8684d1013aa74addbd5cbef0ed183d81 is active independently of
   Codex/clientpolling; controllercallfc-01M629CPCHC6S9134N9DA74FJW. It firstwaits
   forexistingGPUcall, thencachesbaselineprobes/resumeslive/evaluateslikelihoods.
@@ -183,13 +183,13 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ### Task 3: live comparison (pages 12-13)
 
-- [ ] T321 Use first50 MATH heldout questions in saved permutation; seed6304 and pinned original Qwen2.5-3B revision from suppliedREADME.
-- [ ] T322 FP16/no quantization/batch1; temperature.7/top-p.8/top-k20/repetition1; exact native template/system/problem/instruction.
-- [ ] T323 Single response cap3072; parallel3independent cap1024 each with self-consistency; sequential initial1024+critique/revision2048.
-- [ ] T324 Reuse first parallel response as refinement initial; exact appended critique instruction; independent seeds; no gold feedback/selection.
+- [x] T321 Use first50 MATH heldout questions in saved permutation; seed6304 and pinned original Qwen2.5-3B revision from suppliedREADME. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB.
+- [x] T322 FP16/no quantization/batch1; temperature.7/top-p.8/top-k20/repetition1; exact native template/system/problem/instruction. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB.
+- [x] T323 Single response cap3072; parallel3independent cap1024 each with self-consistency; sequential initial1024+critique/revision2048. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB.
+- [x] T324 Reuse first parallel response as refinement initial; exact appended critique instruction; independent seeds; no gold feedback/selection. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB.
 - [x] T325 Extract last literal boxed answer by balanced-braces; missing/empty/unclosed last box stays missing, no numeric fallback. Evidence: executed nestedbrace/lastbox/missing/truncatedbox regressiontests.
-- [ ] T326 Save all prompts/responses/seeds/inputoutputlengths/truncation; end-to-end time sameGPU excluding model load, peakmemory.
-- [ ] T327 Report accuracy/actualtokens/runtime/extractiontruncation and wrong->correct/correct->wrong; charge sharedinitial twice across strategies and all critique/prompt tokens.
+- [x] T326 Save all prompts/responses/seeds/inputoutputlengths/truncation; end-to-end time sameGPU excluding model load, peakmemory. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB.
+- [x] T327 Report accuracy/actualtokens/runtime/extractiontruncation and wrong->correct/correct->wrong; charge sharedinitial twice across strategies and all critique/prompt tokens. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB.
 
 ### Task 3: adaptive sampling and evidence (pages 13-15)
 
@@ -326,3 +326,7 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Baseline probes completed; verified all 64 selected examples and finite activation tensors for layers 0/13/27. Two probe requirements now verified. Detached queue resumed the existing live comparison without an overlapping GPU job (child fc-01M62A28B824NHZ07X6JMH5W5P). Raw prompts and activation tensors remain local/volume-only.
 
 - Live comparison completed 50/50 questions: single 64%, parallel 58%, refinement 62%; wrong-to-correct 1, correct-to-wrong 0; zero symbolic comparison failures/timeouts. Aggregate table and figure generated and visually checked. Full raw-call download/audit is in progress before checking additional requirements. Queue automatically advanced to baseline likelihood benchmarks (call fc-01M62CYBZW5VWEF99X1FNA2JJ8). Completion remains 54/148 (36.5%).
+
+- Queue stopped safely on baseline likelihood output serialization: torch.dtype in harness metadata was not JSON serializable. Added dtype/device conversion and regression; all 6 evaluation tests pass (0.349s). Initial sandbox test invocation had 4 Windows temp ACL errors; rerun outside sandbox passed. No paid retry launched; failed queue retains ledger ownership/reservations.
+- Recovered full HellaSwag validation metrics from all 10,042 unique saved per-example harness records on CPU: raw accuracy 0.3755228042, normalized accuracy 0.4730133440. BoolQ/ARC-Easy did not run. Baseline recovery provenance saved without raw data.
+- Downloaded/audited all 250 live calls: seeds, caps, prompts, lengths, timing/memory, shared initial response and per-strategy cost sums verified; exact first 50 heldout IDs confirmed. Six live requirements now verified. FullFT final and other training remain unfunded under current conservative reservations.
