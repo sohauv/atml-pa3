@@ -1,0 +1,4 @@
+strategy,correct,input_tokens,output_tokens,inference_seconds,peak_gpu_gib,call_truncation_rate,call_extraction_rate,answer_extracted,any_call_truncated
+single,0.64,108.38,664.28,18.633134604280013,5.897339468002319,0.0,1.0,1.0,0.0
+parallel,0.58,325.14,1864.92,52.398126102060004,5.898362979888916,0.18,0.8199999999999998,0.8,0.28
+refinement,0.62,867.34,1198.44,33.207213994580016,5.947440299987793,0.08,0.92,1.0,0.16

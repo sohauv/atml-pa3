@@ -1,0 +1,51 @@
+{
+  "completed": 50,
+  "required": 50,
+  "complete": true,
+  "wrong_to_correct": 1,
+  "correct_to_wrong": 0,
+  "strategies": {
+    "single": {
+      "correct": 0.64,
+      "input_tokens": 108.38,
+      "output_tokens": 664.28,
+      "inference_seconds": 18.633134604280013,
+      "peak_gpu_gib": 5.897339468002319,
+      "call_truncation_rate": 0.0,
+      "call_extraction_rate": 1.0,
+      "answer_extracted": 1.0,
+      "any_call_truncated": 0.0
+    },
+    "parallel": {
+      "correct": 0.58,
+      "input_tokens": 325.14,
+      "output_tokens": 1864.92,
+      "inference_seconds": 52.398126102060004,
+      "peak_gpu_gib": 5.898362979888916,
+      "call_truncation_rate": 0.18,
+      "call_extraction_rate": 0.8199999999999998,
+      "answer_extracted": 0.8,
+      "any_call_truncated": 0.28
+    },
+    "refinement": {
+      "correct": 0.62,
+      "input_tokens": 867.34,
+      "output_tokens": 1198.44,
+      "inference_seconds": 33.207213994580016,
+      "peak_gpu_gib": 5.947440299987793,
+      "call_truncation_rate": 0.08,
+      "call_extraction_rate": 0.92,
+      "answer_extracted": 1.0,
+      "any_call_truncated": 0.16
+    }
+  },
+  "symbolic_failed_comparisons": 0,
+  "symbolic_timeout_comparisons": 0,
+  "revision_examples": {
+    "selection_rule": "first three saved held-out IDs in each observed transition category",
+    "wrong_to_correct": [
+      "test:4678"
+    ],
+    "correct_to_wrong": []
+  }
+}

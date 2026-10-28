@@ -22,7 +22,7 @@ Fine-grained items intentionally include both implementation and required eviden
   Ledgerownership prevents competingstandaloneGPUjobs; totalceiling$14.915625.
 - Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
 - Task2: fullmanifest and ID-onlyexports validated; all 21,749 selected images downloaded and verified; no Task2 GPU run.
-- Task3: both1000-question offline analyses completed; required liveGPUcomparison is nowrunning.
+- Task3: both1000-question offline analyses completed; live GPU comparison completed all 50 questions; detailed artifact audit is active.
 
 ## Manual checklist
 
@@ -324,3 +324,5 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Monitor milestone: selected-image downloader exited successfully after verifying all 21,749 images. The original live GPU session ended normally at its time boundary with 29/50 questions saved. The detached controller automatically advanced to baseline probes (child call fc-01M629Q0PJQ36FCTDP99Y2B5HF), confirming serial handoff after the original client exited. Remaining live questions are already reserved in the queue. No new requirement was marked complete; 52/148 (35.1%) remains verified.
 
 - Baseline probes completed; verified all 64 selected examples and finite activation tensors for layers 0/13/27. Two probe requirements now verified. Detached queue resumed the existing live comparison without an overlapping GPU job (child fc-01M62A28B824NHZ07X6JMH5W5P). Raw prompts and activation tensors remain local/volume-only.
+
+- Live comparison completed 50/50 questions: single 64%, parallel 58%, refinement 62%; wrong-to-correct 1, correct-to-wrong 0; zero symbolic comparison failures/timeouts. Aggregate table and figure generated and visually checked. Full raw-call download/audit is in progress before checking additional requirements. Queue automatically advanced to baseline likelihood benchmarks (call fc-01M62CYBZW5VWEF99X1FNA2JJ8). Completion remains 54/148 (36.5%).
