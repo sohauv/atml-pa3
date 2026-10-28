@@ -1,0 +1,19 @@
+{
+  "seed": 6304,
+  "candidate_budgets": [1, 2, 4, 8, 16, 32],
+  "orders_per_question": 10,
+  "development_questions": 200,
+  "held_out_questions": 800,
+  "live_questions": 50,
+  "bootstrap_question_resamples": 1000,
+  "math_verify_version": "0.8.0",
+  "symbolic_comparison_timeout_seconds": 10,
+  "mathvista_revision": "c5acd37d75a8c8f9756cb66c78fe2e54fa2c31fb",
+  "live_model": "Qwen/Qwen2.5-3B-Instruct",
+  "live_model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "live_caps": {"single": 3072, "parallel": [1024, 1024, 1024], "refinement": [1024, 2048]},
+  "sources": {
+    "rollouts": "https://drive.google.com/drive/folders/1utX-Gfi9vvaoi1mi0pzNpDGL1o1fAh23",
+    "mathvista_normalization": "https://github.com/lupantech/MathVista/blob/c5acd37d75a8c8f9756cb66c78fe2e54fa2c31fb/evaluation/calculate_score.py"
+  }
+}

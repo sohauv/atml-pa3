@@ -35,6 +35,8 @@ def load_model(config, checkpoint=None, diagnostic=False):
     tokenizer = AutoTokenizer.from_pretrained(config["model"], revision=revision)
     base = AutoModelForCausalLM.from_pretrained(config["model"], revision=revision,
                                                torch_dtype=torch.float32, attn_implementation="sdpa").cuda()
+    identity = {"method": "baseline", "update": 0, "data_sha256": meta["sha256"],
+                "model_revision": revision, "checkpoint": str(checkpoint) if checkpoint else None}
     verification = None
     if checkpoint:
         checkpoint = Path(checkpoint)
@@ -44,6 +46,7 @@ def load_model(config, checkpoint=None, diagnostic=False):
         if saved["config"]["model_revision"] != revision or saved["data_sha256"] != meta["sha256"]:
             raise ValueError("Checkpoint provenance mismatch")
         spec = saved["config"]["method_config"]
+        identity.update(method=saved["config"]["method"], update=saved["update"])
         if "rank" in spec:
             factors = torch.load(checkpoint / "projected_factors.pt", map_location="cpu", weights_only=True)
             merge_factors(base, factors)
@@ -79,6 +82,7 @@ def load_model(config, checkpoint=None, diagnostic=False):
         base.half()
     base.eval()
     base.config.use_cache = True
+    base._pa3_checkpoint_identity = identity
     return base, tokenizer, verification
 
 
@@ -312,6 +316,11 @@ def evaluate_job(request, output, seconds, commit=lambda: None):
     deadline = time.monotonic() + seconds - 60
     model, tokenizer, merge = load_model(request["config"], request.get("checkpoint"),
                                          diagnostic=request["job"] in ("probe1", "diagnostics1"))
+    condition_path = output / "condition.json"
+    if condition_path.exists() and read_json(condition_path) != model._pa3_checkpoint_identity:
+        raise ValueError("Saved evaluation condition does not match the loaded checkpoint")
+    if not condition_path.exists():
+        write_json(condition_path, model._pa3_checkpoint_identity)
     if merge:
         write_json(output / "merge_verification.json", merge)
     job = request["job"]

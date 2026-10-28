@@ -171,6 +171,15 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
                    "basis_bytes": sum(b.numel() * b.element_size() for n, b in model.named_buffers()
                                       if n.endswith((".U", ".V")))})
     model.train()
+    session_id = str(time.time_ns())
+    gpu_name = torch.cuda.get_device_name(0)
+    append_jsonl(run_dir / "sessions.jsonl", {
+        "event": "started", "session_id": session_id, "update": update,
+        "gpu": gpu_name, "torch": torch.__version__,
+        "resume": str(resume) if resume else None,
+        "setup_seconds": time.monotonic() - started,
+        "reference_storage_seconds": reference_seconds,
+        "preprocessing_seconds": preprocessing_seconds})
     end_update = min(config["updates"], update + max_updates) if max_updates else config["updates"]
     last_saved = update
     last_checkpoint = Path(resume) if resume else None
@@ -250,6 +259,11 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
     result = {"method": method, "update": update, "finished": update == config["updates"],
               "checkpoint": str(checkpoint) if checkpoint else None,
               "seconds": time.monotonic() - started}
+    append_jsonl(run_dir / "sessions.jsonl", {
+        "event": "completed", "session_id": session_id, "update": update,
+        "gpu": gpu_name, "seconds": result["seconds"],
+        "peak_gpu_gib": torch.cuda.max_memory_allocated() / 2**30,
+        "checkpoint": result["checkpoint"]})
     write_json(run_dir / "status.json", result)
     commit()
     return result

@@ -66,7 +66,81 @@ do not add evaluation conditions. Skipped AMP updates are logged explicitly.
 Only complete-split evaluations count as assignment results. Limited evaluations
 are smoke checks and are labeled as such. GSM8K uses the non-thinking chat template;
 likelihood benchmarks use stock completion prompts. No external judge API is used.
-Task 2 and Task 3 modules and validation are being completed independently.
+Task 2 and Task 3 code is implemented and has CPU fixture/integration tests;
+pretrained GPU experiments and complete-split evaluations are tracked separately
+in `PROGRESS.md`. A passing CPU test is not a completed experiment.
+
+## Task 1 execution
+
+Preparation reuses a complete checksummed dataset and refuses to replace partial
+or inconsistent existing data. All GPU commands require the approved local ledger.
+
+```powershell
+python -m scripts.experiments run --job prepare1 --seconds 1800
+python -m scripts.experiments run --job train1 --method full --gpu A100-40GB --seconds 6000 --run-id full-<unique-id>
+python -m scripts.experiments run --job train1 --method full --gpu A100-40GB --seconds 6000 --run-id full-<same-id> --resume /checkpoints/runs/full-<same-id>/<completed-checkpoint>
+python -m scripts.experiments run --job probe1 --gpu A100-40GB --seconds 600 --run-id probes-<unique-id>
+python -m scripts.experiments run --job evaluate1 --gpu A100-40GB --seconds 3600 --run-id baseline-<unique-id>
+python -m scripts.experiments run --job evaluate1 --gpu A100-40GB --seconds 3600 --run-id full-midpoint-<unique-id> --checkpoint /checkpoints/runs/full-<id>/step-0625
+python -m scripts.experiments run --job diagnostics1 --gpu A100-40GB --seconds 1200 --run-id diagnostics-<unique-id> --checkpoint /checkpoints/runs/<id>/<checkpoint> --probes-dir /checkpoints/runs/<probe-id>
+python -m scripts.experiments run --job qualitative1 --gpu A100-40GB --seconds 1200 --run-id qualitative-<unique-id> --checkpoint /checkpoints/runs/<id>/<checkpoint>
+```
+
+Repeat training independently for `l2sp`, `lora4`, `lora16`, and `oplora16` with
+fresh run IDs; never substitute another method's checkpoint as a starting point.
+Commands are bounded chunks, not a reduced training recipe. Continue each method
+to update1250 when authorized funds permit. Evaluate baseline once, FullFT625,
+and all five final1250 checkpoints. `--eval-tasks` selects comma-separated tasks
+for smaller recoverable calls; `--eval-limit` is smoke-only and excluded from final
+benchmark tables. Cache the64 baseline activation probes before inspecting model
+benchmark outputs. Omit `--checkpoint` for unchanged-baseline qualitative responses.
+
+```powershell
+python -m scripts.collect --remote /runs/<run-id> --output results/task1_finetuning/<run-id>
+.\.venv\Scripts\python.exe -m task1_finetuning.figures --results results/task1_finetuning --output report/figures/task1-<unique-id>
+```
+
+Figure exports retain empty cells for missing conditions and label partial runs;
+their manifests contain source hashes and completion status. Per-example model
+outputs stay in saved evaluation directories, separate from small summary tables.
+
+## Task 2 execution
+
+See `task2_vlm/IMPLEMENTATION.md` for APIs, source attribution and chosen defaults
+where the manual leaves a choice. Original-source parsing uses `ijson` to avoid
+retaining COCO segmentation and all VQA answer dictionaries simultaneously.
+
+```powershell
+.\.venv\Scripts\python.exe -m task2_vlm download-metadata
+.\.venv\Scripts\python.exe -m task2_vlm pin-models
+.\.venv\Scripts\python.exe -m task2_vlm prepare
+.\.venv\Scripts\python.exe -m task2_vlm download-images
+python -m scripts.upload_inputs --source data/task2/prepared --remote /task2/prepared-v1
+python -m scripts.upload_inputs --source data/task2/images --remote /task2/images-v1
+```
+
+Upload the model revision JSON separately to a fresh volume path, then use the
+budgeted `cache2`, `train2`, `evaluate2` jobs with explicit `--manifest`,
+`--image-root`, `--features`, and `--model-revisions` paths. `cache2` is resumable
+and commits feature files; `train2` accepts `--run-id`/`--resume` like Task1. Final
+test evaluation rejects checkpoints before completion of all4500 updates.
+
+## Task 3 execution
+
+See `task3_test_time/README.md` for scorer versions, supplied file IDs, exact
+commands and output schemas. Offline analysis needs neither GPUs nor images and
+is run locally using `requirements-analysis.txt`. Development policies are frozen
+before held-out processing. Incomplete analysis attempts are preserved under
+distinct output directories. Symbolic-equivalence timeouts are fixed/versioned
+and diagnosed explicitly; questions and missing extractions are never dropped.
+
+The budgeted `live3` job uses only the fixed50 held-out MATH IDs, original pinned
+Qwen2.5-3B revision, and required three inference strategies. Upload only the
+necessary generations/splits/provenance with `scripts.upload_live_inputs`, then
+pass the resulting `--data-root` and `--split-path` to `scripts.experiments`.
+Completed per-question live calls are reused on resume; the shared initial answer
+is charged to both parallel/refinement strategies. Plot and table tools consume
+actual saved results and never fill absent measurements.
 
 ## Validation
 

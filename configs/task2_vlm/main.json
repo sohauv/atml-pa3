@@ -1,0 +1,24 @@
+{
+  "seed": 6304,
+  "language_model": "Qwen/Qwen3-0.6B",
+  "vision_model": "google/siglip-base-patch16-224",
+  "visual_tokens": 196,
+  "microbatch": 8,
+  "accumulation": 2,
+  "weight_decay": 0.01,
+  "clip_norm": 1.0,
+  "question_cap": 80,
+  "caption_cap": 64,
+  "answer_cap": 16,
+  "checkpoint_every": 250,
+  "development_every": 500,
+  "stages": [
+    {"name": "caption_alignment", "updates": 2250, "connector_lr": 0.001, "adapter_lr": 0.0},
+    {"name": "visual_instruction", "updates": 1500, "connector_lr": 0.0001, "adapter_lr": 0.00002},
+    {"name": "natural_vqa", "updates": 750, "connector_lr": 0.00005, "adapter_lr": 0.00001}
+  ],
+  "grounding_training_pairs_per_kind": 4096,
+  "grounding_dev_presence_counting_pairs": [12, 12],
+  "grounding_test_presence_counting_pairs": [32, 32],
+  "selection_note": "The manual fixes grounding evaluation totals, not the presence/counting balance. This configuration uses an equal balance."
+}

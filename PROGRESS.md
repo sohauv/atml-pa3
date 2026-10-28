@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 12/148 mandatory requirements (8.1%).**
+**Overall verified completion: 25/148 mandatory requirements (16.9%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -107,16 +107,16 @@ Fine-grained items intentionally include both implementation and required eviden
 
 - [ ] T201 Original Qwen3-0.6B/non-thinking; frozen google/siglip-base-patch16-224; trainable 768->1024 GELU 1024->1024 connector.
 - [ ] T202 Deterministic SigLIP196 final patch features in14x14 order, final layer norm exactly once, FP16 cache; remove encoder from GPU before Qwen training.
-- [ ] T203 COCO2014 captions/instance annotations and VQAv2 original complementary-pair sources prepared.
-- [ ] T204 Presence pools pair annotated-present and category-unannotated images, same generated question, yes/no targets.
-- [ ] T205 Counting pools pair different annotated counts1-4 for same category and generated question.
-- [ ] T206 Natural complementary pairs have different normalized consensus answers and >=8/10 agreement on each image; original consensus string target and all10 references retained.
-- [ ] T207 Train2014 training, val2014 development/final; pairs within splits; all development/final sets image-disjoint from one another/training/replay.
-- [ ] T208 Caption train6000 images*3=18000; development96 images*1; save seeded image/example IDs.
-- [ ] T209 Grounding development24pairs/48questions and final64pairs/128questions, presence/counting represented.
-- [ ] T210 Natural training1536pairs with640/256/640 yes-no/number/other; development32 with12/8/12; final96 with36/24/36.
-- [ ] T211 Seed6304 selects data; image/question/pair IDs saved; answer normalization consistent.
-- [ ] T212 Visual embeddings inserted before question inside Qwen user message with correct labels, attention masks, positions; shape/frozen-set/connector-gradient checks.
+- [x] T203 COCO2014 captions/instance annotations and VQAv2 original complementary-pair sources prepared. Evidence: all10 released sourceJSONs downloaded, checked, streamed; sourceSHA256s recorded in selection_ids/provenance.json.
+- [x] T204 Presence pools pair annotated-present and category-unannotated images, same generated question, yes/no targets. Evidence: actual4096pair trainingpool and evaluationpools built/validated; synthetic annotation-label regression passed.
+- [x] T205 Counting pools pair different annotated counts1-4 for same category and generated question. Evidence: actual4096pair trainingpool plus evaluationpools built/validated from original annotations.
+- [x] T206 Natural complementary pairs have different normalized consensus answers and >=8/10 agreement on each image; original consensus string target and all10 references retained. Evidence: actual sourcepreflight and fullmanifest validation; filtering regression passed.
+- [x] T207 Train2014 training, val2014 development/final; pairs within splits; all development/final sets image-disjoint from one another/training/replay. Evidence: actual isolation assertions;21221trainingimages and mutuallydisjoint evaluation imagecounts96/48/128/64/192.
+- [x] T208 Caption train6000 images*3=18000; development96 images*1; save seeded image/example IDs. Evidence: actualmanifest exactcounts and ID-only captionCSVs with hashes.
+- [x] T209 Grounding development24pairs/48questions and final64pairs/128questions, presence/counting represented. Evidence: actualmanifest validates12+12devpairs/32+32testpairs; exportedIDs.
+- [x] T210 Natural training1536pairs with640/256/640 yes-no/number/other; development32 with12/8/12; final96 with36/24/36. Evidence: actualpreflight/fullmanifest exactquota assertions and exportedIDs.
+- [x] T211 Seed6304 selects data; image/question/pair IDs saved; answer normalization consistent. Evidence: deterministic selected-only streaming/RNGreplay regression and actual9ID-onlyCSVs/provenance, manifestSHA68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b.
+- [x] T212 Visual embeddings inserted before question inside Qwen user message with correct labels, attention masks, positions; shape/frozen-set/connector-gradient checks. Evidence: realtinyQwen hidden1024 gradient and16-step cached/left-padded position tests plus syntheticmask/control/isolation tests passed.
 - [ ] T213 Connector magnitude calibration uses training-only text/visual embeddings; save rule and scale.
 
 ### Task 2: curriculum and recovery (pages 8-9)
@@ -159,7 +159,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - [ ] T304 Save ten seeded random rollout orders/question, nested prefixesN1/2/4/8/16/32, reuse across all methods/policies.
 - [ ] T305 Stored extracted answers are used; math-verify mathematical equivalence and released MathVista metadata normalization/choiceletters/precision; scorer fixed/versioned before heldout.
 - [ ] T306 Form equivalence groups without gold; use same equivalence for grading; missing extraction oneNO_ANSWER group always incorrect, retained in votes/cost/accuracy.
-- [ ] T307 Earliest-supporting-rollout tie breaks, average tied RWC ranks; all selectors return sole candidate atN1.
+- [x] T307 Earliest-supporting-rollout tie breaks, average tied RWC ranks; all selectors return sole candidate atN1. Evidence: selector/regressiontests include mathematicalfloatvote ties, average tiedranks andallN1rules.
 - [ ] T308 Average over orders within questions then across questions; generated-token sum costs, FirstAns consumes only first candidate.
 - [ ] T309 Main accuracy differences have1000 paired question-bootstrap95% intervals after averaging orders.
 
@@ -169,7 +169,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - [ ] T311 Implement mean sampled-token logp and full-distribution KL self-certainty from raw supplied measurements.
 - [ ] T312 Normalize visual attention by image+prompt+generated eligible totals, then average token visual engagement.
 - [ ] T313 VisConf token KL calibration pools current prefix only, linear5th/95thpercentiles, clip0-1/epsilon1e-8; mean confidence times mean vision.
-- [ ] T314 RWC descending average ranks and (N-rank)/(N-1) weighted answer votes, correct N1 handling.
+- [x] T314 RWC descending average ranks and (N-rank)/(N-1) weighted answer votes, correct N1 handling. Evidence: numericalrank/consensus/N1tests andfullfixturepipeline passed.
 - [ ] T315 Both datasets compare FirstAns/self-consistency/highestlogp/highestcertainty/certaintyRWC at allN.
 - [ ] T316 MathVista additionally highestvision/visionRWC/highestVisConf/VisConfRWC at allN.
 - [ ] T317 AtN32 analyze within-question length/score/correctness associations and top-bottom-scorequartile correctness; shortest-rollout control.
@@ -183,7 +183,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - [ ] T322 FP16/no quantization/batch1; temperature.7/top-p.8/top-k20/repetition1; exact native template/system/problem/instruction.
 - [ ] T323 Single response cap3072; parallel3independent cap1024 each with self-consistency; sequential initial1024+critique/revision2048.
 - [ ] T324 Reuse first parallel response as refinement initial; exact appended critique instruction; independent seeds; no gold feedback/selection.
-- [ ] T325 Extract last literal boxed answer by balanced-braces; missing/empty/unclosed last box stays missing, no numeric fallback.
+- [x] T325 Extract last literal boxed answer by balanced-braces; missing/empty/unclosed last box stays missing, no numeric fallback. Evidence: executed nestedbrace/lastbox/missing/truncatedbox regressiontests.
 - [ ] T326 Save all prompts/responses/seeds/inputoutputlengths/truncation; end-to-end time sameGPU excluding model load, peakmemory.
 - [ ] T327 Report accuracy/actualtokens/runtime/extractiontruncation and wrong->correct/correct->wrong; charge sharedinitial twice across strategies and all critique/prompt tokens.
 
@@ -222,6 +222,7 @@ Fine-grained items intentionally include both implementation and required eviden
 | Task3 fixture suites | 9 passed;1 symbolic test pending | Joins, splits, frozen policies, offline integration and250-call live orchestration/resume mocked; actual-result execution still pending |
 | First resume launch | Local startup failure, fixed and retried | Rich emitted Unicode to Windows cp1252 before GPU submission; launcher now configures UTF-8; failure reservation retained conservatively |
 | Complete CPU suite after dependency installation | **51 passed in22.367s** | `.venv/Scripts/python.exe -B -m unittest discover -s tests -v`; allmethods/recovery, visualtinyQwen, selection/scoring/joins/liveorchestration fixtures; no skippedtests in this execution |
+| Updated complete CPU suite | **60 passed in28.648s** | Samecommand; addedfigureintegrity, actualFP16merge/FP32diagnostics, streaming/RNGreplay, VLMtimeout/recovery, bounded symbolic-timeout cleanup; no failed/skippedtests |
 
 ## Modal jobs and spending
 
@@ -252,6 +253,7 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 |---|---|---|
 | `c4ca244d0a8a1472ad0b534a046add9c9e1268d4` | Tested budget reservations, persistence helpers, safeguards and scaffold docs | Succeeded, `origin/dev/pa3-experiments` |
 | `3e1243c52243989bf0074649de785066a499ffa5` | Manual-derived148-item tracker and verified-percentage calculator | Succeeded, `origin/dev/pa3-experiments` |
+| `c0a3cacb69dd4c27586ebf88c123a6a64b2ff508` | Tested Task1 methods/recovery/evaluation code and budget-gated Modal runner | Succeeded, `origin/dev/pa3-experiments` |
 
 ## Blockers and next steps
 
@@ -263,8 +265,13 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Local dependencies finished installing; the full51-test suite passed. Task2
   metadata parsing was refactored to stream large sourceJSONs after a memory-pressure
   failure; raw data was preserved. CPU analysis/data preparation are coordinated.
-- Task2 COCO/VQAv2 source preparation and image availability must be verified.
-- Task3 supplied parquet transfer/metadata download is in progress; no final scores yet.
+- Task2 source preparation and fullmanifest validation completed; ID-only submission
+  exports are in results/task2_vlm/selection_ids. Selected21749image download is
+  active; GPU feature caching/training/finaltest have not run.
+- AllTask3 suppliedparquets and pinnedmetadata downloaded/validated. MATHv1/v2
+  partialattempts are preserved; a pathological symbolicexpression stalled the
+  unboundedscorer. Versioned10s isolatedcomparison timeouts now passregressiontests;
+  MATHv3 and MathVista analysis continue locally, with no final scores claimed yet.
 - The student must write/interpret the PDF report and submit it to LMS; AI-written
   report language is prohibited by the manual. Code, numeric metrics and plot tools
   can be prepared autonomously.

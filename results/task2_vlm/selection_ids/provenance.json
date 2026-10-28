@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "seed": 6304,
+  "manifest_sha256": "68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b",
+  "source_sha256": {
+    "captions_train": "dd8c9636dc11740f956e36728866ea0c4ebe4988dcbdc5e712b7c2267f152d12",
+    "captions_val": "7da4cc45cb76ee1642d163e846e1e0a33feffac2e841c9c426d585ea499165a4",
+    "instances_train": "777ef504abfeba349930485bb32ecd5b6529129a3e010f7852e1437cb049b732",
+    "instances_val": "e1b4d1bc54906827b1a029981b1c77f2088bd4462569b7615db7929070c3ab47",
+    "questions_train": "cb671e77b52a86fc3722b2a0ffc456c8199240391bfd97eaf2d850448404845c",
+    "questions_val": "f34d9c9909dea76700d361baddd63dd47b4494945097459b542d9fe840244811",
+    "annotations_train": "770d2d3980e7838d6186082e0ddeddd804014c390ae45a592e996d6baf841d92",
+    "annotations_val": "0564650e712b34c246e4ad142894692bf2e45dee8e9cc6ebb2cedbe85731c4bf",
+    "pairs_train": "b1ac37a0bae6bd4d8073c98364f46e513647bdd6440199a2db025d45fdf9c37d",
+    "pairs_val": "66d2dab90e7e905e2c9bf3448f3cd744e011fda33879e6109a04834f6e70c0bc"
+  },
+  "counts": {
+    "captions_train": 18000,
+    "captions_dev": 96,
+    "natural_train": 1536,
+    "natural_dev": 32,
+    "natural_test": 96,
+    "presence_train": 4096,
+    "counting_train": 4096,
+    "grounding_dev": 24,
+    "grounding_test": 64
+  },
+  "isolation": {
+    "train_images": 21221,
+    "captions_dev": 96,
+    "grounding_dev": 48,
+    "grounding_test": 128,
+    "natural_dev": 64,
+    "natural_test": 192
+  },
+  "natural_pair_types": {
+    "natural_train": {
+      "yes/no": 640,
+      "number": 256,
+      "other": 640
+    },
+    "natural_dev": {
+      "yes/no": 12,
+      "number": 8,
+      "other": 12
+    },
+    "natural_test": {
+      "yes/no": 36,
+      "number": 24,
+      "other": 36
+    }
+  },
+  "files": {
+    "captions_train.csv": {
+      "rows": 18000,
+      "sha256": "86346627e4318173221cdd25d9d5ffce66e6c5b29ba56d4f9a7ce9b8f6b987bf",
+      "bytes": 263924
+    },
+    "captions_dev.csv": {
+      "rows": 96,
+      "sha256": "c7c3c3e6f3f81c24c1f6e93bdf1d5dd199551a80fc0c7e83fd7e20300d625dd6",
+      "bytes": 1430
+    },
+    "natural_train.csv": {
+      "rows": 1536,
+      "sha256": "d234efe697dc259a022efb233d024de0817abe517f39313dd60119b84c0ceae7",
+      "bytes": 104246
+    },
+    "natural_dev.csv": {
+      "rows": 32,
+      "sha256": "ebe817e2e9302bb55d570e93ea8774b0cedf3aaebb29f2aa922174cda9cb73a1",
+      "bytes": 2164
+    },
+    "natural_test.csv": {
+      "rows": 96,
+      "sha256": "bf5a3db5db4494fd94e935dd15010b9a606ef5361ff1fff3737717af6cacfa40",
+      "bytes": 6371
+    },
+    "presence_train.csv": {
+      "rows": 4096,
+      "sha256": "bb42de4edd35ea6bea60e337fd1694e25084aa98eefa2b4cfb7381087bb06a89",
+      "bytes": 245881
+    },
+    "counting_train.csv": {
+      "rows": 4096,
+      "sha256": "d3bec3affd6554bcd9d5f0f201c7c29ea175ef1c97b9b35b323f5cae3a1301f4",
+      "bytes": 245875
+    },
+    "grounding_dev.csv": {
+      "rows": 24,
+      "sha256": "42671f9446722df31e091260f93fac564b8565a140909ba30d19411f106daab3",
+      "bytes": 1435
+    },
+    "grounding_test.csv": {
+      "rows": 64,
+      "sha256": "33dbf8d70616a8fe212a34c13198b92b124dd8d3306e5b641374124e0f8a9351",
+      "bytes": 3761
+    }
+  },
+  "content": "ID-only CSVs and source hashes; no question/caption/answer/image content"
+}
