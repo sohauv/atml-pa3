@@ -15,7 +15,11 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work
 
-- Parent: monitor the one A100 FullFT continuation toward625; budget, integration, Git and tracker.
+- Parent: monitor the one A100 Task3livecomparison; FullFT625midpoint is safelysaved; budget, integration, Git and tracker.
+- DetachedModalqueue8684d1013aa74addbd5cbef0ed183d81 is active independently of
+  Codex/clientpolling; controllercallfc-01M629CPCHC6S9134N9DA74FJW. It firstwaits
+  forexistingGPUcall, thencachesbaselineprobes/resumeslive/evaluateslikelihoods.
+  Ledgerownership prevents competingstandaloneGPUjobs; totalceiling$14.915625.
 - Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
 - Task2: fullmanifest and ID-onlyexports validated; selected21749images downloading; noTask2GPUrun.
 - Task3: both1000-question offline analyses completed; required liveGPUcomparison is nowrunning.
@@ -223,6 +227,7 @@ Fine-grained items intentionally include both implementation and required eviden
 | First resume launch | Local startup failure, fixed and retried | Rich emitted Unicode to Windows cp1252 before GPU submission; launcher now configures UTF-8; failure reservation retained conservatively |
 | Complete CPU suite after dependency installation | **51 passed in22.367s** | `.venv/Scripts/python.exe -B -m unittest discover -s tests -v`; allmethods/recovery, visualtinyQwen, selection/scoring/joins/liveorchestration fixtures; no skippedtests in this execution |
 | Updated complete CPU suite | **60 passed in28.648s** | Samecommand; addedfigureintegrity, actualFP16merge/FP32diagnostics, streaming/RNGreplay, VLMtimeout/recovery, bounded symbolic-timeout cleanup; no failed/skippedtests |
+| Detachedqueue and batching regression milestone | **74 passed in36.945s** | Fullunittestdiscover executed; includes10queue/idempotency/timeout/atomicbudget tests and5evaluationprecision/batching/cache tests. Initialpuretestimport ofModalfailed; fixed withlazySDKimports andrerunpassed. |
 
 ## Modal jobs and spending
 
@@ -251,8 +256,9 @@ false for thosecomparisons; noquestions/candidates were removed. MathVista has
 zero symbolic failures. Fullscorer/error records accompany the results; the
 timeout rule is disclosed rather than treating ambiguous comparisons as proven.
 
-Authorization: $10 monthly usage, $0 out-of-pocket spend, all available allowance for
-PA3. Billing limits are never modified. Conservative local reservations are **not**
+Authorization: initially$10; the human explicitly raised the PA3 TOTAL cap to$15
+on29October, including priorjobs. Workspace cap is$15 with$0 out-of-pocket spend.
+Billing limits are never modified. Conservative local reservations are **not**
 claimed to equal provider-billed usage.
 
 | Job | Hardware | Status | Reservation | Artifacts |
@@ -282,10 +288,18 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 | `3e1243c52243989bf0074649de785066a499ffa5` | Manual-derived148-item tracker and verified-percentage calculator | Succeeded, `origin/dev/pa3-experiments` |
 | `c0a3cacb69dd4c27586ebf88c123a6a64b2ff508` | Tested Task1 methods/recovery/evaluation code and budget-gated Modal runner | Succeeded, `origin/dev/pa3-experiments` |
 | `3c9263e3a7ce1341bc2177bf8223508e530433bc` |60-test-verifiedVLM/test-timeanalysis/figurecode and actualvalidatedTask2ID-onlysplits | Succeeded, `origin/dev/pa3-experiments` |
+| `60290b6b462eea01aebd0b046e68a57dac27676b` | VerifiedFullFT625midpoint metadata and bothcompleteofflineanalysis metrics/figures | Succeeded, `origin/dev/pa3-experiments` |
 
 ## Blockers and next steps
 
-- Full required GPU workload may exceed the $10 allowance; measure pilot throughput
+- Selected-image downloader was no longer running at19003files; resumption now
+  reuses/verifies existingimages and downloads only missing files. No duplicate
+  downloadprocess or additionalModaljob was launched. Earlierrawdata is preserved.
+- Prior conservative estimates/reservations total$9.438534. The newly authorized
+  TOTAL is$15; detachedqueue plannedadditionalceiling$5.477091, cumulative$14.915625.
+  These are guardreservations, not providerbills. UnaffordableFullFTtail stayspending.
+
+- Full required GPU workload exceeds the current$15 allowance; measure throughput
   before committing remaining reservations. Pilot measured roughly8.9sec/update;
   FullFT alone projects about3.1GPUhours before recovery/evaluation overhead. All
   five methods plus required evaluations cannot be claimed affordable on this

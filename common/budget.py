@@ -51,6 +51,8 @@ def reserve(approval_path, ledger_path, *, gpu, seconds, purpose, cpu=4, memory_
     try:
         with handle:
             ledger = read_json(ledger_path) if ledger_path.exists() else {"jobs": []}
+            if ledger.get("active_queue"):
+                raise PermissionError("A detached queue owns the spending ledger; reconcile it before launching standalone jobs")
             if ledger.get("authorization_id", approval["authorization_id"]) != approval["authorization_id"]:
                 raise PermissionError("Use a separate ledger for each authorization")
             charge = ceiling_cost(gpu, seconds, cpu, memory_gib)
@@ -66,6 +68,53 @@ def reserve(approval_path, ledger_path, *, gpu, seconds, purpose, cpu=4, memory_
             return job
     finally:
         # Close first: Windows cannot unlink an open file.
+        lock.unlink(missing_ok=True)
+
+
+def reserve_queue(approval_path, ledger_path, queue_id, resources):
+    """Atomically pre-reserve every CPU/GPU ceiling before detaching a queue.
+
+    The remote queue never receives permission to spend beyond these tickets.
+    Existing jobs retain their reservations; new standalone launches fail closed.
+    """
+    approval = read_json(approval_path)
+    now = datetime.now(timezone.utc)
+    if approval.get("approved") is not True or not approval.get("approved_by"):
+        raise PermissionError("No human-approved spending limit")
+    expires = datetime.fromisoformat(approval["expires_at"].replace("Z", "+00:00"))
+    if expires <= now:
+        raise PermissionError("Spending authorization expired")
+    cap = float(approval["limit_usd"])
+    if not math.isfinite(cap) or cap <= 0 or not resources:
+        raise ValueError("Invalid cap or empty queue")
+    tickets = []
+    for item in resources:
+        if item["gpu"] and item["gpu"] not in approval.get("allowed_gpus", []):
+            raise PermissionError("GPU is outside authorization")
+        charge = ceiling_cost(item["gpu"], item["seconds"], item["cpu"], item["memory_gib"])
+        tickets.append({**item, "id": uuid.uuid4().hex, "queue_id": queue_id,
+                        "reserved_usd": charge, "reserved_at": now.isoformat(), "status": "reserved"})
+    ledger_path = Path(ledger_path)
+    ledger_path.parent.mkdir(parents=True, exist_ok=True)
+    lock = ledger_path.with_suffix(".lock")
+    handle = lock.open("x", encoding="utf-8")
+    try:
+        with handle:
+            ledger = read_json(ledger_path) if ledger_path.exists() else {"jobs": []}
+            if ledger.get("active_queue"):
+                raise PermissionError("Another detached queue already owns the budget")
+            if ledger.get("authorization_id", approval["authorization_id"]) != approval["authorization_id"]:
+                raise PermissionError("Authorization/ledger identity differs")
+            total = sum(j["reserved_usd"] for j in ledger["jobs"]) + sum(j["reserved_usd"] for j in tickets)
+            if total > cap:
+                raise PermissionError(f"Queue requires ${total:.2f} cumulative reservations; approved cap is ${cap:.2f}")
+            ledger["authorization_id"] = approval["authorization_id"]
+            ledger["approved_limit_usd"] = cap
+            ledger["jobs"].extend(tickets)
+            ledger["active_queue"] = queue_id
+            write_json(ledger_path, ledger)
+            return tickets
+    finally:
         lock.unlink(missing_ok=True)
 
 

@@ -15,6 +15,31 @@ from task1_finetuning.adapters import inject, merge_factors
 LAYERS = (0, 13, 27)
 
 
+def positive_batch_size(value):
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        raise ValueError("Likelihood batch size must be a positive integer")
+    return value
+
+
+def task_cache_identity(model, task_name, batch_size, limit):
+    return {"schema_version": 2, "task": task_name, "batch_size": batch_size,
+            "example_limit": limit, "dtype": "float16",
+            "checkpoint_identity": getattr(model, "_pa3_checkpoint_identity", None)}
+
+
+def validate_completed_task(result, model, task_name, batch_size, limit):
+    protocol = result.get("protocol", {})
+    # All evaluations produced before batching support used batch size one.
+    if protocol.get("batch_size", 1) != batch_size:
+        raise ValueError(f"Cached {task_name} batch size differs; use a fresh evaluation directory")
+    if protocol.get("example_limit") != limit:
+        raise ValueError(f"Cached {task_name} example limit differs")
+    expected = task_cache_identity(model, task_name, batch_size, limit)
+    if protocol.get("cache_identity", expected) != expected:
+        raise ValueError(f"Cached {task_name} model/protocol identity differs")
+    return result
+
+
 def json_value(value):
     if isinstance(value, dict):
         return {str(k): json_value(v) for k, v in value.items()}
@@ -86,19 +111,26 @@ def load_model(config, checkpoint=None, diagnostic=False):
     return base, tokenizer, verification
 
 
-def harness_model(model, tokenizer, output=None, deadline=None, commit=lambda: None):
+def harness_model(model, tokenizer, output=None, deadline=None, commit=lambda: None, *, batch_size=1):
     from lm_eval.models.huggingface import HFLM
 
     class NonThinkingHFLM(HFLM):
         def __init__(self):
-            super().__init__(pretrained=model, tokenizer=tokenizer, batch_size=1,
+            super().__init__(pretrained=model, tokenizer=tokenizer, batch_size=positive_batch_size(batch_size),
                              max_length=4096, dtype="float16")
             self.generation_records = []
             self.generation_cache = {}
+            self.generation_cache_identity = {"schema_version": 2, "batch_size": 1,
+                "dtype": "float16", "checkpoint_identity": getattr(model, "_pa3_checkpoint_identity", None)}
             cache_path = output / "generation_cache.jsonl" if output is not None else None
             if cache_path is not None and cache_path.exists():
                 for line in cache_path.read_text(encoding="utf-8").splitlines():
                     record = json.loads(line)
+                    if record.get("cache_identity", self.generation_cache_identity) != self.generation_cache_identity:
+                        raise ValueError("Generation cache batch/model identity differs")
+                    if record["metadata"].get("batch_size", 1) != 1:
+                        raise ValueError("Generation cache must contain batch-one outputs")
+                    record["metadata"]["batch_size"] = 1
                     self.generation_cache[record["request_sha256"]] = record
 
         def apply_chat_template(self, chat_history, add_generation_prompt=True, **kwargs):
@@ -116,6 +148,7 @@ def harness_model(model, tokenizer, output=None, deadline=None, commit=lambda: N
                 text = tokenizer.decode(generated, skip_special_tokens=False)
                 stopped = eos or any(s and s in text for s in stop)
                 self.generation_records.append({"generated_tokens": len(generated),
+                    "batch_size": 1,
                     "cap": max_length - context.shape[1],
                     "truncated": len(generated) >= max_length - context.shape[1] and not stopped})
             return output
@@ -142,7 +175,8 @@ def harness_model(model, tokenizer, output=None, deadline=None, commit=lambda: N
                 if output is not None:
                     if len(records) != 1 or len(result) != 1:
                         raise ValueError("Expected one generation per request")
-                    record = {"request_sha256": request_hash, "response": result[0], "metadata": records[0]}
+                    record = {"request_sha256": request_hash, "response": result[0], "metadata": records[0],
+                              "cache_identity": self.generation_cache_identity}
                     append_jsonl(output / "generation_cache.jsonl", record)
                     self.generation_cache[request_hash] = record
                     if len(self.generation_cache) % 25 == 0:
@@ -152,7 +186,8 @@ def harness_model(model, tokenizer, output=None, deadline=None, commit=lambda: N
     return NonThinkingHFLM()
 
 
-def benchmarks(model, tokenizer, output, deadline, *, tasks=None, limit=None, commit=lambda: None):
+def benchmarks(model, tokenizer, output, deadline, *, tasks=None, limit=None,
+               likelihood_batch_size=8, commit=lambda: None):
     import lm_eval
     import importlib.metadata
     tasks = tasks or ["gsm8k_cot", "hellaswag", "boolq", "arc_easy"]
@@ -160,7 +195,26 @@ def benchmarks(model, tokenizer, output, deadline, *, tasks=None, limit=None, co
         raise ValueError("Unknown Task 1 benchmark")
     if limit is not None and (not isinstance(limit, int) or limit < 1):
         raise ValueError("Smoke limit must be a positive example count")
-    lm = harness_model(model, tokenizer, output, deadline, commit)
+    likelihood_batch_size = positive_batch_size(likelihood_batch_size)
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    evaluation_config = {"schema_version": 2, "generation_batch_size": 1,
+                         "likelihood_batch_size": likelihood_batch_size,
+                         "example_limit": limit, "dtype": "float16", "seed": 6304,
+                         "checkpoint_identity": getattr(model, "_pa3_checkpoint_identity", None)}
+    config_path = output / "evaluation_config.json"
+    if config_path.exists() and read_json(config_path) != evaluation_config:
+        raise ValueError("Evaluation cache configuration differs; use a fresh output directory")
+    # Validate all existing results before adopting a legacy output directory.
+    # This prevents mixing old batch-one likelihood results with new batch-eight results.
+    for task_name in ("gsm8k_cot", "hellaswag", "boolq", "arc_easy"):
+        completed = output / f"{task_name}.json"
+        if completed.exists():
+            validate_completed_task(read_json(completed), model, task_name,
+                                    1 if task_name == "gsm8k_cot" else likelihood_batch_size, limit)
+    if not config_path.exists():
+        write_json(config_path, evaluation_config)
+    models = {}
     aggregates = {}
     for task_name in tasks:
         completed = output / f"{task_name}.json"
@@ -168,10 +222,15 @@ def benchmarks(model, tokenizer, output, deadline, *, tasks=None, limit=None, co
             aggregates.update(read_json(completed)["results"])
             continue
         chat = task_name == "gsm8k_cot"
+        batch_size = 1 if chat else likelihood_batch_size
         if time.monotonic() >= deadline:
             raise TimeoutError("Evaluation chunk exhausted; completed task files remain saved")
+        if batch_size not in models:
+            models[batch_size] = harness_model(model, tokenizer, output, deadline, commit,
+                                               batch_size=batch_size)
+        lm = models[batch_size]
         result = lm_eval.simple_evaluate(model=lm, tasks=[task_name], num_fewshot=0,
-                                        apply_chat_template=chat, batch_size=1,
+                                        apply_chat_template=chat, batch_size=batch_size,
                                         gen_kwargs="do_sample=False,max_gen_toks=1024" if chat else None,
                                         log_samples=True, random_seed=6304, numpy_random_seed=6304,
                                         torch_random_seed=6304, fewshot_random_seed=6304,
@@ -185,12 +244,16 @@ def benchmarks(model, tokenizer, output, deadline, *, tasks=None, limit=None, co
                                  "torch": torch.__version__}
         result["protocol"] = {"complete_split": limit is None, "smoke_only": limit is not None,
                               "example_limit": limit, "thinking": False,
-                              "chat_template": chat, "num_fewshot": 0}
+                              "chat_template": chat, "num_fewshot": 0, "batch_size": batch_size,
+                              "cache_identity": task_cache_identity(model, task_name, batch_size, limit)}
+        result.setdefault("config", {})["pa3_batch_sizes"] = {
+            "generation": 1, "likelihood": likelihood_batch_size}
         write_json(completed, json_value(result))
         aggregates.update(result["results"])
         commit()
-    for record in lm.generation_records:
-        append_jsonl(output / "generation_metadata.jsonl", record)
+    for lm in models.values():
+        for record in lm.generation_records:
+            append_jsonl(output / "generation_metadata.jsonl", record)
     # Include previously completed tasks when a later call selects a new task.
     for task_name in ("gsm8k_cot", "hellaswag", "boolq", "arc_easy"):
         completed = output / f"{task_name}.json"
@@ -305,11 +368,15 @@ def qualitative(model, tokenizer, output, deadline, commit=lambda: None):
 
 def evaluate_job(request, output, seconds, commit=lambda: None):
     seed_everything(6304)
+    likelihood_batch_size = positive_batch_size(request.get("eval_likelihood_batch_size", 8))
     if output.exists():
         previous = read_json(output / "request.json")
         for key in ("job", "config", "checkpoint", "eval_limit", "probes_dir"):
             if previous.get(key) != request.get(key):
                 raise ValueError(f"Evaluation resume protocol mismatch: {key}")
+        if (request["job"] == "evaluate1" and
+                positive_batch_size(previous.get("eval_likelihood_batch_size", 1)) != likelihood_batch_size):
+            raise ValueError("Evaluation resume likelihood batch size differs; use a fresh output directory")
     else:
         output.mkdir(parents=True)
         write_json(output / "request.json", request)
@@ -326,7 +393,8 @@ def evaluate_job(request, output, seconds, commit=lambda: None):
     job = request["job"]
     if job == "evaluate1":
         result = benchmarks(model, tokenizer, output, deadline, tasks=request.get("eval_tasks"),
-                            limit=request.get("eval_limit"), commit=commit)
+                            limit=request.get("eval_limit"), likelihood_batch_size=likelihood_batch_size,
+                            commit=commit)
     elif job == "probe1":
         if request.get("checkpoint"):
             raise ValueError("Probes must be cached from the unchanged starting model")

@@ -11,7 +11,7 @@ worker_image = (data_image
                 .add_local_dir("configs", remote_path="/opt/pa3/configs", ignore=["spending.approved.json"]))
 
 
-@app.function(image=worker_image, cpu=(4, 4), memory=(32768, 32768),
+@app.function(image=worker_image, gpu="A100-40GB", cpu=(4, 4), memory=(32768, 32768),
               timeout=1800, retries=0, max_containers=1, scaledown_window=2,
               volumes={"/data": data_volume, "/checkpoints": checkpoint_volume})
 def execute(request):
@@ -34,6 +34,11 @@ def execute(request):
         if item.metadata.get("Name")})
     checkpoint_volume.commit()
     job = request["job"]
+    if ticket.get("gpu"):
+        import torch
+        if not torch.cuda.is_available():
+            raise RuntimeError("A GPU was reserved but CUDA is unavailable")
+        print(f"[PA3] job={job} requested_gpu={ticket['gpu']} actual_gpu={torch.cuda.get_device_name(0)}", flush=True)
     if job == "prepare1":
         from task1_finetuning.prepare_data import prepare_data
         result = prepare_data()

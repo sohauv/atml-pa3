@@ -1,17 +1,100 @@
 """Check evaluation precision/identity using a real tiny CPU Qwen3 checkpoint."""
 import copy
+import json
 from pathlib import Path
 import tempfile
+import time
+from types import ModuleType, SimpleNamespace
 import unittest
 from unittest.mock import patch
 
 import torch
 from transformers import Qwen3Config, Qwen3ForCausalLM
 
-from common.io import write_json
+from common.io import read_json, write_json
 from common.training import seed_everything
 from task1_finetuning.adapters import AdapterLinear, export_factors, inject
-from task1_finetuning.evaluate import load_model
+from task1_finetuning.evaluate import benchmarks, evaluate_job, load_model, positive_batch_size
+
+
+class EvaluationBatchingTests(unittest.TestCase):
+    def test_likelihood_batches_eight_while_generation_remains_one_and_cache_reuses(self):
+        calls, constructed = [], []
+        model = SimpleNamespace(_pa3_checkpoint_identity={"method": "baseline", "update": 0})
+        fake_module = ModuleType("lm_eval")
+
+        def evaluate(**kwargs):
+            calls.append(kwargs)
+            task = kwargs["tasks"][0]
+            return {"results": {task: {"acc,none": .5}}, "samples": {}, "config": {}}
+
+        def harness(*args, batch_size, **kwargs):
+            constructed.append(batch_size)
+            return SimpleNamespace(generation_records=[], batch_size=batch_size)
+
+        fake_module.simple_evaluate = evaluate
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            with patch.dict("sys.modules", {"lm_eval": fake_module}), \
+                 patch("task1_finetuning.evaluate.harness_model", side_effect=harness), \
+                 patch("importlib.metadata.version", return_value="unit-test-version"):
+                benchmarks(model, None, output, time.monotonic() + 60,
+                           tasks=["gsm8k_cot", "hellaswag", "boolq"])
+                self.assertEqual(constructed, [1, 8])
+                self.assertEqual([call["batch_size"] for call in calls], [1, 8, 8])
+                self.assertEqual([call["apply_chat_template"] for call in calls], [True, False, False])
+                self.assertEqual(calls[0]["gen_kwargs"], "do_sample=False,max_gen_toks=1024")
+                self.assertIsNone(calls[1]["gen_kwargs"])
+                generation = read_json(output / "gsm8k_cot.json")
+                likelihood = read_json(output / "hellaswag.json")
+                self.assertEqual(generation["protocol"]["batch_size"], 1)
+                self.assertEqual(likelihood["protocol"]["batch_size"], 8)
+                self.assertEqual(likelihood["protocol"]["cache_identity"]["batch_size"], 8)
+                self.assertEqual(likelihood["config"]["pa3_batch_sizes"], {"generation": 1, "likelihood": 8})
+                self.assertEqual(read_json(output / "evaluation_config.json")["likelihood_batch_size"], 8)
+                before = (output / "evaluation_config.json").read_bytes()
+                # A completed task incurs no repeated model/harness evaluation.
+                benchmarks(model, None, output, time.monotonic() + 60,
+                           tasks=["gsm8k_cot", "hellaswag", "boolq"])
+                self.assertEqual(len(calls), 3)
+                self.assertEqual(constructed, [1, 8])
+                with self.assertRaisesRegex(ValueError, "configuration differs"):
+                    benchmarks(model, None, output, time.monotonic() + 60,
+                               tasks=["boolq"], likelihood_batch_size=4)
+                self.assertEqual((output / "evaluation_config.json").read_bytes(), before)
+
+    def test_legacy_cached_likelihood_is_batch_one_and_cannot_silently_mix(self):
+        fake_module = ModuleType("lm_eval")
+        fake_module.simple_evaluate = lambda **kwargs: self.fail("Completed legacy results should be reused")
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            result_path = output / "boolq.json"
+            write_json(result_path, {"results": {"boolq": {"acc,none": .5}},
+                                    "protocol": {"example_limit": None, "complete_split": True, "smoke_only": False}})
+            before = result_path.read_bytes()
+            with patch.dict("sys.modules", {"lm_eval": fake_module}):
+                with self.assertRaisesRegex(ValueError, "batch size differs"):
+                    benchmarks(None, None, output, time.monotonic() + 60, tasks=["boolq"])
+                self.assertFalse((output / "evaluation_config.json").exists())
+                benchmarks(None, None, output, time.monotonic() + 60,
+                           tasks=["boolq"], likelihood_batch_size=1)
+            self.assertEqual(result_path.read_bytes(), before)
+            self.assertEqual(read_json(output / "evaluation_config.json")["likelihood_batch_size"], 1)
+
+    def test_resume_batch_mismatch_is_rejected_before_loading_gpu_model(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            previous = {"job": "evaluate1", "config": {}, "checkpoint": None}
+            write_json(output / "request.json", previous)
+            with patch("task1_finetuning.evaluate.load_model") as load:
+                with self.assertRaisesRegex(ValueError, "likelihood batch size differs"):
+                    evaluate_job({**previous, "eval_likelihood_batch_size": 8}, output, 300)
+                load.assert_not_called()
+
+    def test_batch_size_requires_positive_integer(self):
+        for value in (0, -1, True, False, 1.5, "8"):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                positive_batch_size(value)
 
 
 class Batch(dict):

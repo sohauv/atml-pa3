@@ -1,0 +1,40 @@
+{
+  "controller_seconds": 10800,
+  "description": "Serial, budget-prefunded continuation. Unaffordable tail steps stay pending.",
+  "steps": [
+    {
+      "name": "cache_baseline_probes",
+      "job": "probe1",
+      "gpu": "A100-40GB",
+      "seconds": 600,
+      "run_id": "task1-probes-queue-{short}"
+    },
+    {
+      "name": "finish_live_comparison",
+      "job": "live3",
+      "gpu": "A100-40GB",
+      "seconds": 3600,
+      "run_id": "task3-live-20261029",
+      "data_root": "/data/task3/live-input-v1",
+      "split_path": "/data/task3/live-input-v1/analysis/math/splits.json"
+    },
+    {
+      "name": "baseline_likelihood_benchmarks",
+      "job": "evaluate1",
+      "gpu": "A100-40GB",
+      "seconds": 1600,
+      "run_id": "task1-baseline-queue-{short}",
+      "eval_tasks": ["hellaswag", "boolq", "arc_easy"],
+      "eval_likelihood_batch_size": 8
+    },
+    {
+      "name": "continue_full_ft_to_final",
+      "job": "train1",
+      "gpu": "A100-40GB",
+      "seconds": 6000,
+      "run_id": "full-pilot-20261028",
+      "resume": "/checkpoints/runs/full-pilot-20261028/step-0625",
+      "max_updates": 625
+    }
+  ]
+}

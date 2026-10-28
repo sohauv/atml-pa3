@@ -28,8 +28,9 @@ reserve its entire cost ceiling before submitting work. The local approval and
 ledger are ignored by Git. `configs/spending.example.json` is deliberately
 unapproved; only populate a real approval following explicit human authorization.
 
-The approved allowance on 28 October 2026 is $10 total for PA3, within the user's
-$10 monthly Modal usage limit and $0 out-of-pocket spend limit. Do not modify
+The initial allowance on 28 October was $10. On 29 October the user explicitly
+raised PA3 authorization to **$15 total including all earlier jobs**, with a
+$15 workspace usage cap and $0 out-of-pocket spend limit. Do not modify
 workspace billing settings. Credits are not assumed to be an extra allowance.
 Reservations include requested CPU/RAM, a two-minute overhead allowance, and a
 25% contingency. They are conservative estimates, not provider billing records.
@@ -70,7 +71,39 @@ Task 2 and Task 3 code is implemented and has CPU fixture/integration tests;
 pretrained GPU experiments and complete-split evaluations are tracked separately
 in `PROGRESS.md`. A passing CPU test is not a completed experiment.
 
-## Task 1 execution
+## Detached experiment queue
+
+`scripts.queue` runs a small CPU controller on Modal with `app.run(detach=True)`.
+It waits for the known current GPU call, then advances the fixed plan in
+`configs/experiment_queue.json` without a Codex turn or local polling process.
+The computer/client can disconnect after submission. GPU workers start only for
+their own steps; they do not sit idle between stages. Modal account limits,
+preemption, or external-service failures can still stop work.
+An older non-detached dependency still needs its original client until that
+dependency finishes; the newly queued steps do not have that dependency.
+
+All controller and GPU ceilings are atomically reserved before launch, including
+prior experiment reservations. Only the affordable prefix is funded; remaining
+steps are reported as unfunded. A queue owns the ledger exclusively, preventing
+the chat/monitor from launching overlapping standalone jobs. Ambiguous submission
+or failure stops the queue and retains budget/ownership pending reconciliation.
+Completed worker outputs and controller state are saved on the checkpoint volume.
+
+```powershell
+python -m scripts.queue plan --wait-call <existing-function-call-id>
+python -m scripts.queue submit --wait-call <existing-function-call-id>
+python -m scripts.queue status <queue-id> --sync
+```
+
+The default plan caches baseline probes, resumes the fixed Task3 live comparison,
+evaluates the three baseline likelihood benchmarks with batch8, then continues
+FullFT only if that final step was affordable. GSM8K generation stays batch1.
+No queue retry invents a new starting checkpoint or changes the prescribed seeds.
+Funding a later queue requires available already-authorized budget, or explicit
+human authorization for a higher total; raising account credits is not assumed
+to authorize additional PA3 spend.
+
+## Task 1 execution commands
 
 Preparation reuses a complete checksummed dataset and refuses to replace partial
 or inconsistent existing data. All GPU commands require the approved local ledger.
