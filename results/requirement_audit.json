@@ -1,0 +1,767 @@
+{
+  "verified": 60,
+  "total": 148,
+  "percent": 40.5,
+  "tests": {
+    "passed": 75,
+    "failed": 0,
+    "runtime_seconds": 20.081,
+    "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -v"
+  },
+  "modal": {
+    "active_tasks": 0,
+    "controller": "failed_terminal_confirmed",
+    "benchmark_failure": "dtype serialization, fixed and tested; no paid retry",
+    "conservative_reserved_usd": 14.79842845694251,
+    "authorized_total_usd": 15,
+    "provider_billing": "not reconciled; reservations are not actual billed usage"
+  },
+  "remaining_major_work": [
+    "FullFT final1250 (625 saved); L2-SP, LoRA4, LoRA16, OPLoRA16 required training",
+    "Remaining seven-condition benchmark, diagnostic and qualitative evaluations",
+    "Task2 feature caching, staged GPU training, required evaluations and plots",
+    "Student-written report interpretation, packaging and submission"
+  ],
+  "requirements": [
+    {
+      "id": "G01",
+      "verified": false,
+      "requirement_and_evidence": "Individual code/experiments/results; no sharing with other students."
+    },
+    {
+      "id": "G02",
+      "verified": false,
+      "requirement_and_evidence": "Student understands and is responsible for submitted code."
+    },
+    {
+      "id": "G03",
+      "verified": true,
+      "requirement_and_evidence": "Public GitHub repository exists and source is pushed. Evidence: https://github.com/sohauv/atml-pa3/tree/dev/pa3-experiments ; commit c4ca244."
+    },
+    {
+      "id": "G04",
+      "verified": false,
+      "requirement_and_evidence": "All materially reused external code, data, papers and tools attributed."
+    },
+    {
+      "id": "G05",
+      "verified": false,
+      "requirement_and_evidence": "Fix seeds where practical; record all reported hyperparameters and preserved configurations."
+    },
+    {
+      "id": "G06",
+      "verified": false,
+      "requirement_and_evidence": "Reproduction README covers every task and required command."
+    },
+    {
+      "id": "G07",
+      "verified": false,
+      "requirement_and_evidence": "Environment specification covers all experiments and scoring versions."
+    },
+    {
+      "id": "G08",
+      "verified": false,
+      "requirement_and_evidence": "Selected split/example IDs are preserved and available for submission."
+    },
+    {
+      "id": "G09",
+      "verified": false,
+      "requirement_and_evidence": "Every reported number traces to saved machine-readable results or reproducible commands."
+    },
+    {
+      "id": "G10",
+      "verified": false,
+      "requirement_and_evidence": "Repository excludes secrets, raw datasets and unnecessary large checkpoints; verify final tracked files."
+    },
+    {
+      "id": "G11",
+      "verified": false,
+      "requirement_and_evidence": "Student-written report contains eight main-content pages in course PA0 NeurIPS format."
+    },
+    {
+      "id": "G12",
+      "verified": false,
+      "requirement_and_evidence": "Report has abstract, introduction, concise setup/methods, separate Task 1-3 results/analysis, conclusion and references."
+    },
+    {
+      "id": "G13",
+      "verified": false,
+      "requirement_and_evidence": "Repository link appears at the end of the report abstract."
+    },
+    {
+      "id": "G14",
+      "verified": false,
+      "requirement_and_evidence": "Report language, interpretation and analysis are written entirely by the student, not generative AI."
+    },
+    {
+      "id": "G15",
+      "verified": false,
+      "requirement_and_evidence": "Main report includes central evidence; optional appendix is supplemental and referenced."
+    },
+    {
+      "id": "G16",
+      "verified": false,
+      "requirement_and_evidence": "Figures/tables have labels, axes, units, methods, useful captions and are discussed in the report."
+    },
+    {
+      "id": "G17",
+      "verified": false,
+      "requirement_and_evidence": "Report distinguishes baselines, checkpoints, splits, metrics and percentage-point versus relative changes."
+    },
+    {
+      "id": "G18",
+      "verified": false,
+      "requirement_and_evidence": "Connected evidence-based analysis discusses limitations, unexpected/inconclusive findings, incomplete experiments and deviations."
+    },
+    {
+      "id": "G19",
+      "verified": false,
+      "requirement_and_evidence": "Accessible GitHub link and PDF submitted to LMS by 06 November 2026 in announced format."
+    },
+    {
+      "id": "G20",
+      "verified": false,
+      "requirement_and_evidence": "Final leakage audit: evaluation data never influences training/hyperparameter choice outside prescribed protocols."
+    },
+    {
+      "id": "T101",
+      "verified": true,
+      "requirement_and_evidence": "Use original post-trained Qwen/Qwen3-0.6B identity. Evidence: completed data metadata and original setup_check.json."
+    },
+    {
+      "id": "T102",
+      "verified": true,
+      "requirement_and_evidence": "Select first 40,000 eligible MetaMathQA records in source order. Evidence: preparation completed with retained=40000; internal order/count assertions."
+    },
+    {
+      "id": "T103",
+      "verified": true,
+      "requirement_and_evidence": "Reject empty questions/responses. Evidence: preparation filtering implementation executed on full retained dataset."
+    },
+    {
+      "id": "T104",
+      "verified": true,
+      "requirement_and_evidence": "Reject formatted sequences over 2,048 tokens, without answer truncation. Evidence: too_long=2; max retained length=1942; preparation assertions."
+    },
+    {
+      "id": "T105",
+      "verified": true,
+      "requirement_and_evidence": "Filter query/original_question normalized matches to GSM8K test questions. Evidence: executed normalization/filter in preparation; metadata normalization specification."
+    },
+    {
+      "id": "T106",
+      "verified": true,
+      "requirement_and_evidence": "Preserve source IDs, exact upstream revisions and training-data checksum. Evidence: preparation artifacts committed to data volume; results/task1_finetuning/data_metadata.json."
+    },
+    {
+      "id": "T107",
+      "verified": true,
+      "requirement_and_evidence": "Format user/supplied-assistant conversations with thinking disabled and verify prompt prefix/EOT. Evidence: full preparation execution with template assertions."
+    },
+    {
+      "id": "T108",
+      "verified": true,
+      "requirement_and_evidence": "Mask prompts/padding; supervise assistant response plus EOT; verify actual prepared labels. Evidence: actual first prepared record read from volume:213tokens/159response tokens, EOT151645, contiguous response labels, one masked suffix token; numerical padding test passed."
+    },
+    {
+      "id": "T109",
+      "verified": true,
+      "requirement_and_evidence": "Accumulated causal SFT loss is normalized by all valid response tokens in effective batch; verify in actual training. Evidence: variable-length accumulation gradient-equivalence test and eight real GPU optimizer updates with per-effective-batch response-token logs."
+    },
+    {
+      "id": "T110",
+      "verified": false,
+      "requirement_and_evidence": "Every run independently starts from the identical original checkpoint; same examples/order/tokenization/prompts, seed 6304; no old-task data/replay."
+    },
+    {
+      "id": "T111",
+      "verified": false,
+      "requirement_and_evidence": "Each variant completes one epoch, 40,000 examples and 1,250 updates with microbatch 2, accumulation 16, effective batch 32."
+    },
+    {
+      "id": "T112",
+      "verified": true,
+      "requirement_and_evidence": "AdamW betas (.9,.999), epsilon 1e-8, decay .01 excluding biases/parameters under two dimensions. Evidence: parameter-group numerical test and executed pilot with saved prescribed configuration."
+    },
+    {
+      "id": "T113",
+      "verified": true,
+      "requirement_and_evidence": "Cosine schedule, 38 warmup updates, global norm clipping 1.0 and gradient checkpointing. Evidence: schedule boundary tests, GPU pilot warmup LR/gradient logs, executed checkpointed/clipped training source."
+    },
+    {
+      "id": "T114",
+      "verified": false,
+      "requirement_and_evidence": "FP16 AMP, dynamic scaler, no quantization; unscale before clipping; FP32 master/adapters and optimizer states."
+    },
+    {
+      "id": "T115",
+      "verified": false,
+      "requirement_and_evidence": "Save recovery at updates 312/625/937/1250 including optimizer/scheduler/scaler/RNG/data position; validate resumed trajectory."
+    },
+    {
+      "id": "T116",
+      "verified": false,
+      "requirement_and_evidence": "Log SFT loss/LR versus update and skipped AMP updates for all five methods."
+    },
+    {
+      "id": "T117",
+      "verified": false,
+      "requirement_and_evidence": "Record runtime, peak GPU memory, trainable parameters, checkpoint sizes and method-specific overhead."
+    },
+    {
+      "id": "T118",
+      "verified": false,
+      "requirement_and_evidence": "Full FT updates all original parameters, peak LR 2e-5, lambda=0, completed."
+    },
+    {
+      "id": "T119",
+      "verified": false,
+      "requirement_and_evidence": "Full FT saves full-model displacement at midpoint and final."
+    },
+    {
+      "id": "T120",
+      "verified": false,
+      "requirement_and_evidence": "L2-SP independently restarts, peak LR 2e-5, lambda=1e-3, completed."
+    },
+    {
+      "id": "T121",
+      "verified": false,
+      "requirement_and_evidence": "L2-SP fixed starting reference; sum .5*distance-squared over unique parameters including bias/norm, tied parameters counted once, no averaging."
+    },
+    {
+      "id": "T122",
+      "verified": false,
+      "requirement_and_evidence": "L2-SP logs Omega/lambda-Omega/total objective/final displacement plus reference storage/transfer overhead."
+    },
+    {
+      "id": "T123",
+      "verified": false,
+      "requirement_and_evidence": "LoRA rank4/alpha8 and rank16/alpha32 are separate completed runs, peak LR2e-4."
+    },
+    {
+      "id": "T124",
+      "verified": false,
+      "requirement_and_evidence": "LoRA backbone frozen FP16; FP32 random-A/zero-B adapters, dropout .05, no trainable bias."
+    },
+    {
+      "id": "T125",
+      "verified": false,
+      "requirement_and_evidence": "LoRA targets q/k/v/o/gate/up/down in every layer; record total adapter counts."
+    },
+    {
+      "id": "T126",
+      "verified": false,
+      "requirement_and_evidence": "OPLoRA rank16/alpha32/protection128, same LR/settings and initial unprojected factors as LoRA16, completed."
+    },
+    {
+      "id": "T127",
+      "verified": false,
+      "requirement_and_evidence": "OPLoRA uses fixed leading FP32 U/V, factored two-sided projections, no dense projection matrices; numerical constraints verified."
+    },
+    {
+      "id": "T128",
+      "verified": false,
+      "requirement_and_evidence": "OPLoRA computes bases once, exports projected factors, records basis storage/preprocessing/export overhead."
+    },
+    {
+      "id": "T129",
+      "verified": false,
+      "requirement_and_evidence": "Merge each adapter into a fresh backbone and check merged/unmerged logits, using projected OPLoRA factors."
+    },
+    {
+      "id": "T130",
+      "verified": false,
+      "requirement_and_evidence": "Evaluate shared unchanged baseline once; Full FT midpoint and all five final checkpoints: seven conditions."
+    },
+    {
+      "id": "T131",
+      "verified": false,
+      "requirement_and_evidence": "Pinned lm-eval definitions, full splits, zero-shot evaluation in FP16 with dropout disabled."
+    },
+    {
+      "id": "T132",
+      "verified": false,
+      "requirement_and_evidence": "GSM8K test1319: gsm8k_cot, non-thinking chat, greedy cap1024, stock stopping/filters, flexible-extraction exact match, invalid answers incorrect."
+    },
+    {
+      "id": "T133",
+      "verified": false,
+      "requirement_and_evidence": "HellaSwag validation10042: stock completion likelihood, normalized and raw accuracy."
+    },
+    {
+      "id": "T134",
+      "verified": false,
+      "requirement_and_evidence": "BoolQ validation3270: stock completion likelihood accuracy."
+    },
+    {
+      "id": "T135",
+      "verified": false,
+      "requirement_and_evidence": "ARC-Easy test2376: stock completion likelihood normalized and raw accuracy."
+    },
+    {
+      "id": "T136",
+      "verified": false,
+      "requirement_and_evidence": "Save aggregate and per-example outputs, extracted GSM8K answers and truncation flags at all required conditions."
+    },
+    {
+      "id": "T137",
+      "verified": true,
+      "requirement_and_evidence": "Fixed probe set: seeded 32 GSM8K test and32 HellaSwag validation prompts; save IDs before inspecting model results. Evidence: completed baseline probe run; 32 unique IDs per task saved before forward passes, seed6304; probe_verification.json."
+    },
+    {
+      "id": "T138",
+      "verified": true,
+      "requirement_and_evidence": "Cache baseline down_proj inputs at last non-padding prompt token in layers0/13/27, before answer continuation. Evidence: downloaded cache verified finite FP32 [64,3072] at each layer, SHA256 and ID-only audit in probe_verification.json; capture source inspected."
+    },
+    {
+      "id": "T139",
+      "verified": false,
+      "requirement_and_evidence": "For five finals and Full FT midpoint compute FP32 rho128 and eta using shared starting bases and effective updates."
+    },
+    {
+      "id": "T140",
+      "verified": false,
+      "requirement_and_evidence": "For same checkpoints compute FP32 local activation R(z), shared cached inputs, math/non-math separated, denominator epsilon1e-8."
+    },
+    {
+      "id": "T141",
+      "verified": false,
+      "requirement_and_evidence": "Generate all24 supplied qualitative prompts under seven conditions, greedy non-thinking cap512; save168 responses by question/format."
+    },
+    {
+      "id": "T142",
+      "verified": false,
+      "requirement_and_evidence": "Annotate first/last underlying plain questions, all3 formats/all7 conditions:42 responses; compliance/coherence/relevance/repetition/math intrusion/inappropriate content/truncation."
+    },
+    {
+      "id": "T143",
+      "verified": false,
+      "requirement_and_evidence": "Seven-condition four-benchmark table with primary scores and baseline changes in percentage points."
+    },
+    {
+      "id": "T144",
+      "verified": false,
+      "requirement_and_evidence": "Combined five-run SFT loss plot, Full FT/L2-SP penalty and displacement comparison."
+    },
+    {
+      "id": "T145",
+      "verified": false,
+      "requirement_and_evidence": "Resource comparison table across five methods including overhead."
+    },
+    {
+      "id": "T146",
+      "verified": false,
+      "requirement_and_evidence": "Compact diagnostics figure/table with geometry and math/non-math activation corrections and limitations."
+    },
+    {
+      "id": "T147",
+      "verified": false,
+      "requirement_and_evidence": "Fixed42-response findings and aligned excerpts with stated selection rule, student interpretation."
+    },
+    {
+      "id": "T148",
+      "verified": false,
+      "requirement_and_evidence": "Analyze rank, regularization, orthogonal protection, Full FT/LoRA16 trade-off and Full FT progression, accounting for cost/learning-rate differences."
+    },
+    {
+      "id": "T149",
+      "verified": false,
+      "requirement_and_evidence": "Address all five Task1 research themes: specialization/retention, restrictions, weight changes/behavior, compute cost, behavior beyond scores."
+    },
+    {
+      "id": "T201",
+      "verified": false,
+      "requirement_and_evidence": "Original Qwen3-0.6B/non-thinking; frozen google/siglip-base-patch16-224; trainable 768->1024 GELU 1024->1024 connector."
+    },
+    {
+      "id": "T202",
+      "verified": false,
+      "requirement_and_evidence": "Deterministic SigLIP196 final patch features in14x14 order, final layer norm exactly once, FP16 cache; remove encoder from GPU before Qwen training."
+    },
+    {
+      "id": "T203",
+      "verified": true,
+      "requirement_and_evidence": "COCO2014 captions/instance annotations and VQAv2 original complementary-pair sources prepared. Evidence: all10 released sourceJSONs downloaded, checked, streamed; sourceSHA256s recorded in selection_ids/provenance.json."
+    },
+    {
+      "id": "T204",
+      "verified": true,
+      "requirement_and_evidence": "Presence pools pair annotated-present and category-unannotated images, same generated question, yes/no targets. Evidence: actual4096pair trainingpool and evaluationpools built/validated; synthetic annotation-label regression passed."
+    },
+    {
+      "id": "T205",
+      "verified": true,
+      "requirement_and_evidence": "Counting pools pair different annotated counts1-4 for same category and generated question. Evidence: actual4096pair trainingpool plus evaluationpools built/validated from original annotations."
+    },
+    {
+      "id": "T206",
+      "verified": true,
+      "requirement_and_evidence": "Natural complementary pairs have different normalized consensus answers and >=8/10 agreement on each image; original consensus string target and all10 references retained. Evidence: actual sourcepreflight and fullmanifest validation; filtering regression passed."
+    },
+    {
+      "id": "T207",
+      "verified": true,
+      "requirement_and_evidence": "Train2014 training, val2014 development/final; pairs within splits; all development/final sets image-disjoint from one another/training/replay. Evidence: actual isolation assertions;21221trainingimages and mutuallydisjoint evaluation imagecounts96/48/128/64/192."
+    },
+    {
+      "id": "T208",
+      "verified": true,
+      "requirement_and_evidence": "Caption train6000 images*3=18000; development96 images*1; save seeded image/example IDs. Evidence: actualmanifest exactcounts and ID-only captionCSVs with hashes."
+    },
+    {
+      "id": "T209",
+      "verified": true,
+      "requirement_and_evidence": "Grounding development24pairs/48questions and final64pairs/128questions, presence/counting represented. Evidence: actualmanifest validates12+12devpairs/32+32testpairs; exportedIDs."
+    },
+    {
+      "id": "T210",
+      "verified": true,
+      "requirement_and_evidence": "Natural training1536pairs with640/256/640 yes-no/number/other; development32 with12/8/12; final96 with36/24/36. Evidence: actualpreflight/fullmanifest exactquota assertions and exportedIDs."
+    },
+    {
+      "id": "T211",
+      "verified": true,
+      "requirement_and_evidence": "Seed6304 selects data; image/question/pair IDs saved; answer normalization consistent. Evidence: deterministic selected-only streaming/RNGreplay regression and actual9ID-onlyCSVs/provenance, manifestSHA68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b."
+    },
+    {
+      "id": "T212",
+      "verified": true,
+      "requirement_and_evidence": "Visual embeddings inserted before question inside Qwen user message with correct labels, attention masks, positions; shape/frozen-set/connector-gradient checks. Evidence: realtinyQwen hidden1024 gradient and16-step cached/left-padded position tests plus syntheticmask/control/isolation tests passed."
+    },
+    {
+      "id": "T213",
+      "verified": false,
+      "requirement_and_evidence": "Connector magnitude calibration uses training-only text/visual embeddings; save rule and scale."
+    },
+    {
+      "id": "T214",
+      "verified": false,
+      "requirement_and_evidence": "Same model continues through all3 stages; seed6304, microbatch8/accumulation2/effective16."
+    },
+    {
+      "id": "T215",
+      "verified": false,
+      "requirement_and_evidence": "AdamW decay.01/global clipping1; per-stage5% warmup and cosine decay to10% peak; gradient checkpointing/no quantization."
+    },
+    {
+      "id": "T216",
+      "verified": false,
+      "requirement_and_evidence": "FP16 autocast/scaler/frozen backbone; FP32 trainable parameters/optimizer; unscale before clipping."
+    },
+    {
+      "id": "T217",
+      "verified": false,
+      "requirement_and_evidence": "Content caps question80/caption64/answer16; loss only target/EOT and mean tokens within example then examples across effective batch."
+    },
+    {
+      "id": "T218",
+      "verified": false,
+      "requirement_and_evidence": "Stage1 connector-only2250updates/two passes18000captions, peakLR1e-3, completed."
+    },
+    {
+      "id": "T219",
+      "verified": false,
+      "requirement_and_evidence": "Stage2 1500updates, connectorLR1e-4/LoRALR2e-5, draw probabilities presence.5/counting.25/caption.25, completed."
+    },
+    {
+      "id": "T220",
+      "verified": false,
+      "requirement_and_evidence": "Stage2 enables LoRA16/alpha32/dropout.05/no bias, q/k/v/o only, original weights frozen."
+    },
+    {
+      "id": "T221",
+      "verified": false,
+      "requirement_and_evidence": "Stage3 750updates, connector5e-5/LoRA1e-5, natural.7/presence.1/counting.1/caption.1, completed."
+    },
+    {
+      "id": "T222",
+      "verified": false,
+      "requirement_and_evidence": "Each stage2/3 draw yields a complete pair or two captions, seeded random sampling with no enforced exact quotas; training-pool reuse allowed."
+    },
+    {
+      "id": "T223",
+      "verified": false,
+      "requirement_and_evidence": "Complete4500updates/72000presentations; checkpoint every250updates and stage weights at2250/3750/4500."
+    },
+    {
+      "id": "T224",
+      "verified": false,
+      "requirement_and_evidence": "Recovery saves optimizer/scheduler/scaler/sampler/stage/RNG and is verified by resume."
+    },
+    {
+      "id": "T225",
+      "verified": false,
+      "requirement_and_evidence": "Save loss/mixture counts/configs/development metrics, parameter counts by stage, runtime/memory and separate feature-caching cost."
+    },
+    {
+      "id": "T226",
+      "verified": false,
+      "requirement_and_evidence": "Development evaluation before training/every500updates/stage endpoints2250/3750/4500, without final-test checkpoint selection."
+    },
+    {
+      "id": "T227",
+      "verified": false,
+      "requirement_and_evidence": "Caption reference loss and both-suite answer NLL under correct/complementary/no-image; exclude termination from answer NLL and example-average token means."
+    },
+    {
+      "id": "T228",
+      "verified": false,
+      "requirement_and_evidence": "Compute image-swap penalty NLL(partner)-NLL(correct), original references fixed."
+    },
+    {
+      "id": "T229",
+      "verified": false,
+      "requirement_and_evidence": "Final Stage3 greedy non-thinking cap16/batch8 under correct/complementary/mismatched/no-image on both suites."
+    },
+    {
+      "id": "T230",
+      "verified": false,
+      "requirement_and_evidence": "Freeze unrelated-image mappings before generation, exclude both own-pair images, reuse across comparisons; no-image removes visuals/rebuilds masks/positions."
+    },
+    {
+      "id": "T231",
+      "verified": false,
+      "requirement_and_evidence": "Grounding normalized exact-match by presence/counting; VQAv2 local10-answer leave-one-out soft scoring by yes-no/number/other."
+    },
+    {
+      "id": "T232",
+      "verified": false,
+      "requirement_and_evidence": "Pair accuracy, identical-answer rate, empty-answer rate, mean reference NLL, generation time/answer for every suite/condition; empty predictions stay in denominators."
+    },
+    {
+      "id": "T233",
+      "verified": false,
+      "requirement_and_evidence": "Correct-image advantages in accuracy/NLL,95% intervals from4000 complete-pair bootstrap resamples with matched IDs across conditions."
+    },
+    {
+      "id": "T234",
+      "verified": false,
+      "requirement_and_evidence": "Analyze whether complementary-swap answers follow partner versus unsupported answers; fixed illustrative-example selection rule."
+    },
+    {
+      "id": "T235",
+      "verified": false,
+      "requirement_and_evidence": "Learning-curve figure with loss/developmentcaptionloss/answerNLL/swappenalties and stage boundaries."
+    },
+    {
+      "id": "T236",
+      "verified": false,
+      "requirement_and_evidence": "Both-suite four-condition/type results tables, pair diagnostics/NLL/advantages/intervals."
+    },
+    {
+      "id": "T237",
+      "verified": false,
+      "requirement_and_evidence": "Aligned complementary-image examples with question/references/predictions and stated selection rule."
+    },
+    {
+      "id": "T238",
+      "verified": false,
+      "requirement_and_evidence": "Resource table includes stagewise trainable counts/traininggenerationtime/memory and feature caching."
+    },
+    {
+      "id": "T239",
+      "verified": false,
+      "requirement_and_evidence": "Address four Task2 research questions: interface curriculum, grounding/generalization, image-use measures, capabilities/cost; discuss limitations throughout."
+    },
+    {
+      "id": "T301",
+      "verified": true,
+      "requirement_and_evidence": "Use supplied32rollouts per1000questions for Qwen2.5-3B MATH and Qwen2.5-VL3B MathVista; no offline regeneration."
+    },
+    {
+      "id": "T302",
+      "verified": true,
+      "requirement_and_evidence": "Read supplied README and join generations/probability/attention on(dataset,sample_id,rollout_id), verify all token-list alignments and termination exclusions."
+    },
+    {
+      "id": "T303",
+      "verified": true,
+      "requirement_and_evidence": "Lexicographically sort question IDs, default_rng6304 permutation, first200development/rest800heldout, all rollouts grouped; save IDs."
+    },
+    {
+      "id": "T304",
+      "verified": true,
+      "requirement_and_evidence": "Save ten seeded random rollout orders/question, nested prefixesN1/2/4/8/16/32, reuse across all methods/policies."
+    },
+    {
+      "id": "T305",
+      "verified": true,
+      "requirement_and_evidence": "Stored extracted answers are used; math-verify mathematical equivalence and released MathVista metadata normalization/choiceletters/precision; scorer fixed/versioned before heldout."
+    },
+    {
+      "id": "T306",
+      "verified": true,
+      "requirement_and_evidence": "Form equivalence groups without gold; use same equivalence for grading; missing extraction oneNO_ANSWER group always incorrect, retained in votes/cost/accuracy."
+    },
+    {
+      "id": "T307",
+      "verified": true,
+      "requirement_and_evidence": "Earliest-supporting-rollout tie breaks, average tied RWC ranks; all selectors return sole candidate atN1. Evidence: selector/regressiontests include mathematicalfloatvote ties, average tiedranks andallN1rules."
+    },
+    {
+      "id": "T308",
+      "verified": true,
+      "requirement_and_evidence": "Average over orders within questions then across questions; generated-token sum costs, FirstAns consumes only first candidate."
+    },
+    {
+      "id": "T309",
+      "verified": true,
+      "requirement_and_evidence": "Main accuracy differences have1000 paired question-bootstrap95% intervals after averaging orders."
+    },
+    {
+      "id": "T310",
+      "verified": true,
+      "requirement_and_evidence": "FirstAns accuracy/oraclecoverage/distinctanswergroups for everyN, decompose no-correct-generated versus available-but-missed."
+    },
+    {
+      "id": "T311",
+      "verified": true,
+      "requirement_and_evidence": "Implement mean sampled-token logp and full-distribution KL self-certainty from raw supplied measurements."
+    },
+    {
+      "id": "T312",
+      "verified": true,
+      "requirement_and_evidence": "Normalize visual attention by image+prompt+generated eligible totals, then average token visual engagement."
+    },
+    {
+      "id": "T313",
+      "verified": true,
+      "requirement_and_evidence": "VisConf token KL calibration pools current prefix only, linear5th/95thpercentiles, clip0-1/epsilon1e-8; mean confidence times mean vision."
+    },
+    {
+      "id": "T314",
+      "verified": true,
+      "requirement_and_evidence": "RWC descending average ranks and (N-rank)/(N-1) weighted answer votes, correct N1 handling. Evidence: numericalrank/consensus/N1tests andfullfixturepipeline passed."
+    },
+    {
+      "id": "T315",
+      "verified": true,
+      "requirement_and_evidence": "Both datasets compare FirstAns/self-consistency/highestlogp/highestcertainty/certaintyRWC at allN."
+    },
+    {
+      "id": "T316",
+      "verified": true,
+      "requirement_and_evidence": "MathVista additionally highestvision/visionRWC/highestVisConf/VisConfRWC at allN."
+    },
+    {
+      "id": "T317",
+      "verified": true,
+      "requirement_and_evidence": "AtN32 analyze within-question length/score/correctness associations and top-bottom-scorequartile correctness; shortest-rollout control."
+    },
+    {
+      "id": "T318",
+      "verified": true,
+      "requirement_and_evidence": "MathVista token confidence-vision correlation per rollout, aggregate by question; tokenwise-fusion ablation under highestscore/RWC and covariance identity."
+    },
+    {
+      "id": "T319",
+      "verified": true,
+      "requirement_and_evidence": "Fixed illustrative trajectories examine signal agreement/disagreement/variation; no causal grounding claim from attention alone."
+    },
+    {
+      "id": "T320",
+      "verified": true,
+      "requirement_and_evidence": "Save question results/candidateIDs/selectedanswers/costs and distinguish sampling opportunity versus selection gap."
+    },
+    {
+      "id": "T321",
+      "verified": true,
+      "requirement_and_evidence": "Use first50 MATH heldout questions in saved permutation; seed6304 and pinned original Qwen2.5-3B revision from suppliedREADME. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB."
+    },
+    {
+      "id": "T322",
+      "verified": true,
+      "requirement_and_evidence": "FP16/no quantization/batch1; temperature.7/top-p.8/top-k20/repetition1; exact native template/system/problem/instruction. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB."
+    },
+    {
+      "id": "T323",
+      "verified": true,
+      "requirement_and_evidence": "Single response cap3072; parallel3independent cap1024 each with self-consistency; sequential initial1024+critique/revision2048. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB."
+    },
+    {
+      "id": "T324",
+      "verified": true,
+      "requirement_and_evidence": "Reuse first parallel response as refinement initial; exact appended critique instruction; independent seeds; no gold feedback/selection. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB."
+    },
+    {
+      "id": "T325",
+      "verified": true,
+      "requirement_and_evidence": "Extract last literal boxed answer by balanced-braces; missing/empty/unclosed last box stays missing, no numeric fallback. Evidence: executed nestedbrace/lastbox/missing/truncatedbox regressiontests."
+    },
+    {
+      "id": "T326",
+      "verified": true,
+      "requirement_and_evidence": "Save all prompts/responses/seeds/inputoutputlengths/truncation; end-to-end time sameGPU excluding model load, peakmemory. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB."
+    },
+    {
+      "id": "T327",
+      "verified": true,
+      "requirement_and_evidence": "Report accuracy/actualtokens/runtime/extractiontruncation and wrong->correct/correct->wrong; charge sharedinitial twice across strategies and all critique/prompt tokens. Evidence: completed 50-question/250-call live-final verification.json audit, saved config and summary; exact saved heldout split checked; all calls report same A100-SXM4-80GB."
+    },
+    {
+      "id": "T328",
+      "verified": true,
+      "requirement_and_evidence": "Simulate saved orders; check after4/8/16 else32; both controllers return current self-consistency answer."
+    },
+    {
+      "id": "T329",
+      "verified": true,
+      "requirement_and_evidence": "Agreement stop requires unique nonmissing leader supported byfractiontau; quality additionally same RWCwinner and normalizedmargin>=gamma."
+    },
+    {
+      "id": "T330",
+      "verified": true,
+      "requirement_and_evidence": "Quality uses certainty forMATH/VisConf forMathVista; only revealedprefix for scores/calibration/ranks; onegroup runnerupvote0."
+    },
+    {
+      "id": "T331",
+      "verified": true,
+      "requirement_and_evidence": "On development searchtau.5/.625/.75/.875/1 and gamma0/.1/.25/.5 plusalways32fallback; choose lowesttokencost within1percentagepoint of fixed32accuracy."
+    },
+    {
+      "id": "T332",
+      "verified": true,
+      "requirement_and_evidence": "Policy ties choose higheraccuracy thensmallertau/gamma; freeze selected policies before heldout."
+    },
+    {
+      "id": "T333",
+      "verified": true,
+      "requirement_and_evidence": "Heldoutaccuracy/meantokens/meanrollouts/stoppingdistribution and fixedN comparisons; analyze incorrectearlystops and fixed32recoveries."
+    },
+    {
+      "id": "T334",
+      "verified": true,
+      "requirement_and_evidence": "Accuracy/oraclecoverage curves for bothdatasets, compactmethodtable and failuredecomposition."
+    },
+    {
+      "id": "T335",
+      "verified": true,
+      "requirement_and_evidence": "Signal-analysis figures/tables forlength/correctness/confidencevision/tokenfusion."
+    },
+    {
+      "id": "T336",
+      "verified": false,
+      "requirement_and_evidence": "Live-comparison table and revision-transition evidence on50questions."
+    },
+    {
+      "id": "T337",
+      "verified": true,
+      "requirement_and_evidence": "Adaptive threshold/costaccuracy/distribution figures/tables, matchedobservedcost comparisons."
+    },
+    {
+      "id": "T338",
+      "verified": false,
+      "requirement_and_evidence": "Aligned selection/refinement/stopping examples with statedselectionrule."
+    },
+    {
+      "id": "T339",
+      "verified": false,
+      "requirement_and_evidence": "Interpret token cost as proxy, note scoring/attention/prefill overhead and modeldataset confounding; no gold/futurecandidate leakage."
+    },
+    {
+      "id": "T340",
+      "verified": false,
+      "requirement_and_evidence": "Address five Task3 themes: exploration/selection, evidence/consensus, breadth/refinement, adaptiveallocation, compute/reliability."
+    }
+  ]
+}

@@ -16,13 +16,10 @@ Fine-grained items intentionally include both implementation and required eviden
 ## Active work
 
 - Parent: live evaluation completed and audited; GPU queue stopped on a fixed serialization error. No GPU job is currently being launched; failed reservations remain locked pending reconciliation. FullFT625 midpoint is safely saved.
-- DetachedModalqueue8684d1013aa74addbd5cbef0ed183d81 is active independently of
-  Codex/clientpolling; controllercallfc-01M629CPCHC6S9134N9DA74FJW. It firstwaits
-  forexistingGPUcall, thencachesbaselineprobes/resumeslive/evaluateslikelihoods.
-  Ledgerownership prevents competingstandaloneGPUjobs; totalceiling$14.915625.
+- Detached queue 8684d1013aa74addbd5cbef0ed183d81 is terminal failed after completing probes/live evaluation. Both controller and benchmark child terminal states were independently confirmed. Modal app list shows stopped apps and zero tasks. Failed reservations remain locked; no paid retry is scheduled.
 - Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
 - Task2: fullmanifest and ID-onlyexports validated; all 21,749 selected images downloaded and verified; no Task2 GPU run.
-- Task3: both1000-question offline analyses completed; live GPU comparison completed all 50 questions; detailed artifact audit is active.
+- Task3: both1000-question offline analyses completed; live GPU comparison completed all 50 questions; all 250 generation records and exact heldout IDs audited.
 
 ## Manual checklist
 
@@ -330,3 +327,5 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Queue stopped safely on baseline likelihood output serialization: torch.dtype in harness metadata was not JSON serializable. Added dtype/device conversion and regression; all 6 evaluation tests pass (0.349s). Initial sandbox test invocation had 4 Windows temp ACL errors; rerun outside sandbox passed. No paid retry launched; failed queue retains ledger ownership/reservations.
 - Recovered full HellaSwag validation metrics from all 10,042 unique saved per-example harness records on CPU: raw accuracy 0.3755228042, normalized accuracy 0.4730133440. BoolQ/ARC-Easy did not run. Baseline recovery provenance saved without raw data.
 - Downloaded/audited all 250 live calls: seeds, caps, prompts, lengths, timing/memory, shared initial response and per-strategy cost sums verified; exact first 50 heldout IDs confirmed. Six live requirements now verified. FullFT final and other training remain unfunded under current conservative reservations.
+
+- Final local regression milestone: **75 tests passed, 0 failed, in 20.081s**. Requirement-by-requirement audit saved as results/requirement_audit.json: 60/148 verified (40.5%), 88 pending. Confirmed Modal apps stopped with zero tasks. Conservative cumulative reservations $14.79842846, leaving $0.20157154 unreserved; this is not provider-billed usage. Remaining required GPU workloads cannot be responsibly funded from this remainder; do not retry or release failed reservations without billing reconciliation. Monitor will stop because all downloads/jobs are finished and remaining experiment work is budget-blocked.
