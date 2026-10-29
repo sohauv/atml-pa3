@@ -3,18 +3,18 @@
   "total": 148,
   "percent": 43.2,
   "tests": {
-    "passed": 77,
+    "passed": 81,
     "failed": 0,
-    "runtime_seconds": 25.577,
+    "runtime_seconds": 42.51,
     "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -v"
   },
   "modal": {
-    "queue_id": "eb0e9e9349544855afd32f6cdf20bec5",
-    "state": "Task2 feature cache submitted",
+    "queue_id": "7f0591df78e44e409bddd90807a2166d",
+    "state": "bounded T4 cache validation",
     "authorized_total_usd": 20,
-    "human_reported_cumulative_usage_usd": 13.16,
-    "conservative_reserved_ceiling_usd": 14.31314,
-    "provider_billing": "Human reported13.16; local reservations are not billed usage"
+    "human_reported_cumulative_usage_usd": 13.73,
+    "conservative_reserved_ceiling_usd": 15.3163712354,
+    "provider_billing": "Human reported13.73; conservative reservations are not actual billed usage"
   },
   "remaining_major_work": [
     "L2-SP, LoRA4, LoRA16, OPLoRA16 training; FullFT is complete",

@@ -15,11 +15,11 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work
 
-- Parent: resumed autonomous GPU work after reconciling historical reservations against the human-reported $8.25 cumulative Modal usage; $15 total cap unchanged. FullFT continuation is submitted from the verified step625 checkpoint.
-- Detached queue 8684d1013aa74addbd5cbef0ed183d81 is terminal failed after completing probes/live evaluation. Both controller and benchmark child terminal states were independently confirmed. Modal app list shows stopped apps and zero tasks. Failed reservations remain locked; no paid retry is scheduled.
-- Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
-- Task2: fullmanifest and ID-onlyexports validated; all 21,749 selected images downloaded and verified; no Task2 GPU run.
-- Task3: both1000-question offline analyses completed; live GPU comparison completed all 50 questions; all 250 generation records and exact heldout IDs audited.
+- FullFT completed: 1,250 updates, 40,000 examples, zero skipped updates; recovery markers 312/625/937/1250 verified.
+- Task2 inputs fully uploaded/verified. Compact feature cache remains partial (1,152 reported before current run); the bounded T4 queue 7f0591df78e44e409bddd90807a2166d is testing buffered reads. Actual Tesla T4 execution confirmed. No Task2 training has run.
+- CPU diagnostics complete; current focused suite: 81 passed. Source fix eca0c9b pushed.
+- Task3 offline and live experiments plus aligned examples verified; final report interpretation remains pending until all required experiments finish.
+- Human-authorized total: $20; latest human-reported usage: $13.73. Current conservative cumulative ceiling: $15.3163712354, including reservations, not actual billing. No overlapping GPU jobs.
 
 ## Manual checklist
 
@@ -374,3 +374,5 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 
 - CPU I/O diagnostics completed with no GPU: first cold direct tensor read0.5782s, Torch finite0.00296s, NumPy validation0.000335s; second CPU profile included a distinct buffered-read sample0.04293s. Warm-cache differences prevent claiming an exact I/O speedup. Changed image/tensor decoding to one sequential buffered read before PIL/torch ZIP seeks; exact CPU pixels/tensors preserved. Archive21749member bytes were verified locally but archival staging was not enabled/uploaded; simpler buffered reads selected, original CPU-built archive preserved under ignoreddata.
 - Final focused suite:81 tests passed in42.510s (unused archive-staging prototype/tests removed before shipping; prior84-test result is historical). T4 selected for next600s bounded validation because observed SigLIP peak0.606GiB and GPUcompute only2.75s/640images; user delegates GPUchoice,20TOTAL unchanged. Planned reservation0.263229375, no longer continuation before actual timing validation.
+
+- T4 bounded I/O check submitted: queue7f0591df78e44e409bddd90807a2166d/controllerfc-01M63SXX785RWM1H1PK7NYB086,600s max,0.263229375 reservation. Cumulative conservative ceiling15.3163712354 under20TOTAL. No simultaneous GPUjobs; previous bounded queue fully completed/stopped. Source eca0c9b pushed; CPU profiler outputs saved under results/task2_vlm/cpu_profiles. Monitor updated to currentT4job; no full-cache/training completion claimed.

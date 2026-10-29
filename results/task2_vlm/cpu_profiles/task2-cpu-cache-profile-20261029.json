@@ -1,0 +1,14 @@
+{
+  "shape": [
+    196,
+    768
+  ],
+  "dtype": "torch.float16",
+  "finite": true,
+  "valid_feature": true,
+  "torch_threads": 4,
+  "read_seconds": 0.5782025009999998,
+  "torch_finite_seconds": 0.002964487666666571,
+  "numpy_validation_seconds": 0.00033451866666656116,
+  "repeats": 3
+}
