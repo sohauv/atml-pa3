@@ -9,12 +9,14 @@
     "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -v"
   },
   "modal": {
-    "queue_id": "7f0591df78e44e409bddd90807a2166d",
-    "state": "bounded T4 cache validation",
+    "queue_id": "c287474abf7f40fb9702f2a9facaa9d6",
+    "state": "T4 cache continuation after measured bounded check",
     "authorized_total_usd": 20,
     "human_reported_cumulative_usage_usd": 13.73,
-    "conservative_reserved_ceiling_usd": 15.3163712354,
-    "provider_billing": "Human reported13.73; conservative reservations are not actual billed usage"
+    "conservative_reserved_ceiling_usd": 16.147395688525,
+    "provider_billing": "Human reported13.73; conservative reservations are not actual billed usage",
+    "reported_compact_cached_images": 3648,
+    "required_cached_images": 21749
   },
   "remaining_major_work": [
     "L2-SP, LoRA4, LoRA16, OPLoRA16 training; FullFT is complete",

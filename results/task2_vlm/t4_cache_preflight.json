@@ -1,0 +1,24 @@
+{
+  "partial_only": true,
+  "existing_images": 1152,
+  "new_images": 2496,
+  "reported_total_cached": 3648,
+  "result": {
+    "new_images": 2496,
+    "total_images": 21749,
+    "finished": false,
+    "seconds": 320.263757429,
+    "timings": {
+      "input_seconds": 87.26962675700025,
+      "image_read_seconds": 74.31798624400038,
+      "preprocess_seconds": 12.951409784999953,
+      "vision_seconds": 25.76823736499979,
+      "write_seconds": 5.937595281999947,
+      "commit_seconds": 97.37835321600002
+    },
+    "peak_gpu_gib": 0.6061544418334961
+  },
+  "processing_images_per_second": 11.53665826256517,
+  "actual_gpu": "Tesla T4 (Modal worker logs)",
+  "not_actual_billing": true
+}

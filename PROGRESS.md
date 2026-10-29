@@ -16,10 +16,10 @@ Fine-grained items intentionally include both implementation and required eviden
 ## Active work
 
 - FullFT completed: 1,250 updates, 40,000 examples, zero skipped updates; recovery markers 312/625/937/1250 verified.
-- Task2 inputs fully uploaded/verified. Compact feature cache remains partial (1,152 reported before current run); the bounded T4 queue 7f0591df78e44e409bddd90807a2166d is testing buffered reads. Actual Tesla T4 execution confirmed. No Task2 training has run.
+- Task2 inputs fully uploaded/verified. Compact feature cache remains partial (3,648 verified by completed chunk); T4 continuation c287474abf7f40fb9702f2a9facaa9d6 is completing the remaining cache after throughput validation. Actual Tesla T4 execution confirmed. No Task2 training has run.
 - CPU diagnostics complete; current focused suite: 81 passed. Source fix eca0c9b pushed.
 - Task3 offline and live experiments plus aligned examples verified; final report interpretation remains pending until all required experiments finish.
-- Human-authorized total: $20; latest human-reported usage: $13.73. Current conservative cumulative ceiling: $15.3163712354, including reservations, not actual billing. No overlapping GPU jobs.
+- Human-authorized total: $20; latest human-reported usage: $13.73. Current conservative cumulative ceiling: $16.147395688525, including reservations, not actual billing. No overlapping GPU jobs.
 
 ## Manual checklist
 
@@ -376,3 +376,5 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Final focused suite:81 tests passed in42.510s (unused archive-staging prototype/tests removed before shipping; prior84-test result is historical). T4 selected for next600s bounded validation because observed SigLIP peak0.606GiB and GPUcompute only2.75s/640images; user delegates GPUchoice,20TOTAL unchanged. Planned reservation0.263229375, no longer continuation before actual timing validation.
 
 - T4 bounded I/O check submitted: queue7f0591df78e44e409bddd90807a2166d/controllerfc-01M63SXX785RWM1H1PK7NYB086,600s max,0.263229375 reservation. Cumulative conservative ceiling15.3163712354 under20TOTAL. No simultaneous GPUjobs; previous bounded queue fully completed/stopped. Source eca0c9b pushed; CPU profiler outputs saved under results/task2_vlm/cpu_profiles. Monitor updated to currentT4job; no full-cache/training completion claimed.
+
+- T4 bounded validation completed2496new+1152existing=3648compactfeatures, finished=false. Actual processing11.54images/s (allmeasured input/vision/write/commit time), peak0.606GiB. Successfulapp371s confirmed stopped/zero tasks and conservatively reconciled with margins. New2400s T4 continuation c287474abf7f40fb9702f2a9facaa9d6/controllerfc-01M63TGKXENPPYP96531SWXY38 reserves0.91615125; cumulative ceiling16.147395688525, not actualbilling. Estimatedremaining~30min; noTask2training until completecache verification. Overall64/14843.2%unchanged.

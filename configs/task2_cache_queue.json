@@ -1,12 +1,12 @@
 {
-  "controller_seconds": 1200,
-  "description": "Bounded low-memory T4 cache validation with sequential buffered remote reads; preserve partialv2; no full run before timings verified",
+  "controller_seconds": 3000,
+  "description": "Complete remaining compact cache on T4 after measured bounded validation; estimated30min, preservev2 and20TOTAL",
   "steps": [
     {
       "name": "task2_siglip_cache",
       "job": "cache2",
       "gpu": "T4",
-      "seconds": 600,
+      "seconds": 2400,
       "run_id": "task2-cache-{short}",
       "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
       "image_root": "/data/task2/inputs-v1/images",
