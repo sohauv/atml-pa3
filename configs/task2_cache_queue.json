@@ -1,11 +1,11 @@
 {
   "controller_seconds": 2400,
-  "description": "Cache deterministic SigLIP196 features after all selected image/manifest uploads verified; no training until cache complete.",
+  "description": "SigLIP feature cache on A100 after L4 capacity unavailable; preserve partial caches and20total cap",
   "steps": [
     {
       "name": "task2_siglip_cache",
       "job": "cache2",
-      "gpu": "L4",
+      "gpu": "A100-40GB",
       "seconds": 1800,
       "run_id": "task2-cache-{short}",
       "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
