@@ -1,0 +1,32 @@
+{
+  "complete": true,
+  "images": 21749,
+  "exact_manifest_image_keys_match": true,
+  "all_shapes": [
+    196,
+    768
+  ],
+  "dtype": "float16",
+  "all_finite": true,
+  "cpu_verification": {
+    "verified_images": 21749,
+    "newly_verified_images": 1653,
+    "index_path": "/data/task2/features196-v2/verified-index-17ec6c91de565f4f.json",
+    "index_sha256": "39efd053d1ec191a9fcaa2a3ba01116326bab235c2862a76f45b2ffd24bd1824",
+    "seconds": 131.373402161
+  },
+  "provenance": {
+    "model": "google/siglip-base-patch16-224",
+    "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+    "manifest_sha256": "68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b",
+    "dtype": "float16",
+    "shape": [
+      196,
+      768
+    ],
+    "normalization": "model post_layernorm once",
+    "storage": "independent per-image tensor v2",
+    "preprocessing": "pinned AutoImageProcessor deterministic resize/rescale/normalize"
+  },
+  "cache_root": "/data/task2/features196-v2"
+}

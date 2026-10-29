@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 64/148 mandatory requirements (43.2%).**
+**Overall verified completion: 66/148 mandatory requirements (44.6%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -15,11 +15,13 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work
 
-- FullFT completed: 1,250 updates, 40,000 examples, zero skipped updates; recovery markers 312/625/937/1250 verified.
-- Task2 inputs fully uploaded/verified. Compact feature cache remains partial (3,648 verified by completed chunk); T4 continuation c287474abf7f40fb9702f2a9facaa9d6 is completing the remaining cache after throughput validation. Actual Tesla T4 execution confirmed. No Task2 training has run.
-- CPU diagnostics complete; current focused suite: 81 passed. Source fix eca0c9b pushed.
-- Task3 offline and live experiments plus aligned examples verified; final report interpretation remains pending until all required experiments finish.
-- Human-authorized total: $20; latest human-reported usage: $13.73. Current conservative cumulative ceiling: $16.147395688525, including reservations, not actual billing. No overlapping GPU jobs.
+- FullFT completed 1,250 updates / 40,000 examples; other four Task1 methods and most evaluations remain pending.
+- Task2 all 21,749 compact feature tensors CPU verified: FP16 [196,768], finite, provenance and immutable index checked.
+- Task2 pilot completed 20 attempted steps, 14 successful optimizer steps, six initial AMP skips (last at step 7); all subsequent 13 steps succeeded. Peak 5.09 GiB, mean 2.55 seconds/step. Recovery checkpoint preserved.
+- Detached T4 continuation queue 7473321d5fd24026b5515a7c699a1b7e resumes the same run from step 20, bounded to 7,200 seconds. Controller fc-01M64BG5104ZXD7W3HCSHGQ56F; child fc-01M64BGHGYKQQZQX46A26GZX49. Full 4,500-step training remains incomplete.
+- Latest source CPU suite: 84 tests passed in 28.918 seconds. No source changes since those tests.
+- Task3 offline/live experiments and aligned examples verified. Final report waits for required experiments.
+- Human authorization $20 total; last human-reported actual usage $13.73. Conservative reserved ceiling $19.149265963425, including new $2.6583065625 continuation reservation; this is not billed usage. No overlapping jobs.
 
 ## Manual checklist
 
@@ -107,7 +109,7 @@ Fine-grained items intentionally include both implementation and required eviden
 ### Task 2: data and visual interface (pages 6-9)
 
 - [ ] T201 Original Qwen3-0.6B/non-thinking; frozen google/siglip-base-patch16-224; trainable 768->1024 GELU 1024->1024 connector.
-- [ ] T202 Deterministic SigLIP196 final patch features in14x14 order, final layer norm exactly once, FP16 cache; remove encoder from GPU before Qwen training.
+- [x] T202 Deterministic SigLIP196 final patch features in14x14 order, final layer norm exactly once, FP16 cache; remove encoder from GPU before Qwen training.
 - [x] T203 COCO2014 captions/instance annotations and VQAv2 original complementary-pair sources prepared. Evidence: all10 released sourceJSONs downloaded, checked, streamed; sourceSHA256s recorded in selection_ids/provenance.json.
 - [x] T204 Presence pools pair annotated-present and category-unannotated images, same generated question, yes/no targets. Evidence: actual4096pair trainingpool and evaluationpools built/validated; synthetic annotation-label regression passed.
 - [x] T205 Counting pools pair different annotated counts1-4 for same category and generated question. Evidence: actual4096pair trainingpool plus evaluationpools built/validated from original annotations.
@@ -118,7 +120,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - [x] T210 Natural training1536pairs with640/256/640 yes-no/number/other; development32 with12/8/12; final96 with36/24/36. Evidence: actualpreflight/fullmanifest exactquota assertions and exportedIDs.
 - [x] T211 Seed6304 selects data; image/question/pair IDs saved; answer normalization consistent. Evidence: deterministic selected-only streaming/RNGreplay regression and actual9ID-onlyCSVs/provenance, manifestSHA68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b.
 - [x] T212 Visual embeddings inserted before question inside Qwen user message with correct labels, attention masks, positions; shape/frozen-set/connector-gradient checks. Evidence: realtinyQwen hidden1024 gradient and16-step cached/left-padded position tests plus syntheticmask/control/isolation tests passed.
-- [ ] T213 Connector magnitude calibration uses training-only text/visual embeddings; save rule and scale.
+- [x] T213 Connector magnitude calibration uses training-only text/visual embeddings; save rule and scale.
 
 ### Task 2: curriculum and recovery (pages 8-9)
 
@@ -383,3 +385,9 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 
 - Resumed after local execution limit: CPU verification result recovered from saved ticket6286c6b8463248c1a47f5966670c6975, callfc-01M63WT1R67V9MA43G73N5E3GE: all20096existing tensors verified in741.4519s; attestation /data/task2/features196-v2/verified-index-412680cef3d4a4f7.json, SHAe90366089419b529bb724c29242a3b5e774a56f72f157fc3100ec5491c828380. No duplicate verification or oldGPUjob launched.
 - Final1653-image cache resume aeed9a0293ce405fae1f3765dac630ba/controllerfc-01M64A39BBQB60Q42AEX42QW76 launched using CPU attestation, T4/900s, reservation0.37308, conservative cumulative ceiling16.657494088525 under20cap. Incremental CPU verification added to read only new immutable tensors after completion; exact reuse test and full84-test suite passed28.918s. No fullcache completion claimed yet.
+
+- Feature-cache milestone COMPLETE: final1653 generated, total21749; all exact manifest image keys match. Incremental CPU verification read only1653new tensors and attestsall21749 F16[196,768]/finite/compactshape, pinnedSigLIP revision and exact manifestSHA checked. Final index /data/task2/features196-v2/verified-index-17ec6c91de565f4f.json SHA39efd053d1ec191a9fcaa2a3ba01116326bab235c2862a76f45b2ffd24bd1824. Small verification metadata saved; no tensors committed. T202 now verified. Successfulcache app lifetimes reconciled conservatively, old ceilings retained in jobhistory; no billingsettings/cap change.
+
+### Task2 complete cache and pilot verification (29 October)
+
+All 21,749 cached tensors passed CPU validation; actual evidence in results/task2_vlm/feature_cache_verification.json. Training-only calibration scale 0.05483321937237428 from 32 examples, saved in pilot provenance. Pilot metrics in results/task2_vlm/training_pilot.json explicitly retain six AMP skips. Pilot app stopped with zero tasks; entire 161-second app lifetime conservatively applied independently to CPU/GPU reservations with standard margin before continuation. Continuation status independently read as waiting_for_step with saved child call.

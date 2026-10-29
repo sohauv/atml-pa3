@@ -1,0 +1,13 @@
+{
+  "run_id": "task2-vlm-20261029",
+  "attempted_steps": 20,
+  "skipped_steps": 6,
+  "successful_optimizer_steps": 14,
+  "last_skipped_step": 7,
+  "mean_step_seconds": 2.525644025750001,
+  "peak_gpu_gib": 5.087489128112793,
+  "checkpoint": "/checkpoints/runs/task2-vlm-20261029/resume-0020-1793294620377330523",
+  "worker_seconds": 108.632688754,
+  "training_complete": false,
+  "queue_id": "5ec3a7c566aa422cbb43edfa35105b8d"
+}

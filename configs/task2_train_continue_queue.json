@@ -1,0 +1,18 @@
+{
+  "controller_seconds": 8100,
+  "description": "Resume verified 20-step pilot, exact unchanged 4500-step recipe; bounded checkpointed continuation, not guaranteed completion.",
+  "steps": [
+    {
+      "name": "task2_training_continuation",
+      "job": "train2",
+      "gpu": "T4",
+      "seconds": 7200,
+      "run_id": "task2-vlm-20261029",
+      "max_updates": 4480,
+      "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
+      "features": "/data/task2/features196-v2",
+      "model_revisions": "/data/task2/inputs-v1/model_revisions.json",
+      "resume": "/checkpoints/runs/task2-vlm-20261029/resume-0020-1793294620377330523"
+    }
+  ]
+}

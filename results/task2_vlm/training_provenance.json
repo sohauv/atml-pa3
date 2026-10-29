@@ -1,0 +1,33 @@
+{
+  "manifest_sha256": "68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "feature_provenance": {
+    "model": "google/siglip-base-patch16-224",
+    "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+    "manifest_sha256": "68830e40f86509376296ae5bee12470f5b4669bd88c8dd3ebeee16cace79383b",
+    "dtype": "float16",
+    "shape": [
+      196,
+      768
+    ],
+    "normalization": "model post_layernorm once",
+    "storage": "independent per-image tensor v2",
+    "preprocessing": "pinned AutoImageProcessor deterministic resize/rescale/normalize"
+  },
+  "isolation": {
+    "train_images": 21221,
+    "captions_dev": 96,
+    "grounding_dev": 48,
+    "grounding_test": 128,
+    "natural_dev": 64,
+    "natural_test": 192
+  },
+  "calibration": {
+    "rule": "mean text-token L2 norm / mean initial visual-token L2 norm",
+    "examples": 32,
+    "text_mean_l2": 0.8619034886360168,
+    "visual_mean_l2": 15.718637324261422,
+    "scale": 0.05483321937237428,
+    "training_only": true
+  }
+}
