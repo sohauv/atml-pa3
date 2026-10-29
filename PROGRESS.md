@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 63/148 mandatory requirements (42.6%).**
+**Overall verified completion: 64/148 mandatory requirements (43.2%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -200,7 +200,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - [x] T335 Signal-analysis figures/tables forlength/correctness/confidencevision/tokenfusion.
 - [x] T336 Live-comparison table and revision-transition evidence on50questions.
 - [x] T337 Adaptive threshold/costaccuracy/distribution figures/tables, matchedobservedcost comparisons.
-- [ ] T338 Aligned selection/refinement/stopping examples with statedselectionrule.
+- [x] T338 Aligned selection/refinement/stopping examples with statedselectionrule.
 - [ ] T339 Interpret token cost as proxy, note scoring/attention/prefill overhead and modeldataset confounding; no gold/futurecandidate leakage.
 - [ ] T340 Address five Task3 themes: exploration/selection, evidence/consensus, breadth/refinement, adaptiveallocation, compute/reliability.
 
@@ -349,3 +349,5 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Task2 selected images, prepared manifest/provenance and pinned revisions uploading non-destructively to /data/task2/inputs-v1 in existing data volume. Sessions72863/54734/53970 recorded under ignored runs/task2-input-upload/status.json. Feature-cache plan prepared; no Task2 GPU paid launch until upload and current GPU completion are verified.
 
 - Baseline L4 evaluation did not start inference: setup exhausted its short reservation, then shutdown guard raised insufficient-time-after-setup. Both child/controller independently confirmed terminal; Modal app stopped/zero tasks. Ownership cleared after verification, full0.315429375 cost ceiling retained. BoolQ/ARC-Easy still pending, no scores invented. Task2 manifest/provenance uploaded; pinned revisions remotely read and verified despite Windows CLI Unicode success-print error. Image upload remains running.
+
+- Task3 aligned example milestone: existing three fixed selection-disagreement examples and three incorrect-early-stop examples per controller/dataset validated; exported actual live refinement responses/answers/seeds/costs for the one observed wrong-to-correct case. No correct-to-wrong case occurred, so that category remains explicitly empty. Same saved question IDs and initial response reuse checked. Required example-selection rules preserved in source JSON. T338 now verified; report interpretation remains pending.
