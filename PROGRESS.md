@@ -13,15 +13,15 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Active work
+## Stopped at user request (30 October 2026)
 
-- FullFT completed 1,250 updates / 40,000 examples; other four Task1 methods and most evaluations remain pending.
-- Task2 all 21,749 compact feature tensors CPU verified: FP16 [196,768], finite, provenance and immutable index checked.
-- Task2 pilot completed 20 attempted steps, 14 successful optimizer steps, six initial AMP skips (last at step 7); all subsequent 13 steps succeeded. Peak 5.09 GiB, mean 2.55 seconds/step. Recovery checkpoint preserved.
-- Detached T4 continuation queue 7473321d5fd24026b5515a7c699a1b7e resumes the same run from step 20, bounded to 7,200 seconds. Controller fc-01M64BG5104ZXD7W3HCSHGQ56F; child fc-01M64BGHGYKQQZQX46A26GZX49. Full 4,500-step training remains incomplete.
-- Latest source CPU suite: 84 tests passed in 28.918 seconds. No source changes since those tests.
-- Task3 offline/live experiments and aligned examples verified. Final report waits for required experiments.
-- Human authorization $20 total; last human-reported actual usage $13.73. Conservative reserved ceiling $19.149265963425, including new $2.6583065625 continuation reservation; this is not billed usage. No overlapping jobs.
+- No running Modal apps or tasks; controller and child independently returned terminal results. No further paid jobs authorized by the stopping instruction.
+- Task2 saved complete recovery `/checkpoints/runs/task2-vlm-20261029/resume-2666-1793302038909234139` at attempted step 2,666 / 4,500 (stage two, step 416). Remaining recipe: 1,834 steps plus final evaluation. Training is incomplete.
+- Actual stopping metrics and development history: results/task2_vlm/stopping_point.json and development.jsonl. Complete marker verified. All data and checkpoints preserved.
+- Task2 full 21,749-image cache CPU verified. FullFT 1,250 steps complete; four other Task1 variants and most evaluations remain. Task3 offline/live experiments complete.
+- Latest unchanged source validation: 84 CPU tests passed in 28.918 seconds. Overall checklist count remains evidence-based.
+- Latest human-reported actual Modal usage: $17.26, reported during the run; final billing has not been verified. Conservative reservations are separate from actual usage. Human cap remains $20 total.
+- Monitor will be deleted after recording this safe stopping point. No autonomous continuation planned without user instruction.
 
 ## Manual checklist
 
@@ -391,3 +391,7 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 ### Task2 complete cache and pilot verification (29 October)
 
 All 21,749 cached tensors passed CPU validation; actual evidence in results/task2_vlm/feature_cache_verification.json. Training-only calibration scale 0.05483321937237428 from 32 examples, saved in pilot provenance. Pilot metrics in results/task2_vlm/training_pilot.json explicitly retain six AMP skips. Pilot app stopped with zero tasks; entire 161-second app lifetime conservatively applied independently to CPU/GPU reservations with standard margin before continuation. Continuation status independently read as waiting_for_step with saved child call.
+
+### Safe stopping verification (30 October)
+
+Queue 7473321d5fd24026b5515a7c699a1b7e completed its bounded chunk with finished=false and development_pending=false. Child fc-01M64BGHGYKQQZQX46A26GZX49 and controller fc-01M64BG5104ZXD7W3HCSHGQ56F independently returned results. App ap-mgW0FGBr08SVrf83lTGcBh stopped at 00:27:52 +05 after 6,950 seconds, zero tasks. Ownership synced only after completion. Full app lifetime conservatively reconciled for CPU and GPU separately. User requested stopping after current run; no new work launched.

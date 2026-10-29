@@ -1,0 +1,44 @@
+{
+  "status": {
+    "update": 2666,
+    "finished": false,
+    "training_finished": false,
+    "development_pending": false,
+    "checkpoint": "/checkpoints/runs/task2-vlm-20261029/resume-2666-1793302038909234139",
+    "seconds": 6896.6042388900005
+  },
+  "complete_marker": {
+    "update": 2666
+  },
+  "attempted_steps": 2666,
+  "skipped_steps": 6,
+  "latest": {
+    "update": 2666,
+    "stage": 2,
+    "stage_update": 416,
+    "loss": 1.122736930847168,
+    "examples": 42656,
+    "mixture_counts": {
+      "caption": 37670,
+      "presence": 3236,
+      "counting": 1750
+    },
+    "step_seconds": 3.338492804999987,
+    "grad_norm": 3.172592878341675,
+    "skipped": false,
+    "learning_rates": {
+      "connector": 8.792295090101039e-05,
+      "adapter": 1.7584590180202075e-05
+    },
+    "trainable_parameters": {
+      "connector": 1837056,
+      "adapter": 4587520
+    },
+    "peak_gpu_gib": 5.611949443817139
+  },
+  "app_stopped_zero_tasks": true,
+  "app_lifetime_seconds": 6950,
+  "latest_user_reported_billing_usd": 17.26,
+  "billing_report_during_active_run": true,
+  "remaining_recipe_steps": 1834
+}
