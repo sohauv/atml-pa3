@@ -1,0 +1,22 @@
+{
+  "complete": false,
+  "partial_only": true,
+  "committed_progress": {
+    "new_images": 512,
+    "existing_images": 0,
+    "total_images": 21749,
+    "seconds": 229.676691689,
+    "input_seconds": 199.71170111000004,
+    "vision_seconds": 1.9189178800000732,
+    "write_seconds": 0.9711914479999848,
+    "commit_seconds": 7.856085738999994
+  },
+  "observed_feature_file_bytes": 302296,
+  "tensor_payload_bytes": 301056,
+  "diagnosis": "Compact serialization verified; serial input loading/preprocessing dominated. Eight parallel ordered image reads added, exact CPU RGB/order regression passed. GPU throughput improvement not yet verified.",
+  "cpu_tests": {
+    "passed": 79,
+    "failed": 0,
+    "seconds": 19.855
+  }
+}

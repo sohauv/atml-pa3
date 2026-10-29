@@ -1,5 +1,6 @@
 """SigLIP feature cache and Qwen visual interface; no vision encoder in training."""
 import gc
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import time
 
@@ -7,6 +8,13 @@ import torch
 from torch import nn
 
 from common.io import read_json, sha256, write_json
+
+
+def load_cache_image(image_root, row):
+    from PIL import Image
+    path = Path(image_root) / row["split"] / row["image_file"]
+    with Image.open(path) as original:
+        return original.convert("RGB")
 
 
 def save_feature(path, value):
@@ -33,7 +41,6 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     Transformers 4.51.3 SiglipVisionTransformer already applies post_layernorm
     before returning last_hidden_state. Do not apply it again here.
     """
-    from PIL import Image
     from transformers import AutoImageProcessor, SiglipVisionModel
     started = time.monotonic()
     manifest = read_json(manifest_path)
@@ -69,19 +76,20 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     if device == "cuda":
         torch.cuda.reset_peak_memory_stats()
     complete = 0
-    timings = {key: 0.0 for key in ("input_seconds", "vision_seconds", "write_seconds", "commit_seconds")}
-    with torch.no_grad():
+    timings = {key: 0.0 for key in ("input_seconds", "image_read_seconds", "preprocess_seconds",
+                                   "vision_seconds", "write_seconds", "commit_seconds")}
+    with ThreadPoolExecutor(max_workers=8) as image_pool, torch.no_grad():
         for offset in range(0, len(pending), batch_size):
             if max_seconds is not None and time.monotonic() - started > max_seconds - 90:
                 break
             group = pending[offset:offset + batch_size]
             phase_started = time.monotonic()
-            images = []
-            for _, row in group:
-                path = Path(image_root) / row["split"] / row["image_file"]
-                with Image.open(path) as original:
-                    images.append(original.convert("RGB"))
+            # map preserves manifest order while overlapping remote-volume I/O.
+            images = list(image_pool.map(lambda item: load_cache_image(image_root, item[1]), group))
+            timings["image_read_seconds"] += time.monotonic() - phase_started
+            preprocess_started = time.monotonic()
             pixels = processor(images=images, return_tensors="pt")["pixel_values"].to(device)
+            timings["preprocess_seconds"] += time.monotonic() - preprocess_started
             timings["input_seconds"] += time.monotonic() - phase_started
             phase_started = time.monotonic()
             features = encoder(pixel_values=pixels).last_hidden_state
