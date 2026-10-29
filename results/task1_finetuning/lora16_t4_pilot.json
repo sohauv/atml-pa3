@@ -1,0 +1,24 @@
+{
+  "method": "lora16",
+  "gpu": "T4",
+  "steps": 20,
+  "skipped": 0,
+  "mean_step_seconds": 10.94065510525,
+  "checkpoint_summary": {
+    "update": 20,
+    "examples": 640,
+    "wall_seconds": 228.739217125,
+    "checkpoint_write_seconds": 0.7363298230000055,
+    "inference_export_seconds": 0.16852027699999894,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 20,
+    "displacement_l2": null,
+    "trainable_parameters": 10092544,
+    "peak_gpu_gib": 6.105996131896973,
+    "checkpoint_bytes": 162071528
+  },
+  "marker": {
+    "update": 20
+  },
+  "app_lifetime_seconds": 312
+}

@@ -1,0 +1,16 @@
+{
+  "controller_seconds": 1200,
+  "description": "Compare measured cost per optimizer step on A100, resume same exact LoRA16 run for20 additionalsteps; preserves T4checkpoint.",
+  "steps": [
+    {
+      "name": "task1_lora16_a100_cost_comparison",
+      "job": "train1",
+      "method": "lora16",
+      "gpu": "A100-40GB",
+      "seconds": 600,
+      "run_id": "lora16-20261030",
+      "max_updates": 20,
+      "resume": "/checkpoints/runs/lora16-20261030/resume-0020-1793310939926609963"
+    }
+  ]
+}

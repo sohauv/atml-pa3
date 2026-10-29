@@ -18,7 +18,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - Task2 final evaluation COMPLETE: all320testquestions under4conditions,1280predictions; actual correct-image grounding accuracy70.3125%, naturalVQA softaccuracy56.0417%. Strict normalized no-image accuracy0% reflects verbose predictions; do not reinterpret or alter scoring. Full metrics/95%pairbootstrap intervals saved in results/task2_vlm/final_metrics.json and figures/task2_final_metrics.csv.
 - Training4500scheduledsteps/72000presentations,4494successfulupdates/sixAMPskips disclosed. Stage3checkpointstep4500 verified, all12development sweeps. T223 remainsunchecked due skippedupdates.
 - Learning figure generated from real logs and visually inspected; fixed-rule alignedexamples generated locally in outputs/task2/examples-20261030. No images/rawdatasets committed.
-- Only active bounded Task1 LoRA16 T4pilot queue9f302414b3ab4921a5e1d4fa6c6a232c controllerfc-01M64TA21SP4XDR28S0W6MESCV appap-d2xrCS6BmQtHr88WLR9e2M,20steps/900s,controller1800s,reservation$0.37308. Actual memory/runtime will determine continuation affordability; no full-run completion assumed.
+- Current active LoRA16 A10020-step comparison resumes verified20stepT4checkpoint; see latest milestone for exactqueue IDs. No full-run completion assumed.
 - Task2 evaluation app stopped0tasks,whole440slifetime conservatively reconciled CPU/GPU independently; conservative total$21.480197057, not billedusage. Human cap$30total; latesthumanreportedactual$17.26 duringearlierrun.
 - FullFT1250complete; otherTask1methods/fullbenchmarkset remainpending. Task3offline/live complete. Latest unchanged source84CPUtests passed28.918s. NooverlappingGPUjobs; monitoractive.
 
@@ -402,3 +402,7 @@ Queue 7473321d5fd24026b5515a7c699a1b7e completed its bounded chunk with finished
 ### Task2 final evaluation evidence (30 October)
 
 All fourconditions for64groundingpairs/96naturalpairs completed in oneattempt380.8401s,peak4.7011GiB. Percondition pairIDs/cardinality validated by worker before aggregate; fullmetric tables/4000pairbootstrapCIs exported. No-image verbose outputs retained and scored strictly, no posthoc extraction. Learningcurve visually verified; rawpredictions and fivefixedalignedimageexamples remain ignoredlocaloutputs. NewLoRA16pilot preserves exactTask1recipe and is bounded to measure actual cost before longerfunding.
+
+### LoRA16 measured pilot and GPU cost comparison (30 October)
+
+T4pilot20updates completed,0skips,mean10.9406551s/step,peak6.1060GiB,10,092,544trainableparameters. Complete20steprecovery verified; appstopped0tasks312slifetime conservativelyreconciled. Smallactualevidence results/task1_finetuning/lora16_t4_pilot.json. T4projection ~3.74h forremaining1230steps beforecheckpoints; remainingallmethods/evals maynotfit30cap. Bounded A100comparison resumes same run20additionalsteps, notnewtrainingrecipe; reservation0.640329375. Currentqueue f83b7625a5984e90a36c416725d44fbe, controller fc-01M64TVGFS7MAXG57NP9S2VM1V, appap-Q2Guyv7ul3cMPrbtbGPbdx. Do not fundlongcontinuation until actualA100cost/step measured; previousT4queuecomplete,ownershipsynced.
