@@ -10,8 +10,17 @@ prepare_image = data_image.add_local_python_source("common", "task1_finetuning")
 def prepare_execute(request):
     if request["ticket"]["deadline"] - time.time() < 120:
         raise TimeoutError("Preparation reservation expired")
-    from task1_finetuning.prepare_data import prepare_data
     data_volume.reload()
-    result = prepare_data()
+    if request["job"] == "profile_cache2":
+        from pathlib import Path
+        from common.cache_profile import profile_feature
+        from common.io import write_json
+        samples = Path(request["features"]).glob("*.pt")
+        sample = next(samples)
+        result = profile_feature(sample, comparison_path=next(samples, None))
+        write_json(Path("/data/task2/cpu-profiles") / (request["run_id"] + ".json"), result)
+    else:
+        from task1_finetuning.prepare_data import prepare_data
+        result = prepare_data()
     data_volume.commit()
     return result

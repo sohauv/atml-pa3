@@ -1,0 +1,26 @@
+{
+  "finished": false,
+  "partial_only": true,
+  "existing_images": 512,
+  "new_images": 640,
+  "total_cached_images_reported": 1152,
+  "parallel_result": {
+    "new_images": 640,
+    "total_images": 21749,
+    "finished": false,
+    "seconds": 321.733018764,
+    "timings": {
+      "input_seconds": 63.688486960000034,
+      "image_read_seconds": 59.43891164499993,
+      "preprocess_seconds": 4.249426585999885,
+      "vision_seconds": 2.753558383000069,
+      "write_seconds": 2.2612346450001155,
+      "commit_seconds": 35.530688923999946
+    },
+    "peak_gpu_gib": 0.6061544418334961
+  },
+  "serial_input_seconds_per_image": 0.3900619162304688,
+  "parallel_input_seconds_per_image": 0.09951326087500005,
+  "input_speedup": 3.919697865397365,
+  "note": "Input-only speedup, not total wall-time speedup; no full-cache completion claimed."
+}

@@ -1,11 +1,11 @@
 {
   "controller_seconds": 1200,
-  "description": "Bounded compact-cache validation chunk: inspect first128 file sizes/timings before funding continuation; preserve partial features196-v2",
+  "description": "Bounded low-memory T4 cache validation with sequential buffered remote reads; preserve partialv2; no full run before timings verified",
   "steps": [
     {
       "name": "task2_siglip_cache",
       "job": "cache2",
-      "gpu": "A100-40GB",
+      "gpu": "T4",
       "seconds": 600,
       "run_id": "task2-cache-{short}",
       "manifest": "/data/task2/inputs-v1/prepared/manifest.json",

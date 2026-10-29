@@ -3,17 +3,19 @@ import gc
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import time
+import io
 
 import torch
 from torch import nn
 
 from common.io import read_json, sha256, write_json
+from common.cache_profile import load_feature_cpu, valid_feature_cpu
 
 
 def load_cache_image(image_root, row):
     from PIL import Image
     path = Path(image_root) / row["split"] / row["image_file"]
-    with Image.open(path) as original:
+    with Image.open(io.BytesIO(path.read_bytes())) as original:
         return original.convert("RGB")
 
 
@@ -65,8 +67,8 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     for key, row in sorted(unique.items()):
         path = output / f"{key}.pt"
         if path.exists():
-            value = torch.load(path, map_location="cpu", weights_only=True)
-            if value.shape != (196, 768) or value.dtype != torch.float16 or not torch.isfinite(value).all():
+            value = load_feature_cpu(path)
+            if not valid_feature_cpu(value):
                 raise ValueError(f"Existing feature cache is invalid: {path}")
         else:
             pending.append((key, row))
@@ -127,7 +129,7 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
 
 def load_feature(row, feature_dir, device):
     path = Path(feature_dir) / f'{row["split"]}-{row["image_id"]}.pt'
-    value = torch.load(path, map_location="cpu", weights_only=True)
+    value = load_feature_cpu(path)
     if value.shape != (196, 768) or value.dtype != torch.float16:
         raise ValueError(f"Invalid cached feature: {path}")
     return value.to(device)
