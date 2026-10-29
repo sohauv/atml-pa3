@@ -1,6 +1,6 @@
 {
   "controller_seconds": 8100,
-  "description": "Resume verified 20-step pilot, exact unchanged 4500-step recipe; bounded checkpointed continuation, not guaranteed completion.",
+  "description": "Resume verified step2666 recovery toward unchanged4500 recipe within human30 total cap.",
   "steps": [
     {
       "name": "task2_training_continuation",
@@ -8,11 +8,11 @@
       "gpu": "T4",
       "seconds": 7200,
       "run_id": "task2-vlm-20261029",
-      "max_updates": 4480,
+      "max_updates": 1834,
       "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
       "features": "/data/task2/features196-v2",
       "model_revisions": "/data/task2/inputs-v1/model_revisions.json",
-      "resume": "/checkpoints/runs/task2-vlm-20261029/resume-0020-1793294620377330523"
+      "resume": "/checkpoints/runs/task2-vlm-20261029/resume-2666-1793302038909234139"
     }
   ]
 }

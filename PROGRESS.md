@@ -13,15 +13,15 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Stopped at user request (30 October 2026)
+## Active work (restarted 30 October 2026)
 
-- No running Modal apps or tasks; controller and child independently returned terminal results. No further paid jobs authorized by the stopping instruction.
-- Task2 saved complete recovery `/checkpoints/runs/task2-vlm-20261029/resume-2666-1793302038909234139` at attempted step 2,666 / 4,500 (stage two, step 416). Remaining recipe: 1,834 steps plus final evaluation. Training is incomplete.
-- Actual stopping metrics and development history: results/task2_vlm/stopping_point.json and development.jsonl. Complete marker verified. All data and checkpoints preserved.
-- Task2 full 21,749-image cache CPU verified. FullFT 1,250 steps complete; four other Task1 variants and most evaluations remain. Task3 offline/live experiments complete.
-- Latest unchanged source validation: 84 CPU tests passed in 28.918 seconds. Overall checklist count remains evidence-based.
-- Latest human-reported actual Modal usage: $17.26, reported during the run; final billing has not been verified. Conservative reservations are separate from actual usage. Human cap remains $20 total.
-- Monitor will be deleted after recording this safe stopping point. No autonomous continuation planned without user instruction.
+- Human explicitly restarted work and the ten-minute monitor, authorizing $30 TOTAL including all previous usage. This supersedes the prior stopping instruction.
+- Latest human-reported actual Modal usage is $17.26, reported during the prior run; final billing has not been independently verified. Conservative ledger ceiling is $21.713797994675 including the new $2.6583065625 reservation; these are not billed charges.
+- Verified prior Task2 recovery at attempted step 2,666 / 4,500, stage two step 416. Six early AMP skips remain disclosed. All data/checkpoints preserved.
+- Only active detached queue: e735d8b181b846e69b1423f35b497488, controller fc-01M64MEKA14SQXG1NRSKBBE3CD, child fc-01M64MF0CCZNXEKPHENF3AVC9Z, app ap-cRdCRQRCj7osL7xno428Zv. Resumes exact same run from resume-2666-1793302038909234139; max1,834 additional steps, T4/7,200 seconds, CPU controller8,100 seconds. Status independently verified waiting_for_step.
+- All 21,749 Task2 compact features already CPU verified; no repeat cache work. Final evaluation follows verified completion of stage three.
+- FullFT1,250 updates complete; four other Task1 methods and most evaluations pending. Task3 offline/live complete. Completion within $30 is not guaranteed; remaining runs require measured budget planning.
+- Latest unchanged source validation: 84 CPU tests passed in28.918 seconds. Only continuation configuration/docs changed; plan command accepted the funded reservation. Monitor active every ten minutes, quiet for healthy routine progress.
 
 ## Manual checklist
 
