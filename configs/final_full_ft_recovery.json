@@ -1,0 +1,15 @@
+{
+  "controller_seconds": 1800,
+  "description": "Finish final86 FullFT updates from complete checkpoint1164; use confirmed unsubmitted evaluation allowance, retain failed training costs.",
+  "steps": [
+    {
+      "name": "finish_full_ft_last86",
+      "job": "train1",
+      "gpu": "A100-40GB",
+      "seconds": 1350,
+      "run_id": "full-pilot-20261028",
+      "resume": "/checkpoints/runs/full-pilot-20261028/resume-1164-1793263338297150269",
+      "max_updates": 86
+    }
+  ]
+}

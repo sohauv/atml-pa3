@@ -15,6 +15,7 @@ worker_image = (data_image
               timeout=1800, retries=0, max_containers=1, scaledown_window=2,
               volumes={"/data": data_volume, "/checkpoints": checkpoint_volume})
 def execute(request):
+    worker_started = time.time()
     from pathlib import Path
     import importlib.metadata
     from common.io import write_json
@@ -39,6 +40,13 @@ def execute(request):
         if not torch.cuda.is_available():
             raise RuntimeError("A GPU was reserved but CUDA is unavailable")
         print(f"[PA3] job={job} requested_gpu={ticket['gpu']} actual_gpu={torch.cuda.get_device_name(0)}", flush=True)
+    # Setup/imports/volume commits consume the same provider timeout as work.
+    # Recalculate here and retain shutdown time in addition to each job's own
+    # checkpoint margin, rather than passing a stale pre-setup duration.
+    from common.runtime import worker_budget
+    remaining = worker_budget(ticket, worker_started, time.time())
+    if remaining < 180:
+        raise TimeoutError("Insufficient reservation time after setup; no work started")
     if job == "prepare1":
         from task1_finetuning.prepare_data import prepare_data
         result = prepare_data()
