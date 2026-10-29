@@ -1,0 +1,17 @@
+{
+  "controller_seconds": 2700,
+  "description": "Final Stage3 evaluation on both suites and all four image conditions, only after verified completed training.",
+  "steps": [
+    {
+      "name": "task2_final_evaluation",
+      "job": "evaluate2",
+      "gpu": "T4",
+      "seconds": 1800,
+      "run_id": "task2-final-eval-20261030",
+      "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
+      "features": "/data/task2/features196-v2",
+      "model_revisions": "/data/task2/inputs-v1/model_revisions.json",
+      "checkpoint": "/checkpoints/runs/task2-vlm-20261029/step-4500"
+    }
+  ]
+}

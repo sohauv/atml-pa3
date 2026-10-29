@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 66/148 mandatory requirements (44.6%).**
+**Overall verified completion: 69/148 mandatory requirements (46.6%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -13,15 +13,14 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Active work (restarted 30 October 2026)
+## Active work (30 October 2026)
 
-- Human explicitly restarted work and the ten-minute monitor, authorizing $30 TOTAL including all previous usage. This supersedes the prior stopping instruction.
-- Latest human-reported actual Modal usage is $17.26, reported during the prior run; final billing has not been independently verified. Conservative ledger ceiling is $21.713797994675 including the new $2.6583065625 reservation; these are not billed charges.
-- Verified prior Task2 recovery at attempted step 2,666 / 4,500, stage two step 416. Six early AMP skips remain disclosed. All data/checkpoints preserved.
-- Only active detached queue: e735d8b181b846e69b1423f35b497488, controller fc-01M64MEKA14SQXG1NRSKBBE3CD, child fc-01M64MF0CCZNXEKPHENF3AVC9Z, app ap-cRdCRQRCj7osL7xno428Zv. Resumes exact same run from resume-2666-1793302038909234139; max1,834 additional steps, T4/7,200 seconds, CPU controller8,100 seconds. Status independently verified waiting_for_step.
-- All 21,749 Task2 compact features already CPU verified; no repeat cache work. Final evaluation follows verified completion of stage three.
-- FullFT1,250 updates complete; four other Task1 methods and most evaluations pending. Task3 offline/live complete. Completion within $30 is not guaranteed; remaining runs require measured budget planning.
-- Latest unchanged source validation: 84 CPU tests passed in28.918 seconds. Only continuation configuration/docs changed; plan command accepted the funded reservation. Monitor active every ten minutes, quiet for healthy routine progress.
+- Task2 completed all4,500 scheduled steps /72,000 presentations;4,494 successful optimizer updates and six initial AMP skips at1,2,3,4,5,7, explicitly retained. Final step-4500 complete marker and all12 required development sweeps verified. Peak5.6892GiB. This does not claim4,500 successful optimizer updates.
+- Training completion evidence: results/task2_vlm/training_completion.json; actual development results saved. Exact stage counts2250/1500/750; recovery successfully resumed across two continuations. All datasets/checkpoints preserved.
+- Only active queue b86eefc91e63495b8e82afebfaf95b8f, controller fc-01M64SR3TMEAFFFMAYKQT7176R, runs final Task2 evaluation using completed Stage3 checkpoint, T4/1800s,controller2700s, reservation$0.6995409375. Final evaluation results not yet available.
+- Human cap$30TOTAL; last human-reported actual usage$17.26 during earlier run. Conservative ledger ceiling$21.603526745 is not actual billing. Successful training app stopped/zero tasks, lifetime4976s conservatively reconciled for CPU/GPU independently.
+- FullFT1250complete; four otherTask1methods and most evaluations pending. Task3offline/live complete. Final report awaits required experiments.
+- Latest unchanged source84CPUtests passed28.918s; configuration plan validated, no source change requiring retests. Monitor active, no overlappingGPUjobs.
 
 ## Manual checklist
 
@@ -134,14 +133,14 @@ Fine-grained items intentionally include both implementation and required eviden
 - [ ] T221 Stage3 750updates, connector5e-5/LoRA1e-5, natural.7/presence.1/counting.1/caption.1, completed.
 - [ ] T222 Each stage2/3 draw yields a complete pair or two captions, seeded random sampling with no enforced exact quotas; training-pool reuse allowed.
 - [ ] T223 Complete4500updates/72000presentations; checkpoint every250updates and stage weights at2250/3750/4500.
-- [ ] T224 Recovery saves optimizer/scheduler/scaler/sampler/stage/RNG and is verified by resume.
+- [x] T224 Recovery saves optimizer/scheduler/scaler/sampler/stage/RNG and is verified by resume.
 - [ ] T225 Save loss/mixture counts/configs/development metrics, parameter counts by stage, runtime/memory and separate feature-caching cost.
 
 ### Task 2: evaluation and required evidence (pages 8-10)
 
-- [ ] T226 Development evaluation before training/every500updates/stage endpoints2250/3750/4500, without final-test checkpoint selection.
+- [x] T226 Development evaluation before training/every500updates/stage endpoints2250/3750/4500, without final-test checkpoint selection.
 - [ ] T227 Caption reference loss and both-suite answer NLL under correct/complementary/no-image; exclude termination from answer NLL and example-average token means.
-- [ ] T228 Compute image-swap penalty NLL(partner)-NLL(correct), original references fixed.
+- [x] T228 Compute image-swap penalty NLL(partner)-NLL(correct), original references fixed.
 - [ ] T229 Final Stage3 greedy non-thinking cap16/batch8 under correct/complementary/mismatched/no-image on both suites.
 - [ ] T230 Freeze unrelated-image mappings before generation, exclude both own-pair images, reuse across comparisons; no-image removes visuals/rebuilds masks/positions.
 - [ ] T231 Grounding normalized exact-match by presence/counting; VQAv2 local10-answer leave-one-out soft scoring by yes-no/number/other.
@@ -395,3 +394,7 @@ All 21,749 cached tensors passed CPU validation; actual evidence in results/task
 ### Safe stopping verification (30 October)
 
 Queue 7473321d5fd24026b5515a7c699a1b7e completed its bounded chunk with finished=false and development_pending=false. Child fc-01M64BGHGYKQQZQX46A26GZX49 and controller fc-01M64BG5104ZXD7W3HCSHGQ56F independently returned results. App ap-mgW0FGBr08SVrf83lTGcBh stopped at 00:27:52 +05 after 6,950 seconds, zero tasks. Ownership synced only after completion. Full app lifetime conservatively reconciled for CPU and GPU separately. User requested stopping after current run; no new work launched.
+
+### Verified Task2 scheduled training completion (30 October)
+
+4,500 log entries,72,000 presentations,4,494 non-skipped updates. Initial six AMP skips remain a disclosed deviation; T223 remains unchecked because it requires complete optimizer updates. Required development updates0/500/1000/1500/2000/2250/2500/3000/3500/3750/4000/4500 saved. Recovery and finalmarker verified; final-test evaluation launched only after completedStage3. Training app stopped0tasks at02:31:25+05. No final-test scores invented.
