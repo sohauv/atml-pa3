@@ -1,0 +1,18 @@
+{
+  "controller_seconds": 1200,
+  "description": "Baseline BoolQ/ARC-Easy on cost-efficient L4 using confirmed-success runtime reconciliation; all prior failures retained.",
+  "steps": [
+    {
+      "name": "baseline_boolq_arc_easy_l4",
+      "job": "evaluate1",
+      "gpu": "L4",
+      "seconds": 600,
+      "run_id": "task1-baseline-l4-{short}",
+      "eval_tasks": [
+        "boolq",
+        "arc_easy"
+      ],
+      "eval_likelihood_batch_size": 8
+    }
+  ]
+}

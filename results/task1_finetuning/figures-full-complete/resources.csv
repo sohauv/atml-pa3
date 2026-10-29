@@ -1,0 +1,2 @@
+run,method,status,observed_updates,target_updates,recorded_gpu_sessions,checkpoint_update,trainable_parameters,wall_seconds,peak_gpu_gib,checkpoint_gib,displacement_l2,skipped_updates
+full-pilot-20261028,full,complete,1250,1250,NVIDIA A100-SXM4-40GB | NVIDIA A100-SXM4-80GB,1250,596049920,12681.090377255998,20.415581703186035,9.461817394010723,10.78154468536377,0

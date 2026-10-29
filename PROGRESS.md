@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 60/148 mandatory requirements (40.5%).**
+**Overall verified completion: 63/148 mandatory requirements (42.6%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -68,8 +68,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ### Task 1: five methods (page 4)
 
-- [ ] T118 Full FT updates all original parameters, peak LR 2e-5, lambda=0, completed.
-- [ ] T119 Full FT saves full-model displacement at midpoint and final.
+- [x] T118 Full FT updates all original parameters, peak LR 2e-5, lambda=0, completed.
+- [x] T119 Full FT saves full-model displacement at midpoint and final.
 - [ ] T120 L2-SP independently restarts, peak LR 2e-5, lambda=1e-3, completed.
 - [ ] T121 L2-SP fixed starting reference; sum .5*distance-squared over unique parameters including bias/norm, tied parameters counted once, no averaging.
 - [ ] T122 L2-SP logs Omega/lambda-Omega/total objective/final displacement plus reference storage/transfer overhead.
@@ -198,7 +198,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - [x] T333 Heldoutaccuracy/meantokens/meanrollouts/stoppingdistribution and fixedN comparisons; analyze incorrectearlystops and fixed32recoveries.
 - [x] T334 Accuracy/oraclecoverage curves for bothdatasets, compactmethodtable and failuredecomposition.
 - [x] T335 Signal-analysis figures/tables forlength/correctness/confidencevision/tokenfusion.
-- [ ] T336 Live-comparison table and revision-transition evidence on50questions.
+- [x] T336 Live-comparison table and revision-transition evidence on50questions.
 - [x] T337 Adaptive threshold/costaccuracy/distribution figures/tables, matchedobservedcost comparisons.
 - [ ] T338 Aligned selection/refinement/stopping examples with statedselectionrule.
 - [ ] T339 Interpret token cost as proxy, note scoring/attention/prefill overhead and modeldataset confounding; no gold/futurecandidate leakage.
@@ -341,3 +341,6 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Worker shutdown fix: recompute remaining time after imports/volume setup and subtract180s provider shutdown allowance, in addition to training checkpoint margin. Two deterministic deadline regression tests passed; full suite running before paid continuation. Planned last86-update continuation reserves $1.3046775 from the $1.308230625 confirmed available allowance, keeping cumulative ceiling $14.996446875 under $15. No billing reset or budget increase.
 
 - Full regression after shutdown fix:77 tests passed in25.577s. Detached last86-update queue e7a644d1598945938f7b5d18973d6a2d launched; controller fc-01M63DK8Q90YF6V454DRWMZHYF. Cumulative conservative ceiling $14.996446875; BoolQ/ARC-Easy remain pending and no competing GPU job launched. Monitor updated to current queue. Overall verified60/148 (40.5%).
+
+- FullFT completed and verified: all1250 contiguous optimizer logs/40,000 examples, zero skipped updates, complete recovery markers312/625/937/1250. Final displacement10.7815447, peak20.4156GiB,596,049,920trainable parameters. Learning-curve figure generated/visually inspected; remaining4methods explicitly marked missing. FullFT verification and final checkpoint metadata saved; no weights downloaded. Live transition table exported for50IDs:1wrong-to-correct,0correct-to-wrong. T118/T119/T336 now verified.
+- Successful final FullFT app confirmed stopped/zero tasks, complete916s app lifetime applied conservatively to both GPU/CPU reservations with existing120s+25% margin. Prior failed-training reservation retained. This freed enough allowance for an L4 baseline BoolQ/ARC-Easy queue reserving $0.315429375; new cumulative ceiling $14.9255965625. This is a conservative estimate, not billed usage.

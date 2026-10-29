@@ -1,0 +1,27 @@
+{
+  "method": "full",
+  "updates": 1250,
+  "examples": 40000,
+  "all_update_logs_contiguous": true,
+  "skipped_updates": 0,
+  "required_recovery_markers": [
+    312,
+    625,
+    937,
+    1250
+  ],
+  "midpoint_displacement_l2": 10.124213218688965,
+  "final_summary": {
+    "update": 1250,
+    "examples": 40000,
+    "wall_seconds": 12681.090377255998,
+    "checkpoint_write_seconds": 22.04822233699997,
+    "inference_export_seconds": 4.769215241999973,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 1250,
+    "displacement_l2": 10.78154468536377,
+    "trainable_parameters": 596049920,
+    "peak_gpu_gib": 20.415581703186035,
+    "checkpoint_bytes": 10159549067
+  }
+}

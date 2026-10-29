@@ -1,0 +1,72 @@
+{
+  "training_complete": false,
+  "training_runs": [
+    {
+      "run": "full-pilot-20261028",
+      "method": "full",
+      "updates": 1250,
+      "target": 1250,
+      "complete": true
+    }
+  ],
+  "missing_training_methods": [
+    "l2sp",
+    "lora16",
+    "lora4",
+    "oplora16"
+  ],
+  "completed_benchmark_cells": 0,
+  "required_benchmark_cells": 28,
+  "excluded_smoke_or_unverified_evaluations": 0,
+  "diagnostic_cells": 0,
+  "required_diagnostic_cells": 18,
+  "qualitative_responses": 0,
+  "required_qualitative_responses": 168,
+  "annotation_subset_responses": 0,
+  "required_annotation_subset_responses": 42,
+  "annotation_status": "Blank template; student annotations required",
+  "generated": [
+    "learning_curves.png",
+    "learning_curves.pdf",
+    "resources.csv",
+    "benchmark_comparison.csv",
+    "smoke_benchmarks.csv",
+    "diagnostics.csv",
+    "qualitative_responses.csv",
+    "qualitative_annotation_template.csv"
+  ],
+  "sources": [
+    {
+      "path": "results\\task1_finetuning\\baseline_probes\\condition.json",
+      "sha256": "1e01a8e86fb111c42085652804708e2de057cbb14e236e4c6c404ac817f1b6e7"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\config.json",
+      "sha256": "65b1d60a1ba41d4f2bdf26e98433b5a8193ac2e4a4dae6859241a8c34132702c"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\sessions.jsonl",
+      "sha256": "e6ea7403bb45430af69df8653afb83ab49fce39538607bec6d01d08ed07aa935"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\step-1250\\summary.json",
+      "sha256": "228d27d3ee6fecb2294a2010d5a574bc38231d626bdfcc7cea6cb796ae9e7c1e"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\train.2ca5dfa3d686.jsonl",
+      "sha256": "2ca5dfa3d686ace379c01444a87b77a14fa2f8a2b2b883e2f39350613e05fc8d"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\train.35e754384764.jsonl",
+      "sha256": "35e7543847646613e59823a5e628f7c5f4a7db0084596ed6c65d4f6e4a24b423"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\train.ccec89efb391.jsonl",
+      "sha256": "ccec89efb391447a8ddbb2826715c58f21f725628e100ae666802ba956924bf8"
+    },
+    {
+      "path": "results\\task1_finetuning\\full-pilot-20261028\\train.jsonl",
+      "sha256": "5c9abc814c8372134d2ccff2a22183b027000b563be9447fba64e7e9278a6158"
+    }
+  ]
+}

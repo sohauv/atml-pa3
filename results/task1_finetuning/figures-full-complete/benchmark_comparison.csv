@@ -1,0 +1,8 @@
+condition,status,gsm8k_cot_percent,gsm8k_cot_delta_pp,gsm8k_cot_raw_accuracy_percent,hellaswag_percent,hellaswag_delta_pp,hellaswag_raw_accuracy_percent,boolq_percent,boolq_delta_pp,boolq_raw_accuracy_percent,arc_easy_percent,arc_easy_delta_pp,arc_easy_raw_accuracy_percent
+baseline,incomplete,,,,,,,,,,,,
+full_midpoint,incomplete,,,,,,,,,,,,
+full_final,incomplete,,,,,,,,,,,,
+l2sp_final,incomplete,,,,,,,,,,,,
+lora4_final,incomplete,,,,,,,,,,,,
+lora16_final,incomplete,,,,,,,,,,,,
+oplora16_final,incomplete,,,,,,,,,,,,
