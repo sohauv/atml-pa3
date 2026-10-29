@@ -15,7 +15,7 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work
 
-- Parent: live evaluation completed and audited; GPU queue stopped on a fixed serialization error. No GPU job is currently being launched; failed reservations remain locked pending reconciliation. FullFT625 midpoint is safely saved.
+- Parent: resumed autonomous GPU work after reconciling historical reservations against the human-reported $8.25 cumulative Modal usage; $15 total cap unchanged. FullFT continuation is submitted from the verified step625 checkpoint.
 - Detached queue 8684d1013aa74addbd5cbef0ed183d81 is terminal failed after completing probes/live evaluation. Both controller and benchmark child terminal states were independently confirmed. Modal app list shows stopped apps and zero tasks. Failed reservations remain locked; no paid retry is scheduled.
 - Task1 review: completed numerical/recovery/evaluation/figure and realtinyQwenVLM checks.
 - Task2: fullmanifest and ID-onlyexports validated; all 21,749 selected images downloaded and verified; no Task2 GPU run.
@@ -329,3 +329,6 @@ Provider billing total: not yet reconciled; do not describe reservations as spen
 - Downloaded/audited all 250 live calls: seeds, caps, prompts, lengths, timing/memory, shared initial response and per-strategy cost sums verified; exact first 50 heldout IDs confirmed. Six live requirements now verified. FullFT final and other training remain unfunded under current conservative reservations.
 
 - Final local regression milestone: **75 tests passed, 0 failed, in 20.081s**. Requirement-by-requirement audit saved as results/requirement_audit.json: 60/148 verified (40.5%), 88 pending. Confirmed Modal apps stopped with zero tasks. Conservative cumulative reservations $14.79842846, leaving $0.20157154 unreserved; this is not provider-billed usage. Remaining required GPU workloads cannot be responsibly funded from this remainder; do not retry or release failed reservations without billing reconciliation. Monitor will stop because all downloads/jobs are finished and remaining experiment work is budget-blocked.
+
+- Budget correction (29 October): the human reports actual Modal usage $8.25, not the $14.80 reservation estimate. Modal app list returned no active apps before reconciliation. Preserved the entire old ledger and job history; replaced only the historical cost basis with the human-reported cumulative billing baseline. This is user-reported billing evidence, not an API billing verification. Available allowance was $6.75.
+- Detached recovery queue 0120ca6612534073bcf50fb03df56c52 launched successfully (controller fc-01M637HN7NKPW4GF1TGND10VTS, FullFT child fc-01M637JADRKK0PMNYX444NGQA3). Serial plan: FullFT625->1250, then baseline BoolQ/ARC-Easy. New conservative reservation $6.607395375, cumulative ceiling $14.857395375; expected roughly two hours. Ten-minute monitor restored with explicit reconciliation instructions. No new requirement counted complete: 60/148 (40.5%). Prior budget-block conclusion is superseded by this billing reconciliation.

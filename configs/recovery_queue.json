@@ -1,0 +1,27 @@
+{
+  "controller_seconds": 10800,
+  "description": "Resume verified FullFT midpoint, then finish baseline BoolQ/ARC-Easy after serialization fix.",
+  "steps": [
+    {
+      "name": "finish_full_ft",
+      "job": "train1",
+      "gpu": "A100-40GB",
+      "seconds": 6000,
+      "run_id": "full-pilot-20261028",
+      "resume": "/checkpoints/runs/full-pilot-20261028/step-0625",
+      "max_updates": 625
+    },
+    {
+      "name": "baseline_boolq_arc_easy",
+      "job": "evaluate1",
+      "gpu": "A100-40GB",
+      "seconds": 1200,
+      "run_id": "task1-baseline-recovery-{short}",
+      "eval_tasks": [
+        "boolq",
+        "arc_easy"
+      ],
+      "eval_likelihood_batch_size": 8
+    }
+  ]
+}
