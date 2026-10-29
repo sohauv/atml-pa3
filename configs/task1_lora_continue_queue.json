@@ -1,0 +1,16 @@
+{
+  "controller_seconds": 8100,
+  "description": "Resume verified step40 LoRA16 recovery on cost-efficient measuredT4, exact manualrecipe; checkpointed7200s chunk.",
+  "steps": [
+    {
+      "name": "task1_lora16_continuation",
+      "job": "train1",
+      "method": "lora16",
+      "gpu": "T4",
+      "seconds": 7200,
+      "run_id": "lora16-20261030",
+      "max_updates": 1210,
+      "resume": "/checkpoints/runs/lora16-20261030/resume-0040-1793311488945740559"
+    }
+  ]
+}

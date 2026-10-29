@@ -1,0 +1,22 @@
+{
+  "a100_mean_step_seconds": 10.649830543550001,
+  "t4_mean_step_seconds": 10.94065510525,
+  "a100_app_lifetime_seconds": 288,
+  "checkpoint_summary": {
+    "update": 40,
+    "examples": 1280,
+    "wall_seconds": 453.10920782399995,
+    "checkpoint_write_seconds": 0.7333272999999849,
+    "inference_export_seconds": 0.18305676400001403,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 40,
+    "displacement_l2": null,
+    "trainable_parameters": 10092544,
+    "peak_gpu_gib": 9.224046230316162,
+    "checkpoint_bytes": 162071528
+  },
+  "marker": {
+    "update": 40
+  },
+  "choice": "T4 lower measured cost per step; A100 speed gain insufficient to offset price"
+}

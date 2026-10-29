@@ -18,7 +18,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - Task2 final evaluation COMPLETE: all320testquestions under4conditions,1280predictions; actual correct-image grounding accuracy70.3125%, naturalVQA softaccuracy56.0417%. Strict normalized no-image accuracy0% reflects verbose predictions; do not reinterpret or alter scoring. Full metrics/95%pairbootstrap intervals saved in results/task2_vlm/final_metrics.json and figures/task2_final_metrics.csv.
 - Training4500scheduledsteps/72000presentations,4494successfulupdates/sixAMPskips disclosed. Stage3checkpointstep4500 verified, all12development sweeps. T223 remainsunchecked due skippedupdates.
 - Learning figure generated from real logs and visually inspected; fixed-rule alignedexamples generated locally in outputs/task2/examples-20261030. No images/rawdatasets committed.
-- Current active LoRA16 A10020-step comparison resumes verified20stepT4checkpoint; see latest milestone for exactqueue IDs. No full-run completion assumed.
+- Current active LoRA16 T4continuation resumes verified40stepcheckpoint; see latest milestone for exactqueue IDs. A100comparison offered insufficient speed gain. No full-run completion assumed.
 - Task2 evaluation app stopped0tasks,whole440slifetime conservatively reconciled CPU/GPU independently; conservative total$21.480197057, not billedusage. Human cap$30total; latesthumanreportedactual$17.26 duringearlierrun.
 - FullFT1250complete; otherTask1methods/fullbenchmarkset remainpending. Task3offline/live complete. Latest unchanged source84CPUtests passed28.918s. NooverlappingGPUjobs; monitoractive.
 
@@ -406,3 +406,7 @@ All fourconditions for64groundingpairs/96naturalpairs completed in oneattempt380
 ### LoRA16 measured pilot and GPU cost comparison (30 October)
 
 T4pilot20updates completed,0skips,mean10.9406551s/step,peak6.1060GiB,10,092,544trainableparameters. Complete20steprecovery verified; appstopped0tasks312slifetime conservativelyreconciled. Smallactualevidence results/task1_finetuning/lora16_t4_pilot.json. T4projection ~3.74h forremaining1230steps beforecheckpoints; remainingallmethods/evals maynotfit30cap. Bounded A100comparison resumes same run20additionalsteps, notnewtrainingrecipe; reservation0.640329375. Currentqueue f83b7625a5984e90a36c416725d44fbe, controller fc-01M64TVGFS7MAXG57NP9S2VM1V, appap-Q2Guyv7ul3cMPrbtbGPbdx. Do not fundlongcontinuation until actualA100cost/step measured; previousT4queuecomplete,ownershipsynced.
+
+### Measured hardware choice and LoRA16 continuation (30 October)
+
+A100comparison completed20additionalsteps, recoveredstep40 verified; mean10.6498305s versusT4mean10.9406551s. A100appstopped0tasks288slifetime conservativelyreconciled. It is not costeffective for this codepath, so continuation usesT4. Actualsmallcomparison results/task1_finetuning/lora16_gpu_comparison.json. Currentonlyqueue bcab8864ab6c4cccb8dab9ba7f358ff2, controller fc-01M64VE7PA5BFV709R98R07FJ0, appap-RMzOY6zMnhAU5gPoGGh7mX, T4/7200s/controller8100s, reserves2.6583065625; conservative cumulative 24.283810494675006. Resumes /checkpoints/runs/lora16-20261030/resume-0040-1793311488945740559 toward1250, expected additionalchunk needed. Fullremainingfourmethod/evaluation completion within30 not established; hardcap retained. Noalteredrecipe or fabricatedresults.
