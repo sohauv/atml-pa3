@@ -1,6 +1,7 @@
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import torch
 
@@ -11,6 +12,23 @@ from task2_vlm.model import save_feature
 
 
 class CacheProfileTests(unittest.TestCase):
+    def test_incremental_verification_reads_only_new_tensor_bytes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            write_json(root / "provenance.json", {"revision": "fixed"})
+            save_feature(root / "old.pt", torch.ones(196, 768, dtype=torch.float16))
+            original = verify_feature_cache(root)
+            save_feature(root / "new.pt", torch.zeros(196, 768, dtype=torch.float16))
+            read_bytes = Path.read_bytes
+            def checked_read(path):
+                if path.name == "old.pt":
+                    self.fail("An immutable already-verified tensor was downloaded again")
+                return read_bytes(path)
+            with patch.object(Path, "read_bytes", checked_read):
+                result = verify_feature_cache(root, verified_index=original["index_path"])
+            self.assertEqual(result["verified_images"], 2)
+            self.assertEqual(result["newly_verified_images"], 1)
+
     def test_cpu_index_attests_bytes_and_rejects_changed_provenance(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

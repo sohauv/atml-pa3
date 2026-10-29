@@ -36,6 +36,7 @@ def parser():
     run.add_argument("--eval-limit", type=int, help="Smoke validation only; never use limited scores in assignment results")
     run.add_argument("--manifest", default="/data/task2/prepared/manifest.json")
     run.add_argument("--features", default="/data/task2/features196")
+    run.add_argument("--verified-index", help="CPU verification attestation for immutable existing features")
     run.add_argument("--image-root", default="/data/task2/images")
     run.add_argument("--model-revisions", default="/data/task2/model_revisions.json")
     run.add_argument("--data-root", default="/data/task3")
@@ -82,6 +83,7 @@ def main():
                "probes_dir": args.probes_dir,
                "eval_tasks": args.eval_tasks.split(","), "eval_limit": args.eval_limit,
                "manifest": args.manifest, "features": args.features, "image_root": args.image_root,
+               "verified_index": args.verified_index,
                "model_revisions": args.model_revisions, "data_root": args.data_root,
                "split_path": args.split_path,
                "max_updates": args.max_updates, "config": config, "ticket": ticket}

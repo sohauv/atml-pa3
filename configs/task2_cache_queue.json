@@ -1,17 +1,18 @@
 {
-  "controller_seconds": 3000,
-  "description": "Complete remaining compact cache on T4 after measured bounded validation; estimated30min, preservev2 and20TOTAL",
+  "controller_seconds": 1800,
+  "description": "Finish1653remaining images using CPU-verified immutable index; no repeat tensor downloads on GPU",
   "steps": [
     {
       "name": "task2_siglip_cache",
       "job": "cache2",
       "gpu": "T4",
-      "seconds": 2400,
+      "seconds": 900,
       "run_id": "task2-cache-{short}",
       "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
       "image_root": "/data/task2/inputs-v1/images",
       "model_revisions": "/data/task2/inputs-v1/model_revisions.json",
-      "features": "/data/task2/features196-v2"
+      "features": "/data/task2/features196-v2",
+      "verified_index": "/data/task2/features196-v2/verified-index-412680cef3d4a4f7.json"
     }
   ]
 }

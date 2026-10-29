@@ -46,13 +46,18 @@ def profile_feature(path, repeats=3, comparison_path=None):
             "distinct_bulk_sample": comparison_path is not None and Path(comparison_path) != Path(path)}
 
 
-def verify_feature_cache(root, max_seconds=600):
+def verify_feature_cache(root, max_seconds=600, verified_index=None):
     """Attest immutable cache files on CPU so GPU resumes need only metadata."""
     root = Path(root)
     started = time.monotonic()
     files = sorted(root.glob("*.pt"))
     if not files:
         raise ValueError("No cached features to verify")
+    entries = load_verified_index(verified_index, root).copy() if verified_index else {}
+    for name, entry in entries.items():
+        if (root / name).stat().st_size != entry["bytes"]:
+            raise ValueError("Previously verified immutable feature size changed")
+    pending = [path for path in files if path.name not in entries]
 
     def check(path):
         if time.monotonic() - started > max_seconds - 60:
@@ -64,7 +69,7 @@ def verify_feature_cache(root, max_seconds=600):
         return path.name, {"bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}
 
     with ThreadPoolExecutor(max_workers=8) as pool:
-        entries = dict(pool.map(check, files))
+        entries.update(pool.map(check, pending))
     index = {"schema_version": 1, "provenance_sha256": sha256(root / "provenance.json"),
              "shape": [196, 768], "dtype": "float16", "all_finite": True, "files": entries}
     digest = hashlib.sha256(repr(sorted(entries.items())).encode()).hexdigest()[:16]
@@ -74,7 +79,7 @@ def verify_feature_cache(root, max_seconds=600):
             raise ValueError("Existing verification index differs")
     else:
         write_json(path, index)
-    return {"verified_images": len(entries), "index_path": str(path),
+    return {"verified_images": len(entries), "newly_verified_images": len(pending), "index_path": str(path),
             "index_sha256": sha256(path), "seconds": time.monotonic() - started}
 
 

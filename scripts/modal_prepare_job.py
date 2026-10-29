@@ -15,7 +15,8 @@ def prepare_execute(request):
         from common.cache_profile import verify_feature_cache
         from pathlib import Path
         from common.io import write_json
-        result = verify_feature_cache(request["features"], max_seconds=request["ticket"]["deadline"] - time.time())
+        result = verify_feature_cache(request["features"], max_seconds=request["ticket"]["deadline"] - time.time(),
+                                      verified_index=request.get("verified_index"))
         write_json(Path("/data/task2/cpu-profiles") / (request["run_id"] + ".json"), result)
     elif request["job"] == "profile_cache2":
         from pathlib import Path
