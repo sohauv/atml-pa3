@@ -63,7 +63,8 @@ def execute(request):
             from task2_vlm.model import cache_features
             result = cache_features(request["manifest"], request["image_root"], request["features"],
                                     revisions["google/siglip-base-patch16-224"],
-                                    max_seconds=remaining, commit=data_volume.commit)
+                                    max_seconds=remaining, commit=data_volume.commit,
+                                    verified_index=request.get("verified_index"))
             data_volume.commit()
         elif job == "train2":
             from task2_vlm.train import train

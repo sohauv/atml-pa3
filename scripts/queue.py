@@ -51,6 +51,7 @@ def plan_queue(plan, approval, ledger, queue_id, existing_call_id, now=None):
                    "split_path": spec.get("split_path", "/data/task3/analysis/math/splits.json"),
                    "manifest": spec.get("manifest", "/data/task2/prepared/manifest.json"),
                    "features": spec.get("features", "/data/task2/features196"),
+                   "verified_index": spec.get("verified_index"),
                    "image_root": spec.get("image_root", "/data/task2/images"),
                    "model_revisions": spec.get("model_revisions", "/data/task2/model_revisions.json")}
         if "/" in payload["run_id"] or ".." in payload["run_id"]:

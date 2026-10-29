@@ -22,7 +22,7 @@ def parser():
     plan.add_argument("--gpu", default="A100-40GB")
     plan.add_argument("--seconds", type=int, default=1800)
     run = sub.add_parser("run")
-    run.add_argument("--job", choices=["prepare1", "profile_cache2", "train1", "evaluate1", "diagnostics1", "probe1", "qualitative1", "cache2", "train2", "evaluate2", "live3"], required=True)
+    run.add_argument("--job", choices=["prepare1", "profile_cache2", "verify_cache2", "train1", "evaluate1", "diagnostics1", "probe1", "qualitative1", "cache2", "train2", "evaluate2", "live3"], required=True)
     run.add_argument("--method", choices=["full", "l2sp", "lora4", "lora16", "oplora16"], default="full")
     run.add_argument("--gpu", choices=["T4", "L4", "A100-40GB", "A100-80GB", "L40S"], default="A100-40GB")
     run.add_argument("--seconds", type=int, default=1800)
@@ -68,11 +68,11 @@ def main():
     default_config = "configs/task2_vlm/main.json" if args.job in ("cache2", "train2", "evaluate2") else "configs/task1_finetuning/shared.json"
     config = read_json(args.config or default_config)
     # Import before reserving, but app.run() only starts AFTER reservation succeeds.
-    if args.job in ("prepare1", "profile_cache2"):
+    if args.job in ("prepare1", "profile_cache2", "verify_cache2"):
         from scripts.modal_prepare_job import app, prepare_execute as execute
     else:
         from scripts.modal_jobs import app, execute
-    gpu = None if args.job in ("prepare1", "profile_cache2") else args.gpu
+    gpu = None if args.job in ("prepare1", "profile_cache2", "verify_cache2") else args.gpu
     ticket = reserve(args.approval, args.ledger, gpu=gpu, seconds=args.seconds,
                      purpose=f"{args.job}/{args.method}/{run_id}")
     # Absolute deadline survives automatic infrastructure retries/preemption.

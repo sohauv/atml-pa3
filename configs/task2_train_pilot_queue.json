@@ -1,0 +1,17 @@
+{
+  "controller_seconds": 1800,
+  "description": "Only after complete feature-cache verification:20 real updates to validate Task2 memory/throughput; all manual settings unchanged and recovery reused.",
+  "steps": [
+    {
+      "name": "task2_training_memory_throughput_pilot",
+      "job": "train2",
+      "gpu": "T4",
+      "seconds": 900,
+      "run_id": "task2-vlm-20261029",
+      "max_updates": 20,
+      "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
+      "features": "/data/task2/features196-v2",
+      "model_revisions": "/data/task2/inputs-v1/model_revisions.json"
+    }
+  ]
+}

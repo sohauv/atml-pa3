@@ -9,7 +9,7 @@ import torch
 from torch import nn
 
 from common.io import read_json, sha256, write_json
-from common.cache_profile import load_feature_cpu, valid_feature_cpu
+from common.cache_profile import load_feature_cpu, load_verified_index, valid_feature_cpu
 
 
 def load_cache_image(image_root, row):
@@ -37,7 +37,7 @@ def save_feature(path, value):
 
 
 def cache_features(manifest_path, image_root, output_dir, revision, *, batch_size=32,
-                   device="cuda", max_seconds=None, commit=lambda: None):
+                   device="cuda", max_seconds=None, commit=lambda: None, verified_index=None):
     """Cache final normalized patch outputs exactly once per image.
 
     Transformers 4.51.3 SiglipVisionTransformer already applies post_layernorm
@@ -57,6 +57,7 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     if provenance.exists() and read_json(provenance) != identity:
         raise ValueError("Feature cache provenance mismatch")
     write_json(provenance, identity)
+    attested = load_verified_index(verified_index, output) if verified_index else {}
     unique = {}
     for items in manifest.values():
         for item in items:
@@ -67,6 +68,13 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     for key, row in sorted(unique.items()):
         path = output / f"{key}.pt"
         if path.exists():
+            # Files are immutable: our writer refuses overwrites. A CPU index
+            # attests actual bytes/shape/dtype/finite values before this run.
+            # Recheck identity and size, avoiding repeated GPU-time downloads.
+            if path.name in attested:
+                if path.stat().st_size != attested[path.name]["bytes"]:
+                    raise ValueError(f"Verified feature size changed: {path}")
+                continue
             value = load_feature_cpu(path)
             if not valid_feature_cpu(value):
                 raise ValueError(f"Existing feature cache is invalid: {path}")

@@ -4,10 +4,39 @@ import unittest
 
 import torch
 
-from common.cache_profile import load_feature_cpu, profile_feature, valid_feature_cpu
+from common.cache_profile import (load_feature_cpu, load_verified_index, profile_feature,
+                                  valid_feature_cpu, verify_feature_cache)
+from common.io import write_json
+from task2_vlm.model import save_feature
 
 
 class CacheProfileTests(unittest.TestCase):
+    def test_cpu_index_attests_bytes_and_rejects_changed_provenance(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            write_json(root / "provenance.json", {"revision": "fixed"})
+            save_feature(root / "train2014-1.pt", torch.ones(196, 768, dtype=torch.float16))
+            save_feature(root / "train2014-2.pt", torch.zeros(196, 768, dtype=torch.float16))
+            result = verify_feature_cache(root)
+            self.assertEqual(result["verified_images"], 2)
+            entries = load_verified_index(result["index_path"], root)
+            self.assertEqual(entries["train2014-1.pt"]["bytes"], (root / "train2014-1.pt").stat().st_size)
+            self.assertEqual(verify_feature_cache(root)["index_sha256"], result["index_sha256"])
+            write_json(root / "provenance.json", {"revision": "different"})
+            with self.assertRaisesRegex(ValueError, "provenance"):
+                load_verified_index(result["index_path"], root)
+
+    def test_invalid_cache_never_publishes_verification_index(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            write_json(root / "provenance.json", {"revision": "fixed"})
+            value = torch.ones(196, 768, dtype=torch.float16)
+            value[0, 0] = float("nan")
+            torch.save(value, root / "bad.pt")
+            with self.assertRaisesRegex(ValueError, "Invalid"):
+                verify_feature_cache(root)
+            self.assertEqual(list(root.glob("verified-index-*.json")), [])
+
     def test_cpu_validation_rejects_nonfinite_and_wrong_layout(self):
         value = torch.zeros(196, 768, dtype=torch.float16)
         self.assertTrue(valid_feature_cpu(value))

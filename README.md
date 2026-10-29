@@ -158,6 +158,20 @@ budgeted `cache2`, `train2`, `evaluate2` jobs with explicit `--manifest`,
 and commits feature files; `train2` accepts `--run-id`/`--resume` like Task1. Final
 test evaluation rejects checkpoints before completion of all4500 updates.
 
+Before resuming a large partial feature cache, validate its immutable tensors on
+CPU rather than downloading them repeatedly while paying for an allocated GPU:
+
+```powershell
+python -m scripts.experiments run --job verify_cache2 --seconds 600 --run-id cache-verification-<unique-id> --features /data/task2/features196-v2
+```
+
+This reserves CPU/RAM only. It checks actual tensor bytes, shape, dtype and finite
+values, then writes a provenance-bound SHA256 index without changing features.
+Set `verified_index` in the next cache queue step to the returned `index_path`.
+GPU resumes check provenance and file sizes; this relies on the cache writer's
+no-overwrite rule. A changed provenance or invalid tensor fails closed. The
+verification count may describe a partial cache and never implies training is ready.
+
 ## Task 3 execution
 
 See `task3_test_time/README.md` for scorer versions, supplied file IDs, exact

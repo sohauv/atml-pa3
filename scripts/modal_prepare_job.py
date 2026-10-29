@@ -11,7 +11,13 @@ def prepare_execute(request):
     if request["ticket"]["deadline"] - time.time() < 120:
         raise TimeoutError("Preparation reservation expired")
     data_volume.reload()
-    if request["job"] == "profile_cache2":
+    if request["job"] == "verify_cache2":
+        from common.cache_profile import verify_feature_cache
+        from pathlib import Path
+        from common.io import write_json
+        result = verify_feature_cache(request["features"], max_seconds=request["ticket"]["deadline"] - time.time())
+        write_json(Path("/data/task2/cpu-profiles") / (request["run_id"] + ".json"), result)
+    elif request["job"] == "profile_cache2":
         from pathlib import Path
         from common.cache_profile import profile_feature
         from common.io import write_json
