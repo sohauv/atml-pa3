@@ -9,6 +9,23 @@ from torch import nn
 from common.io import read_json, sha256, write_json
 
 
+def save_feature(path, value):
+    """Save one independent tensor, never its parent batch storage."""
+    path = Path(path)
+    if path.exists():
+        raise FileExistsError(path)
+    temporary = path.with_name(path.name + f".tmp-{time.time_ns()}")
+    # A contiguous batch slice is still a view. torch.save otherwise includes
+    # the entire batch's storage in every image file (32x duplication).
+    isolated = value.detach().cpu().clone(memory_format=torch.contiguous_format)
+    torch.save(isolated, temporary)
+    if temporary.stat().st_size > 2 * isolated.numel() * isolated.element_size():
+        raise RuntimeError("Feature serialization unexpectedly includes excess storage")
+    if path.exists():
+        raise FileExistsError(path)
+    temporary.rename(path)
+
+
 def cache_features(manifest_path, image_root, output_dir, revision, *, batch_size=32,
                    device="cuda", max_seconds=None, commit=lambda: None):
     """Cache final normalized patch outputs exactly once per image.
@@ -26,6 +43,7 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     identity = {"model": "google/siglip-base-patch16-224", "revision": revision,
                 "manifest_sha256": sha256(manifest_path), "dtype": "float16",
                 "shape": [196, 768], "normalization": "model post_layernorm once",
+                "storage": "independent per-image tensor v2",
                 "preprocessing": "pinned AutoImageProcessor deterministic resize/rescale/normalize"}
     if provenance.exists() and read_json(provenance) != identity:
         raise ValueError("Feature cache provenance mismatch")
@@ -51,31 +69,44 @@ def cache_features(manifest_path, image_root, output_dir, revision, *, batch_siz
     if device == "cuda":
         torch.cuda.reset_peak_memory_stats()
     complete = 0
+    timings = {key: 0.0 for key in ("input_seconds", "vision_seconds", "write_seconds", "commit_seconds")}
     with torch.no_grad():
         for offset in range(0, len(pending), batch_size):
             if max_seconds is not None and time.monotonic() - started > max_seconds - 90:
                 break
             group = pending[offset:offset + batch_size]
+            phase_started = time.monotonic()
             images = []
             for _, row in group:
                 path = Path(image_root) / row["split"] / row["image_file"]
                 with Image.open(path) as original:
                     images.append(original.convert("RGB"))
             pixels = processor(images=images, return_tensors="pt")["pixel_values"].to(device)
+            timings["input_seconds"] += time.monotonic() - phase_started
+            phase_started = time.monotonic()
             features = encoder(pixel_values=pixels).last_hidden_state
             if features.shape[1:] != (196, 768) or not torch.isfinite(features).all():
                 raise ValueError("Unexpected SigLIP patch features")
-            for (key, _), value in zip(group, features.half().cpu()):
+            features_cpu = features.half().cpu()
+            timings["vision_seconds"] += time.monotonic() - phase_started
+            phase_started = time.monotonic()
+            for (key, _), value in zip(group, features_cpu):
                 path = output / f"{key}.pt"
-                temporary = output / f"{key}.tmp-{time.time_ns()}"
-                torch.save(value.contiguous(), temporary)
-                if path.exists():
-                    raise FileExistsError(path)
-                temporary.rename(path)
+                save_feature(path, value)
+            timings["write_seconds"] += time.monotonic() - phase_started
             complete += len(group)
-            commit()
+            if complete % 128 == 0 or offset + batch_size >= len(pending):
+                write_json(output / "progress.json", {
+                    "new_images": complete, "existing_images": len(unique) - len(pending),
+                    "total_images": len(unique), "seconds": time.monotonic() - started,
+                    **timings})
+                phase_started = time.monotonic()
+                commit()
+                timings["commit_seconds"] += time.monotonic() - phase_started
+                print(f"[Task2 cache] {complete}/{len(pending)} new images; timings={timings}", flush=True)
     result = {"new_images": complete, "total_images": len(unique),
               "finished": complete == len(pending), "seconds": time.monotonic() - started,
+              "timings": timings,
               "peak_gpu_gib": torch.cuda.max_memory_allocated() / 2**30 if device == "cuda" else None}
     write_json(output / f"cache-run-{time.time_ns()}.json", result)
     del encoder, processor

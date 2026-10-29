@@ -1,17 +1,17 @@
 {
-  "controller_seconds": 2400,
-  "description": "SigLIP feature cache on A100 after L4 capacity unavailable; preserve partial caches and20total cap",
+  "controller_seconds": 1200,
+  "description": "Bounded compact-cache validation chunk: inspect first128 file sizes/timings before funding continuation; preserve partial features196-v2",
   "steps": [
     {
       "name": "task2_siglip_cache",
       "job": "cache2",
       "gpu": "A100-40GB",
-      "seconds": 1800,
+      "seconds": 600,
       "run_id": "task2-cache-{short}",
       "manifest": "/data/task2/inputs-v1/prepared/manifest.json",
       "image_root": "/data/task2/inputs-v1/images",
       "model_revisions": "/data/task2/inputs-v1/model_revisions.json",
-      "features": "/data/task2/features196-v1"
+      "features": "/data/task2/features196-v2"
     }
   ]
 }
