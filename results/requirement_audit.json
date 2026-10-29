@@ -1,26 +1,26 @@
 {
-  "verified": 60,
+  "verified": 64,
   "total": 148,
-  "percent": 40.5,
+  "percent": 43.2,
   "tests": {
-    "passed": 75,
+    "passed": 77,
     "failed": 0,
-    "runtime_seconds": 20.081,
+    "runtime_seconds": 25.577,
     "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -v"
   },
   "modal": {
-    "active_tasks": 0,
-    "controller": "failed_terminal_confirmed",
-    "benchmark_failure": "dtype serialization, fixed and tested; no paid retry",
-    "conservative_reserved_usd": 14.79842845694251,
-    "authorized_total_usd": 15,
-    "provider_billing": "not reconciled; reservations are not actual billed usage"
+    "queue_id": "eb0e9e9349544855afd32f6cdf20bec5",
+    "state": "Task2 feature cache submitted",
+    "authorized_total_usd": 20,
+    "human_reported_cumulative_usage_usd": 13.16,
+    "conservative_reserved_ceiling_usd": 14.31314,
+    "provider_billing": "Human reported13.16; local reservations are not billed usage"
   },
   "remaining_major_work": [
-    "FullFT final1250 (625 saved); L2-SP, LoRA4, LoRA16, OPLoRA16 required training",
+    "L2-SP, LoRA4, LoRA16, OPLoRA16 training; FullFT is complete",
     "Remaining seven-condition benchmark, diagnostic and qualitative evaluations",
-    "Task2 feature caching, staged GPU training, required evaluations and plots",
-    "Student-written report interpretation, packaging and submission"
+    "Task2 feature caching, staged GPU training, evaluations and plots",
+    "Report interpretation/packaging/submission; AI writing permitted by professor according to human, draft after experiments"
   ],
   "requirements": [
     {
@@ -210,12 +210,12 @@
     },
     {
       "id": "T118",
-      "verified": false,
+      "verified": true,
       "requirement_and_evidence": "Full FT updates all original parameters, peak LR 2e-5, lambda=0, completed."
     },
     {
       "id": "T119",
-      "verified": false,
+      "verified": true,
       "requirement_and_evidence": "Full FT saves full-model displacement at midpoint and final."
     },
     {
@@ -740,7 +740,7 @@
     },
     {
       "id": "T336",
-      "verified": false,
+      "verified": true,
       "requirement_and_evidence": "Live-comparison table and revision-transition evidence on50questions."
     },
     {
@@ -750,7 +750,7 @@
     },
     {
       "id": "T338",
-      "verified": false,
+      "verified": true,
       "requirement_and_evidence": "Aligned selection/refinement/stopping examples with statedselectionrule."
     },
     {
