@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 69/148 mandatory requirements (46.6%).**
+**Overall verified completion: 76/148 mandatory requirements (51.4%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -15,12 +15,12 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active work (30 October 2026)
 
-- Task2 completed all4,500 scheduled steps /72,000 presentations;4,494 successful optimizer updates and six initial AMP skips at1,2,3,4,5,7, explicitly retained. Final step-4500 complete marker and all12 required development sweeps verified. Peak5.6892GiB. This does not claim4,500 successful optimizer updates.
-- Training completion evidence: results/task2_vlm/training_completion.json; actual development results saved. Exact stage counts2250/1500/750; recovery successfully resumed across two continuations. All datasets/checkpoints preserved.
-- Only active queue b86eefc91e63495b8e82afebfaf95b8f, controller fc-01M64SR3TMEAFFFMAYKQT7176R, runs final Task2 evaluation using completed Stage3 checkpoint, T4/1800s,controller2700s, reservation$0.6995409375. Final evaluation results not yet available.
-- Human cap$30TOTAL; last human-reported actual usage$17.26 during earlier run. Conservative ledger ceiling$21.603526745 is not actual billing. Successful training app stopped/zero tasks, lifetime4976s conservatively reconciled for CPU/GPU independently.
-- FullFT1250complete; four otherTask1methods and most evaluations pending. Task3offline/live complete. Final report awaits required experiments.
-- Latest unchanged source84CPUtests passed28.918s; configuration plan validated, no source change requiring retests. Monitor active, no overlappingGPUjobs.
+- Task2 final evaluation COMPLETE: all320testquestions under4conditions,1280predictions; actual correct-image grounding accuracy70.3125%, naturalVQA softaccuracy56.0417%. Strict normalized no-image accuracy0% reflects verbose predictions; do not reinterpret or alter scoring. Full metrics/95%pairbootstrap intervals saved in results/task2_vlm/final_metrics.json and figures/task2_final_metrics.csv.
+- Training4500scheduledsteps/72000presentations,4494successfulupdates/sixAMPskips disclosed. Stage3checkpointstep4500 verified, all12development sweeps. T223 remainsunchecked due skippedupdates.
+- Learning figure generated from real logs and visually inspected; fixed-rule alignedexamples generated locally in outputs/task2/examples-20261030. No images/rawdatasets committed.
+- Only active bounded Task1 LoRA16 T4pilot queue9f302414b3ab4921a5e1d4fa6c6a232c controllerfc-01M64TA21SP4XDR28S0W6MESCV appap-d2xrCS6BmQtHr88WLR9e2M,20steps/900s,controller1800s,reservation$0.37308. Actual memory/runtime will determine continuation affordability; no full-run completion assumed.
+- Task2 evaluation app stopped0tasks,whole440slifetime conservatively reconciled CPU/GPU independently; conservative total$21.480197057, not billedusage. Human cap$30total; latesthumanreportedactual$17.26 duringearlierrun.
+- FullFT1250complete; otherTask1methods/fullbenchmarkset remainpending. Task3offline/live complete. Latest unchanged source84CPUtests passed28.918s. NooverlappingGPUjobs; monitoractive.
 
 ## Manual checklist
 
@@ -141,14 +141,14 @@ Fine-grained items intentionally include both implementation and required eviden
 - [x] T226 Development evaluation before training/every500updates/stage endpoints2250/3750/4500, without final-test checkpoint selection.
 - [ ] T227 Caption reference loss and both-suite answer NLL under correct/complementary/no-image; exclude termination from answer NLL and example-average token means.
 - [x] T228 Compute image-swap penalty NLL(partner)-NLL(correct), original references fixed.
-- [ ] T229 Final Stage3 greedy non-thinking cap16/batch8 under correct/complementary/mismatched/no-image on both suites.
-- [ ] T230 Freeze unrelated-image mappings before generation, exclude both own-pair images, reuse across comparisons; no-image removes visuals/rebuilds masks/positions.
-- [ ] T231 Grounding normalized exact-match by presence/counting; VQAv2 local10-answer leave-one-out soft scoring by yes-no/number/other.
-- [ ] T232 Pair accuracy, identical-answer rate, empty-answer rate, mean reference NLL, generation time/answer for every suite/condition; empty predictions stay in denominators.
-- [ ] T233 Correct-image advantages in accuracy/NLL,95% intervals from4000 complete-pair bootstrap resamples with matched IDs across conditions.
+- [x] T229 Final Stage3 greedy non-thinking cap16/batch8 under correct/complementary/mismatched/no-image on both suites.
+- [x] T230 Freeze unrelated-image mappings before generation, exclude both own-pair images, reuse across comparisons; no-image removes visuals/rebuilds masks/positions.
+- [x] T231 Grounding normalized exact-match by presence/counting; VQAv2 local10-answer leave-one-out soft scoring by yes-no/number/other.
+- [x] T232 Pair accuracy, identical-answer rate, empty-answer rate, mean reference NLL, generation time/answer for every suite/condition; empty predictions stay in denominators.
+- [x] T233 Correct-image advantages in accuracy/NLL,95% intervals from4000 complete-pair bootstrap resamples with matched IDs across conditions.
 - [ ] T234 Analyze whether complementary-swap answers follow partner versus unsupported answers; fixed illustrative-example selection rule.
-- [ ] T235 Learning-curve figure with loss/developmentcaptionloss/answerNLL/swappenalties and stage boundaries.
-- [ ] T236 Both-suite four-condition/type results tables, pair diagnostics/NLL/advantages/intervals.
+- [x] T235 Learning-curve figure with loss/developmentcaptionloss/answerNLL/swappenalties and stage boundaries.
+- [x] T236 Both-suite four-condition/type results tables, pair diagnostics/NLL/advantages/intervals.
 - [ ] T237 Aligned complementary-image examples with question/references/predictions and stated selection rule.
 - [ ] T238 Resource table includes stagewise trainable counts/traininggenerationtime/memory and feature caching.
 - [ ] T239 Address four Task2 research questions: interface curriculum, grounding/generalization, image-use measures, capabilities/cost; discuss limitations throughout.
@@ -398,3 +398,7 @@ Queue 7473321d5fd24026b5515a7c699a1b7e completed its bounded chunk with finished
 ### Verified Task2 scheduled training completion (30 October)
 
 4,500 log entries,72,000 presentations,4,494 non-skipped updates. Initial six AMP skips remain a disclosed deviation; T223 remains unchecked because it requires complete optimizer updates. Required development updates0/500/1000/1500/2000/2250/2500/3000/3500/3750/4000/4500 saved. Recovery and finalmarker verified; final-test evaluation launched only after completedStage3. Training app stopped0tasks at02:31:25+05. No final-test scores invented.
+
+### Task2 final evaluation evidence (30 October)
+
+All fourconditions for64groundingpairs/96naturalpairs completed in oneattempt380.8401s,peak4.7011GiB. Percondition pairIDs/cardinality validated by worker before aggregate; fullmetric tables/4000pairbootstrapCIs exported. No-image verbose outputs retained and scored strictly, no posthoc extraction. Learningcurve visually verified; rawpredictions and fivefixedalignedimageexamples remain ignoredlocaloutputs. NewLoRA16pilot preserves exactTask1recipe and is bounded to measure actual cost before longerfunding.
