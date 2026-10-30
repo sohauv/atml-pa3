@@ -15,6 +15,10 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active free Kaggle work (30 October 2026)
 
+- Newprivate pa3-lora4-step405-restore datasetcreated/attached. ActualCPUrestore matched4checkpointSHA256 values tolocalbackup,405successfulzero skips; required312present. Freshkernel environmentsetup+checksumverification submitted inself-containedcell then150additionalupdates/1800s resume405; GPUtrainingSTARTnotyetverified. No paidjob. Evidence results/task1_finetuning/lora4_kaggle_restore405.json.
+
+- 31October restart recovery: human reports session restarted; actualCPUinspection found no working archives/runstatus, onlyoriginalstep5input. Priorchunk actuallyreached505butitsarchivewasnotdownloadedbefore reset. Resume405fromverifiedlocalbackup,not5. Clean restorearchive outputs/kaggle/pa3-lora4-step405-restore.zip75315252bytes13files SHA9aa4a4e46caa756f09e3d0e2b50e050c3859be82bf9d5390c2c536dd6dee2223 CRCverified; includes405+required312+metadata. Uploadpickeropened; accessibilityunavailable, humanaskedselectarchivePRIVATE. NoGPUjobactive. Humanrequests150updates/chunk1800s andimmediateblockernotification; older100/125instructions superseded.
+
 - Step405 durably downloaded:405successful/zero skips12960examples,225817533bytes SHA537cb21d755d8e6f3c027ffbf3b0396c7b0d25855b01b5180d55d1582614bcef; localhash/CRC/all4recoveryfiles verified for recovery405 AND requiredstep0312. Evidence results/task1_finetuning/lora4_kaggle_step405.json. Afterlocalverification next100additionalupdates/1800s launched fromresume-0405-1793383309837161688 toward505,actualSTARTconfirmed.
 
 - Step305 durably downloaded:305successful/zero skips9760examples;150521679bytes SHA3f3487e013e729c6f53783be43bb928255a791de2742566f1c1ba19814e0c3d1 matchesGPUoutput; CRC/all4recoveryfiles verified. Evidence results/task1_finetuning/lora4_kaggle_step305.json. Next100additionalupdates/1800s requested fromresume-0305-1793380724835322952 toward405 only afterbackupverification.
