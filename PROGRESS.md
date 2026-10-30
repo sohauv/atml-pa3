@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active free Kaggle work (30 October 2026)
 
+- Step693 safelydownloaded:693successful/zero skips22176examples;188236634bytes SHAd369f8aee0a731f8d10f09f9dace05810d3014c181278253ce6203faa4061b99 matchedGPUoutput. LocalCRC/latest4recoveryfiles andrequired312/625verified. Evidence results/task1_finetuning/lora4_kaggle_step693.json. Next150additionalupdates/1800s launched onlyafterverifiedbackup fromresume-0693-1793397134175734237,actualSTARTconfirmed,targetup to843.
+
 - Step548 safelydownloaded:548successful/zero skips17536examples,112962887bytes SHAbce5bd8c7a0386f857900dffabbeea706db9e0520d144c068728269ce62b6e78 matchedGPUoutput; localCRC/all4recoveryfiles andrequired312verified. Evidence results/task1_finetuning/lora4_kaggle_step548.json. Afterverifiedbackup next150additionalupdates/1800s resumedfromresume-0548-1793394456457346665, actualSTARTconfirmed,targetup to698(timeboundmaystopshort).
 
 - Newprivate pa3-lora4-step405-restore datasetcreated/attached. ActualCPUrestore matched4checkpointSHA256 values tolocalbackup,405successfulzero skips; required312present. Freshkernel environmentsetup+checksumverification submitted inself-containedcell then150additionalupdates/1800s resume405; GPUtrainingSTARTnowverified via actual VERIFIED_GPU2.6.0+cu124TeslaT4 and START_BOUNDED_RECOVERY_FROM step405 output. No paidjob. Evidence results/task1_finetuning/lora4_kaggle_restore405.json.
