@@ -1,0 +1,21 @@
+{
+  "summary": {
+    "update": 665,
+    "examples": 21280,
+    "wall_seconds": 7311.418781282001,
+    "checkpoint_write_seconds": 0.7399184899995817,
+    "inference_export_seconds": 0.1815658519999488,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 665,
+    "displacement_l2": null,
+    "trainable_parameters": 10092544,
+    "peak_gpu_gib": 9.224046230316162,
+    "checkpoint_bytes": 162071528
+  },
+  "complete_marker": {
+    "update": 665
+  },
+  "checkpoint": "/checkpoints/runs/lora16-20261030/resume-0665-1793318754217356917",
+  "remaining_steps": 585,
+  "reason": "Paid chunk ended; moving to free Kaggle, no new paid work"
+}

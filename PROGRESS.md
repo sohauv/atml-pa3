@@ -13,14 +13,14 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Active work (30 October 2026)
+## Kaggle migration awaiting access (30 October 2026)
 
-- Task2 final evaluation COMPLETE: all320testquestions under4conditions,1280predictions; actual correct-image grounding accuracy70.3125%, naturalVQA softaccuracy56.0417%. Strict normalized no-image accuracy0% reflects verbose predictions; do not reinterpret or alter scoring. Full metrics/95%pairbootstrap intervals saved in results/task2_vlm/final_metrics.json and figures/task2_final_metrics.csv.
-- Training4500scheduledsteps/72000presentations,4494successfulupdates/sixAMPskips disclosed. Stage3checkpointstep4500 verified, all12development sweeps. T223 remainsunchecked due skippedupdates.
-- Learning figure generated from real logs and visually inspected; fixed-rule alignedexamples generated locally in outputs/task2/examples-20261030. No images/rawdatasets committed.
-- Current active LoRA16 T4continuation resumes verified40stepcheckpoint; see latest milestone for exactqueue IDs. A100comparison offered insufficient speed gain. No full-run completion assumed.
-- Task2 evaluation app stopped0tasks,whole440slifetime conservatively reconciled CPU/GPU independently; conservative total$21.480197057, not billedusage. Human cap$30total; latesthumanreportedactual$17.26 duringearlierrun.
-- FullFT1250complete; otherTask1methods/fullbenchmarkset remainpending. Task3offline/live complete. Latest unchanged source84CPUtests passed28.918s. NooverlappingGPUjobs; monitoractive.
+- All Modal jobs STOPPED, zero tasks. No further paid jobs will launch during migration.
+- LoRA16 verified recovery at665/1250updates,21280examples,zero skips,9.2241GiB peak,10,092,544trainableparameters. Remaining585steps plus evaluations. Checkpoint /checkpoints/runs/lora16-20261030/resume-0665-1793318754217356917; small evidence results/task1_finetuning/lora16_stopping_checkpoint.json. Controller and child independently terminal, complete marker verified, queue ownership synced.
+- Prior paid app stopped05:06:22+05,6946secondslifetime conservatively reconciled. Reservations are not billing; user30TOTAL cap remains and latestreportedactual17.26 is stale, not finalbilling.
+- Kaggle T4x2/30hours verified, configured draftOFF. Notebook import was attempted but stalled; browser reload then failedURLpolicycheck. No Kaggletraining started. Prepared notebook and private10.8MB inputarchive remain ready; transferlauncher tests2passed. Do not repeatedly retryblockedUI.
+- Task2 finaleval/figures verified,4494successfulof4500scheduledsteps/sixinitialskips disclosed;Task3offline/livecomplete;FullFT1250complete. LoRA4/L2SP/OPLoRA16 and mostTask1evaluations pending. Overall count remains76/148.
+- Preparing ignored local LoRA16step665transfer archive from immutablecheckpoint. Preserve all remote/localdata; nevercommitweights/rawdata. Once transfer completes and no autonomouswork remains, stopmonitor until user resolves Kaggleaccess.
 
 ## Manual checklist
 
