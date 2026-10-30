@@ -20,7 +20,7 @@ Fine-grained items intentionally include both implementation and required eviden
 - Prior paid app stopped05:06:22+05,6946secondslifetime conservatively reconciled. Reservations are not billing; user30TOTAL cap remains and latestreportedactual17.26 is stale, not finalbilling.
 - Kaggle T4x2/30hours verified, configured draftOFF. Notebook import was attempted but stalled; browser reload then failedURLpolicycheck. No Kaggletraining started. Prepared notebook and private10.8MB inputarchive remain ready; transferlauncher tests2passed. Do not repeatedly retryblockedUI.
 - Task2 finaleval/figures verified,4494successfulof4500scheduledsteps/sixinitialskips disclosed;Task3offline/livecomplete;FullFT1250complete. LoRA4/L2SP/OPLoRA16 and mostTask1evaluations pending. Overall count remains76/148.
-- Preparing ignored local LoRA16step665transfer archive from immutablecheckpoint. Preserve all remote/localdata; nevercommitweights/rawdata. Once transfer completes and no autonomouswork remains, stopmonitor until user resolves Kaggleaccess.
+- Immutable LoRA16step665transfer archive collected locally: outputs/kaggle/pa3-lora16-step665.zip, 148995106bytes. All four required checkpoint files collected; weights remain ignored. Monitor stopped because all compute is terminal and migration requires Kagglebrowser access. Notebook handoffguard now true only after independentlyverified terminalModalstate.
 
 ## Manual checklist
 
