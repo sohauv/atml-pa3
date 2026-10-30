@@ -1,0 +1,20 @@
+{
+  "archive_sha256": "bce5bd8c7a0386f857900dffabbeea706db9e0520d144c068728269ce62b6e78",
+  "archive_bytes": 112962887,
+  "checkpoint": "lora4-recovery/resume-0548-1793394456457346665/",
+  "summary": {
+    "update": 548,
+    "examples": 17536,
+    "wall_seconds": 6545.033377912999,
+    "checkpoint_write_seconds": 0.1675767110000379,
+    "inference_export_seconds": 0.04103754400011894,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 548,
+    "displacement_l2": null,
+    "trainable_parameters": 2523136,
+    "peak_gpu_gib": 9.096727848052979,
+    "checkpoint_bytes": 40961320
+  },
+  "required312_verified": true,
+  "verification": "Actual local download hash matches Kaggle; ZIP CRC and required files verified"
+}

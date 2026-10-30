@@ -6,5 +6,6 @@
   "kaggle_restore_verification": "Actual cell output RESTORED_VERIFIED_STEP405; all four checkpoint file SHA256 matched local values; summary405successful0skips",
   "chunk_max_additional_updates": 150,
   "max_seconds": 1800,
-  "training_started_verified": false
+  "training_started_verified": true,
+  "start_evidence": "Actual cell output VERIFIED_GPU 2.6.0+cu124 Tesla T4 START_BOUNDED_RECOVERY_FROM resume-0405-1793383309837161688"
 }
