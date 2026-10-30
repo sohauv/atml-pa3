@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active free Kaggle work (30 October 2026)
 
+- Step405 durably downloaded:405successful/zero skips12960examples,225817533bytes SHA537cb21d755d8e6f3c027ffbf3b0396c7b0d25855b01b5180d55d1582614bcef; localhash/CRC/all4recoveryfiles verified for recovery405 AND requiredstep0312. Evidence results/task1_finetuning/lora4_kaggle_step405.json. Afterlocalverification next100additionalupdates/1800s launched fromresume-0405-1793383309837161688 toward505,actualSTARTconfirmed.
+
 - Step305 durably downloaded:305successful/zero skips9760examples;150521679bytes SHA3f3487e013e729c6f53783be43bb928255a791de2742566f1c1ba19814e0c3d1 matchesGPUoutput; CRC/all4recoveryfiles verified. Evidence results/task1_finetuning/lora4_kaggle_step305.json. Next100additionalupdates/1800s requested fromresume-0305-1793380724835322952 toward405 only afterbackupverification.
 
 - Step205 durably downloaded:205successful/zero skips6560examples,112869549bytes SHA9f637a9aef66138320cd51b42d4dba79a4a25636072735eee51bba850aad1d95 matchesGPUoutput; CRC/all4recoveryfiles verified. Small evidence results/task1_finetuning/lora4_kaggle_step205.json. Next100additionalupdates/1800s launched only afterbackupverification, fromresume-0205-1793378802186882375 toward305, actualSTARTconfirmed.

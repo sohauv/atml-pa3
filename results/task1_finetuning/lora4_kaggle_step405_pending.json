@@ -1,0 +1,12 @@
+{
+  "update": 405,
+  "successful_optimizer_updates": 405,
+  "skipped_updates": 0,
+  "examples": 12960,
+  "checkpoint": "/kaggle/working/pa3/runs/lora4-kaggle-20261030/resume-0405-1793383309837161688",
+  "archive_bytes": 225817533,
+  "archive_sha256": "537cb21d755d8e6f3c027ffbf3b0396c7b0d25855b01b5180d55d1582614bcef",
+  "local_download_verified": true,
+  "evidence": "Actual Kaggle cell output, download requested but native UI inaccessible",
+  "superseded_by": "lora4_kaggle_step405.json"
+}
