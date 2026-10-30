@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active free Kaggle work (30 October 2026)
 
+- Step205 durably downloaded:205successful/zero skips6560examples,112869549bytes SHA9f637a9aef66138320cd51b42d4dba79a4a25636072735eee51bba850aad1d95 matchesGPUoutput; CRC/all4recoveryfiles verified. Small evidence results/task1_finetuning/lora4_kaggle_step205.json. Next100additionalupdates/1800s launched only afterbackupverification, fromresume-0205-1793378802186882375 toward305, actualSTARTconfirmed.
+
 - Step105 recovered durably:105successful/0skips,3360examples. Actual75201858byte archive downloaded locally, SHA29081122d4b983ffbb1cf33efc2633b77bb65e851bfd2b8f3423f7f005ade0f1 matched Kaggle; CRC and all4recoveryfiles verified. Evidence results/task1_finetuning/lora4_kaggle_step105.json. Only after localverification next100additionalupdates/1800s continuation launched fromresume-0105-1793377324209710319, actualSTARToutputconfirmed. Nexttarget205; downloadnextarchive BEFORE furtherwork.
 
 - Human authorized LoRA4 rerun. Clean checkpoint-only private input pa3-lora4-recovery-only attached after fullarchive upload failed directory collision. CPUrestore verified all4files byte-identical to input and summary5successful0skips. ActualpinnedTorch2.6.0+cu124/TeslaT4/sourcee07b5e1 and originaldataSHA verified again. At21:01Pakistan, actualoutput START_BOUNDED_RECOVERY_FROM step5 confirmed new100additionalupdates/1800s continuation started. Finallyblock creates CRCverified lora4-backup-step-NNNN.zip; MUST download/verify locally BEFORE nextchunk. Finalweightsstillnotrecovered; newrunpartial, countsunchanged.
