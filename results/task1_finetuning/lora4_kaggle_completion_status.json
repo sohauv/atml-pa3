@@ -1,0 +1,13 @@
+{
+  "method": "lora4",
+  "update": 1250,
+  "finished": true,
+  "checkpoint": "/kaggle/working/pa3/runs/lora4-kaggle-20261030/step-1250",
+  "seconds": 14478.096497998,
+  "evidence": "Actual Kaggle continuation cell output observed 2026-10-30T15:07Z",
+  "verification_remaining": [
+    "summary and successful updates",
+    "required checkpoint complete markers",
+    "preserve final outputs"
+  ]
+}

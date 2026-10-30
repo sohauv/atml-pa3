@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Active free Kaggle work (30 October 2026)
 
+- At 15:07 UTC, actual Kaggle cell output confirmed LoRA4 update1250, finished=true, checkpoint /kaggle/working/pa3/runs/lora4-kaggle-20261030/step-1250, continuation runtime14478.096497998s. Final summary/required markers and full outputs still need collection; no successful-update count inferred. Quick Save could not be activated (UI geometry unavailable, then window activation failed); existing Version1 preserves pilot only. Do not end session before final outputs are preserved.
+
 - Kaggle upload completed by human; current private notebook https://www.kaggle.com/code/sohauvv/notebookee75d6f8b7/edit. Input pa3-task1-input attached, automatically extracted byKaggle. Original training-data checksum verified inactualcelloutput.
 - Free GPU T4x2 selected; quota dialog30hoursremaining. ActualTorch2.6.0+cu124/TeslaT4 verified. CompatibleTorchVision0.21.0/TorchAudio2.6.0 installed alongside originalpinnedtrainingpackages. Unrelatedpreinstalledpackageconflictwarnings recorded, no trainingfailure.
 - LoRA4 freepilot completed5successfulupdates/160examples,zero skips,peak4.9240GiB,2,523,136trainableparameters. Complete recoverymarker and summary verified viaKagglecelloutput; results/task1_finetuning/lora4_kaggle_pilot.json. PrivateVersion1 QuickSaveSuccessful, outputs explicitlysaved. Source unchangedTask1trainer pinned toe07b5e1548065f5c913a25756d3abd3e421e6666.
