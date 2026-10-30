@@ -1,0 +1,26 @@
+{
+  "archive_sha256": "44b22873314059ef0934e3cb5aeefd5e03702f70fed17895c75e37c82352552d",
+  "archive_bytes": 79313754,
+  "saved_version": 1,
+  "checkpoint": "pa3/runs/lora4-kaggle-20261030/resume-0005-1793354870754588049/",
+  "summary": {
+    "update": 5,
+    "examples": 160,
+    "wall_seconds": 94.19893296400005,
+    "checkpoint_write_seconds": 0.16404422699997667,
+    "inference_export_seconds": 0.04005784699995729,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 5,
+    "displacement_l2": null,
+    "trainable_parameters": 2523136,
+    "peak_gpu_gib": 4.924004554748535,
+    "checkpoint_bytes": 40961320
+  },
+  "required_files": {
+    "complete.json": 17,
+    "summary.json": 367,
+    "recovery.pt": 30747214,
+    "projected_factors.pt": 10214106
+  },
+  "final_checkpoint_recovered": false
+}
