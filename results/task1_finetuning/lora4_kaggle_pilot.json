@@ -1,0 +1,27 @@
+{
+  "provider": "Kaggle",
+  "notebook_url": "https://www.kaggle.com/code/sohauvv/notebookee75d6f8b7/edit",
+  "privacy": "Private verified in Share dialog",
+  "gpu": "Tesla T4",
+  "available_accelerator": "T4 x2",
+  "observed_remaining_gpu_hours_at_start": 30,
+  "torch": "2.6.0+cu124",
+  "source_commit": "e07b5e1548065f5c913a25756d3abd3e421e6666",
+  "data_checksum_verified": true,
+  "pilot": {
+    "update": 5,
+    "examples": 160,
+    "wall_seconds": 94.19893296400005,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 5,
+    "trainable_parameters": 2523136,
+    "peak_gpu_gib": 4.924004554748535,
+    "checkpoint_bytes": 40961320,
+    "checkpoint": "/kaggle/working/pa3/runs/lora4-kaggle-20261030/resume-0005-1793354870754588049"
+  },
+  "saved_pilot_version": 1,
+  "saved_output_enabled": true,
+  "continuation_seconds": 18000,
+  "training_complete": false,
+  "evidence": "Kaggle cell output observed through browser accessibility; version1 Successful observed in Active Events"
+}

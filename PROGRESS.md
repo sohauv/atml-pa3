@@ -13,14 +13,15 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Kaggle migration awaiting access (30 October 2026)
+## Active free Kaggle work (30 October 2026)
 
-- All Modal jobs STOPPED, zero tasks. No further paid jobs will launch during migration.
-- LoRA16 verified recovery at665/1250updates,21280examples,zero skips,9.2241GiB peak,10,092,544trainableparameters. Remaining585steps plus evaluations. Checkpoint /checkpoints/runs/lora16-20261030/resume-0665-1793318754217356917; small evidence results/task1_finetuning/lora16_stopping_checkpoint.json. Controller and child independently terminal, complete marker verified, queue ownership synced.
-- Prior paid app stopped05:06:22+05,6946secondslifetime conservatively reconciled. Reservations are not billing; user30TOTAL cap remains and latestreportedactual17.26 is stale, not finalbilling.
-- Kaggle T4x2/30hours verified, configured draftOFF. Notebook import was attempted but stalled; browser reload then failedURLpolicycheck. No Kaggletraining started. Prepared notebook and private10.8MB inputarchive remain ready; transferlauncher tests2passed. Do not repeatedly retryblockedUI.
-- Task2 finaleval/figures verified,4494successfulof4500scheduledsteps/sixinitialskips disclosed;Task3offline/livecomplete;FullFT1250complete. LoRA4/L2SP/OPLoRA16 and mostTask1evaluations pending. Overall count remains76/148.
-- Immutable LoRA16step665transfer archive collected locally: outputs/kaggle/pa3-lora16-step665.zip, 148995106bytes. All four required checkpoint files collected; weights remain ignored. Monitor stopped because all compute is terminal and migration requires Kagglebrowser access. Notebook handoffguard now true only after independentlyverified terminalModalstate.
+- Kaggle upload completed by human; current private notebook https://www.kaggle.com/code/sohauvv/notebookee75d6f8b7/edit. Input pa3-task1-input attached, automatically extracted byKaggle. Original training-data checksum verified inactualcelloutput.
+- Free GPU T4x2 selected; quota dialog30hoursremaining. ActualTorch2.6.0+cu124/TeslaT4 verified. CompatibleTorchVision0.21.0/TorchAudio2.6.0 installed alongside originalpinnedtrainingpackages. Unrelatedpreinstalledpackageconflictwarnings recorded, no trainingfailure.
+- LoRA4 freepilot completed5successfulupdates/160examples,zero skips,peak4.9240GiB,2,523,136trainableparameters. Complete recoverymarker and summary verified viaKagglecelloutput; results/task1_finetuning/lora4_kaggle_pilot.json. PrivateVersion1 QuickSaveSuccessful, outputs explicitlysaved. Source unchangedTask1trainer pinned toe07b5e1548065f5c913a25756d3abd3e421e6666.
+- LoRA4 continuation submitted inexistingdraftsession from /kaggle/working/pa3/runs/lora4-kaggle-20261030/resume-0005-1793354870754588049 toward1250,18000sbounded. No fulltrainingcompletion claimed. NeverrunSave&RunAll whiledraftactive; that createsduplicatefreshsession. QuickSave withoutputsonly preservescheckpoint snapshots.
+- All Modal jobs stopped, ledgerownerNone. No newpaidModaljobs authorizedduringfreeKagglemigration. Human30TOTALcap unchanged; latestreportedactual17.26stale,notfinalbill; reservationsNOTactualusage.
+- LoRA16 immutablecheckpointstep665/1250,zero skips,preservedremoteandlocaltransferarchive. Remaining585steps; norestartfromscratch. LoRA4/L2SP/OPLoRA16 andmostTask1evaluations incomplete; L2SPmemoryneedsvalidationonKaggle, twoT4s arenotone32GiBGPU.
+- Task2finaleval/figures complete with6initialAMPskipsdisclosed;Task3offline/livecomplete;FullFT1250complete. Overallverified76/148 unchanged. Original84CPUtests passed plus2transfer tests; updatednotebookcodecompiles, no claimfull86suiterun.
 
 ## Manual checklist
 
