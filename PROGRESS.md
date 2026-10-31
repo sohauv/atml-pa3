@@ -13,7 +13,13 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Stopped for tonight (31 October 2026)
+## Continuation requested (31 October 2026)
+
+- Background workflowprepared: notebooks/pa3_kaggle_lora4_resume839.ipynb restoresall17SHA-pinnedinputfiles, preservesexactsource/recipe, executesone150-update/1800s chunk, createsCRCcheckedarchive+evidenceJSONforKaggle savedversionoutputs. All5codecellscompile;4actualCPUchecks passed(exactrestore,overwriteguard,corruptbytesfailclosed,handoffguard). NewnotebookGPUexecutionNOTlaunched; ChromehasnobackgroundconnectorandnativeAXunavailable. One-timeprivate839inputupload/notebookimport/savedbackgroundlaunchstillneeded. Instructions notebooks/KAGGLE_BACKGROUND_RESUME.md.
+
+- Humanrequestedcontinue;15minmonitorrecreated. Latest839backuphashrechecked, cleanrestorearchive prepared outputs/kaggle/pa3-lora4-step839-restore.zip112954401bytes17files SHA2060531d0a12854d1ee61bcace943d9067b6cad5d2ca25eadaa4096190481fa1,CRCverified,contains839+required312/625+metadata. KaggleAXunavailableafterfreshinventory/rebind; noGPUjoblaunched. Awaitaccessibleauthorizednotebooktoverifyquota/session/actualfiles,resume839withoutrepeatingcompletedupdates.
+
+### Previous stopping point
 
 - Humanrequestedstopaftercurrentcheckpoint. LoRA4 stoppedat839successfulupdates/26848examples/zero skips;411updatesremain to1250. Actuallocal outputs/kaggle/lora4-backup-step-0839.zip225867869bytes SHAcd0d221a442aa3930668fe7e2cffb4d411334cddf74c0a67d09a152b642cc9ab matchesKaggle; ZIPCRC/all4recoveryfiles/required312and625verified. Safecheckpointresume-0839-1793399575007780443. Evidence results/task1_finetuning/lora4_kaggle_step839.json. Noadditionaljoblaunched. IdleGPUshutdownnotverifiedbecauseKaggleAXunavailable; noUIresetperformed. Monitorbeingdeletedperhumanrequest. Overallmandatorycountsunchanged; partialtrainingisnotcomplete.
 
