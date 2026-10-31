@@ -1,0 +1,34 @@
+{
+  "update": 983,
+  "successful_optimizer_updates": 983,
+  "skipped_updates": 0,
+  "examples": 31456,
+  "checkpoint": "resume-0983-1793453722887938401",
+  "chunk_seconds": 1680.6017548089999,
+  "archive": "lora4-backup-step-0983.zip",
+  "archive_bytes": 188208463,
+  "archive_sha256": "20771b7d2455e23c6819be6b55c9dcb1f6d4c11dfaf132e1079fd5b78b579320",
+  "evidence_source": "Actual saved Kaggle notebook cell output observed 2026-10-31",
+  "local_download_verified": true,
+  "required_markers_verified_in_local_archive": true,
+  "zip_crc_passed": true,
+  "verified_checkpoint_tags": [
+    "resume-0983-1793453722887938401",
+    "step-0312",
+    "step-0625",
+    "step-0937"
+  ],
+  "summary": {
+    "update": 983,
+    "examples": 31456,
+    "wall_seconds": 11577.496028475995,
+    "checkpoint_write_seconds": 0.16507185099999333,
+    "inference_export_seconds": 0.04051725699991948,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 983,
+    "displacement_l2": null,
+    "trainable_parameters": 2523136,
+    "peak_gpu_gib": 9.096727848052979,
+    "checkpoint_bytes": 40961320
+  }
+}

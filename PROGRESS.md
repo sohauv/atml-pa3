@@ -15,6 +15,12 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- Human authorized all267 remaining updates in one background run (5400s safety bound), superseding150-update chunks. Prepared notebooks/pa3_kaggle_lora4_finish983.ipynb and clean21-file983restore ZIP; all5cells compile and actualCPUrestore983passed. Human launched saved version; actualLogs show Running for83.1s. Restore983/GPUtraining START not yet visible; no duplicate launched.
+
+- Step983 backup downloaded and locally VERIFIED:188208463bytes SHA20771b7d2455e23c6819be6b55c9dcb1f6d4c11dfaf132e1079fd5b78b579320 matches actual Kaggle output; ZIP CRC passed, all4recovery files present/nonempty for983 and required312/625/937. Embedded summary confirms983successful/zero skips/31456examples. Separate evidenceJSON download is unnecessary for recovery; local verification JSON reconstructed from actual ZIP. Latest safe local checkpoint is983,267updates remain; no next run launched yet.
+
+- Saved background chunk completed at983 successful updates/zero skips/31456 examples;267 updates remain. Actual cell output reports resume-0983-1793453722887938401 and lora4-backup-step-0983.zip188208463bytes SHA20771b7d2455e23c6819be6b55c9dcb1f6d4c11dfaf132e1079fd5b78b579320. LOCAL download and required937 marker verification PENDING; latest verified local backup remains839. Output-tab click failed geometry; safe activation was deferred by detected user input. No next run launched.
+
 - 31 October 13:22 UTC: saved background version actual Logs show Running for 653.7s, GPU T4 x2, VERIFIED_RESTORE at839 successful updates/zero skips and START_BOUNDED_RECOVERY_FROM resume-0839-1793399575007780443. Background training start is now verified; completion/output preservation remains pending. No duplicate job launched.
 
 - Background workflowprepared: notebooks/pa3_kaggle_lora4_resume839.ipynb restoresall17SHA-pinnedinputfiles, preservesexactsource/recipe, executesone150-update/1800s chunk, createsCRCcheckedarchive+evidenceJSONforKaggle savedversionoutputs. All5codecellscompile;4actualCPUchecks passed(exactrestore,overwriteguard,corruptbytesfailclosed,handoffguard). NewnotebookGPUexecutionNOTlaunched; ChromehasnobackgroundconnectorandnativeAXunavailable. One-timeprivate839inputupload/notebookimport/savedbackgroundlaunchstillneeded. Instructions notebooks/KAGGLE_BACKGROUND_RESUME.md.
