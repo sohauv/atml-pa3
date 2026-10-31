@@ -8,6 +8,24 @@ import zipfile
 from common.io import read_json, sha256, write_json
 
 
+def select_original_input(input_root, expected_sha256):
+    """Accept duplicate extracted inputs only when all three files are identical."""
+    names = ("train.jsonl", "metadata.json", "source_ids.json")
+    candidates = sorted({p.parent for p in Path(input_root).rglob("metadata.json")
+                         if all((p.parent / name).is_file() for name in names)})
+    if not candidates:
+        raise ValueError("Original Task1 input is missing")
+    identities = []
+    for candidate in candidates:
+        identity = tuple(sha256(candidate / name) for name in names)
+        if identity[0] != expected_sha256 or read_json(candidate / "metadata.json")["sha256"] != expected_sha256:
+            raise ValueError(f"Original training checksum mismatch: {candidate}")
+        identities.append(identity)
+    if len(set(identities)) != 1:
+        raise ValueError("Task1 input copies differ in metadata or source IDs; refusing ambiguous input")
+    return candidates[0]
+
+
 def unpack_inputs(archive, destination):
     """Extract only the three expected data files, then verify original bytes."""
     destination = Path(destination)
