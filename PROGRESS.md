@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- Prepared FULL fresh OPLoRA16 notebook notebooks/pa3_kaggle_oplora16_full.ipynb: originalcheckpoint independentrestart,rank16/alpha32/protection128/seed6304,1250updates/40000examples,30000s safetybound,exactsourcecf7f042 (trainer/adapters/configunchangedfrome07).15numerics/recovery/transferCPUtests passed8.832s;4codecellscompile; controllerCPUfailure-path archives recoverablecheckpoint withoutclaimingcomplete. NOTGPUexecutedyet. OnlyoriginalprivateTask1inputneeded; no newcheckpointupload.
+
 - LoRA16 FINAL LOCALBACKUP VERIFIED:446980133bytes SHA4170aaf9efd6c446a8e3496ed77bef09381db8a97404f15f8b8b943c858643aa matches actualKaggle; ZIPCRC/all4recoveryfiles937/1250passed. Finalsummary1250successful40000examples0skips; statusfinished=true. Historical312625 remain originalModalvolume, notverifiedlocally. BothLoRA4andLoRA16trainingcomplete; evaluations/OPLoRA/L2SPpending.
 
 - LoRA16 actualVersion8 output completed1250successful/40000examples/zero skips,finished=true, finalchunk5260.51775218s,cumulative14240.505097271s,10092544trainable,peak9.224046230GiB. Actualsavedarchive lora16-backup-step-1250.zip446980133bytes SHA4170aaf9efd6c446a8e3496ed77bef09381db8a97404f15f8b8b943c858643aa. LOCALdownloadverificationpending; no trainingrerun needed. Evidence results/task1_finetuning/lora16_kaggle_step1250.json. Historical312625remainremote;9371250markersmustverifyinactualdownload.
