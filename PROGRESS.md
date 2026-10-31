@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- Patched preflight-first finish804 notebook imported intoactualKaggle; actualAX restore_verified_inputs functionverified,804inputstillattached,draftOFF,handoffTrue. SubmittedSaveRunAllVersion8 ONCE; actualCommitting...observed. Queued/GPUrestoreSTARTnotyetverified; do notduplicate.
+
 - SavedVersion7 failed BEFOREtraining at step804 strictinputcount assertion (actualsavedpage error). Latest804localbackup remains safe. Replaced restore with hash-pinned directory/RAW-ZIP discovery, accepting duplicatecopies onlyifall7expectedfiles match; copyonlypinnedfiles and complete markers last, neveroverwrite. MovedCPUpreflight BEFOREpackageinstall.7checkpoint/transferCPUtests passed0.685s; actual804rawZIP+twoextractedcopies preflight passed, all5cellscompile. Trainingrecipe/all446target unchanged. RetryGPU notyetlaunched.
 
 - FullLoRA16finish804 notebook imported intoactualKaggle draft and handoffTrueverified; draftsessionOFF. UploadData dialog open forclean804input. BrowseFiles click failed geometry afterfreshbinding; exactwindowRaise failedactivation, so no screenshot/blindfiletyping attempted. Requiredhumanselect/upload PRIVATE outputs/kaggle/pa3-lora16-step804-restore.zip, thenSaveRunAll. NoGPUjoblaunched; actual804localbackup safe.
