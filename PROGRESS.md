@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- 31 October 13:22 UTC: saved background version actual Logs show Running for 653.7s, GPU T4 x2, VERIFIED_RESTORE at839 successful updates/zero skips and START_BOUNDED_RECOVERY_FROM resume-0839-1793399575007780443. Background training start is now verified; completion/output preservation remains pending. No duplicate job launched.
+
 - Background workflowprepared: notebooks/pa3_kaggle_lora4_resume839.ipynb restoresall17SHA-pinnedinputfiles, preservesexactsource/recipe, executesone150-update/1800s chunk, createsCRCcheckedarchive+evidenceJSONforKaggle savedversionoutputs. All5codecellscompile;4actualCPUchecks passed(exactrestore,overwriteguard,corruptbytesfailclosed,handoffguard). NewnotebookGPUexecutionNOTlaunched; ChromehasnobackgroundconnectorandnativeAXunavailable. One-timeprivate839inputupload/notebookimport/savedbackgroundlaunchstillneeded. Instructions notebooks/KAGGLE_BACKGROUND_RESUME.md.
 
 - Humanrequestedcontinue;15minmonitorrecreated. Latest839backuphashrechecked, cleanrestorearchive prepared outputs/kaggle/pa3-lora4-step839-restore.zip112954401bytes17files SHA2060531d0a12854d1ee61bcace943d9067b6cad5d2ca25eadaa4096190481fa1,CRCverified,contains839+required312/625+metadata. KaggleAXunavailableafterfreshinventory/rebind; noGPUjoblaunched. Awaitaccessibleauthorizednotebooktoverifyquota/session/actualfiles,resume839withoutrepeatingcompletedupdates.
