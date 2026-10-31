@@ -96,6 +96,17 @@ class EvaluationBatchingTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 positive_batch_size(value)
 
+    def test_resume_data_location_mismatch_rejected_before_gpu_load(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            previous = {"job": "evaluate1", "config": {}, "checkpoint": None,
+                        "eval_likelihood_batch_size": 8, "data_dir": "/original/task1"}
+            write_json(output / "request.json", previous)
+            with patch("task1_finetuning.evaluate.load_model") as load:
+                with self.assertRaisesRegex(ValueError, "data_dir"):
+                    evaluate_job({**previous, "data_dir": "/different/task1"}, output, 300)
+                load.assert_not_called()
+
 
 class Batch(dict):
     def to(self, device):
@@ -135,18 +146,19 @@ class EvaluationPrecisionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             checkpoint = Path(temporary) / "step-1250"
             checkpoint.mkdir()
+            data_dir = Path(temporary) / "kaggle-data"
+            write_json(data_dir / "metadata.json", metadata)
             write_json(checkpoint / "complete.json", {"update": 1250})
             torch.save({"config": {"model_revision": "test-revision", "method": "lora4",
                          "method_config": {"rank": 4, "alpha": 8}}, "update": 1250,
                         "data_sha256": "test-hash"}, checkpoint / "recovery.pt")
             torch.save(factors, checkpoint / "projected_factors.pt")
-            with patch("task1_finetuning.evaluate.read_json", return_value=metadata), \
-                 patch("task1_finetuning.evaluate.AutoTokenizer.from_pretrained", return_value=Tokenizer()), \
+            with patch("task1_finetuning.evaluate.AutoTokenizer.from_pretrained", return_value=Tokenizer()), \
                  patch("task1_finetuning.evaluate.AutoModelForCausalLM.from_pretrained", side_effect=lambda *a, **k: copy.deepcopy(starting)), \
                  patch.object(torch.nn.Module, "cuda", lambda self: self), \
                  patch.object(torch, "autocast", side_effect=cpu_autocast):
-                inference, _, verified = load_model({"model": "random-test-qwen"}, checkpoint)
-                diagnostic, _, no_inference_check = load_model({"model": "random-test-qwen"}, checkpoint, diagnostic=True)
+                inference, _, verified = load_model({"model": "random-test-qwen"}, checkpoint, data_dir=data_dir)
+                diagnostic, _, no_inference_check = load_model({"model": "random-test-qwen"}, checkpoint, diagnostic=True, data_dir=data_dir)
             self.assertEqual(inference.dtype, torch.float16)
             self.assertEqual(verified["dtype"], "float16")
             self.assertEqual(diagnostic.dtype, torch.float32)

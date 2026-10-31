@@ -1,0 +1,33 @@
+{
+  "archive": "outputs\\kaggle\\lora4-backup-step-1250.zip",
+  "archive_bytes": 225843654,
+  "archive_sha256": "bda4a01b6e597ce71da23b60664de25ee11f6f51886a6e774932ec48f22c43b4",
+  "zip_crc_passed": true,
+  "required_checkpoints_verified": [
+    312,
+    625,
+    937,
+    1250
+  ],
+  "status": {
+    "method": "lora4",
+    "update": 1250,
+    "finished": true,
+    "checkpoint": "/kaggle/working/pa3/runs/lora4-kaggle-20261030/step-1250",
+    "seconds": 3092.3413293950002
+  },
+  "summary": {
+    "update": 1250,
+    "examples": 40000,
+    "wall_seconds": 14669.834126601996,
+    "checkpoint_write_seconds": 0.16893020299994532,
+    "inference_export_seconds": 0.039559475000260136,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 1250,
+    "displacement_l2": null,
+    "trainable_parameters": 2523136,
+    "peak_gpu_gib": 9.096727848052979,
+    "checkpoint_bytes": 40961320
+  },
+  "source": "Actual downloaded Kaggle ZIP; SHA comparison to remote output pending"
+}

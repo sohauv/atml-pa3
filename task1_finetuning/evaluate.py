@@ -56,8 +56,8 @@ def json_value(value):
     return value
 
 
-def load_model(config, checkpoint=None, diagnostic=False):
-    meta = read_json("/data/task1/metadata.json")
+def load_model(config, checkpoint=None, diagnostic=False, *, data_dir="/data/task1"):
+    meta = read_json(Path(data_dir) / "metadata.json")
     revision = meta["revisions"]["model"]
     tokenizer = AutoTokenizer.from_pretrained(config["model"], revision=revision)
     base = AutoModelForCausalLM.from_pretrained(config["model"], revision=revision,
@@ -376,6 +376,8 @@ def evaluate_job(request, output, seconds, commit=lambda: None):
         for key in ("job", "config", "checkpoint", "eval_limit", "probes_dir"):
             if previous.get(key) != request.get(key):
                 raise ValueError(f"Evaluation resume protocol mismatch: {key}")
+        if previous.get("data_dir", "/data/task1") != request.get("data_dir", "/data/task1"):
+            raise ValueError("Evaluation resume protocol mismatch: data_dir")
         if (request["job"] == "evaluate1" and
                 positive_batch_size(previous.get("eval_likelihood_batch_size", 1)) != likelihood_batch_size):
             raise ValueError("Evaluation resume likelihood batch size differs; use a fresh output directory")
@@ -384,7 +386,8 @@ def evaluate_job(request, output, seconds, commit=lambda: None):
         write_json(output / "request.json", request)
     deadline = time.monotonic() + seconds - 60
     model, tokenizer, merge = load_model(request["config"], request.get("checkpoint"),
-                                         diagnostic=request["job"] in ("probe1", "diagnostics1"))
+                                         diagnostic=request["job"] in ("probe1", "diagnostics1"),
+                                         data_dir=request.get("data_dir", "/data/task1"))
     condition_path = output / "condition.json"
     if condition_path.exists() and read_json(condition_path) != model._pa3_checkpoint_identity:
         raise ValueError("Saved evaluation condition does not match the loaded checkpoint")

@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- LoRA4 final LOCAL ZIP VERIFIED:225843654bytes SHA bda4a01b6e597ce71da23b60664de25ee11f6f51886a6e774932ec48f22c43b4; CRC passed; complete/summary/recovery/projected factors present for312/625/937/1250. Final1250 successful optimizer updates,40000examples,zero skips; finished=true. Finalchunk3092.341329395s,cumulative14669.834126602s,peak9.096727848GiB,2523136trainable parameters. Source results/task1_finetuning/lora4_kaggle_step1250.json. RemoteSHAcomparison remains pending dueURLpolicy block; actual localcheckpoint verification passed. LoRA4training complete, evaluations pending.
+
 - Human authorized all267 remaining updates in one background run (5400s safety bound), superseding150-update chunks. Prepared notebooks/pa3_kaggle_lora4_finish983.ipynb and clean21-file983restore ZIP; all5cells compile and actualCPUrestore983passed. Human launched saved version; actualLogs show Running for83.1s. Restore983/GPUtraining START not yet visible; no duplicate launched.
 
 - Step983 backup downloaded and locally VERIFIED:188208463bytes SHA20771b7d2455e23c6819be6b55c9dcb1f6d4c11dfaf132e1079fd5b78b579320 matches actual Kaggle output; ZIP CRC passed, all4recovery files present/nonempty for983 and required312/625/937. Embedded summary confirms983successful/zero skips/31456examples. Separate evidenceJSON download is unnecessary for recovery; local verification JSON reconstructed from actual ZIP. Latest safe local checkpoint is983,267updates remain; no next run launched yet.
