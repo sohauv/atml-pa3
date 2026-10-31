@@ -1,0 +1,30 @@
+{
+  "method": "lora16",
+  "update": 804,
+  "successful_optimizer_updates": 804,
+  "skipped_updates": 0,
+  "examples": 25728,
+  "checkpoint": "resume-0804-1793464816710527703",
+  "chunk_seconds": 1668.5757642600001,
+  "wall_seconds": 8979.990685193,
+  "archive": "lora16-backup-step-0804.zip",
+  "archive_bytes": 297984150,
+  "archive_sha256": "521185d44f499c54cff30299af9d169a85d0d6839e9c6c227b04b34ef3342ace",
+  "local_download_verified": true,
+  "source": "Actual saved version6 notebook output; version id364275442",
+  "zip_crc_passed": true,
+  "required_recovery_files_verified": true,
+  "summary": {
+    "update": 804,
+    "examples": 25728,
+    "wall_seconds": 8979.990685193,
+    "checkpoint_write_seconds": 0.29431869800009736,
+    "inference_export_seconds": 0.078148895999675,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 804,
+    "displacement_l2": null,
+    "trainable_parameters": 10092544,
+    "peak_gpu_gib": 9.224046230316162,
+    "checkpoint_bytes": 162071784
+  }
+}

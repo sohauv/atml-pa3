@@ -15,6 +15,10 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- LoRA16 step804 LOCAL VERIFIED:297984150bytes SHA521185d44f499c54cff30299af9d169a85d0d6839e9c6c227b04b34ef3342ace matches actualVersion6 output; CRC/all4recovery files verified;804successful/zero skips25728examples.446updatesremain. Prepared notebooks/pa3_kaggle_lora16_finish804.ipynb forALL446/10800s safety bound; actualCPUrestore804passed/all5cellscompile. Clean private input outputs/kaggle/pa3-lora16-step804-restore.zip148989066bytes7files SHA61990fb07643b5f7147d926ef4ba5a4cc28f0785812cf4ce970eeb71098ceefd. Historical312/625remainremote, not inlocalrestore. NewGPUcompletionrunnotyetlaunched.
+
+- HUMAN GLOBAL PREFERENCE: all future training continuations target completion (all remaining updates to prescribed endpoint), not150-update chunks. Preserve exact recipe, resume verifiedactualcheckpoint, retain a generous safety timeout and durable saved-version outputs/localverification. CurrentLoRA16 completed804, backup downloading; verifybeforeone446-update continuation to1250. Never equate timeout/partialrun withcompletion.
+
 - 31October16:30UTC: corrected savedLoRA16Version6 actualLogs Running649.1s, VERIFIED_RESTORE665successful/zero skips and START_BOUNDED_RECOVERY_FROM resume-0665-1793318754217356917. Duplicate-input setup failure resolved; one150-update/1800s job active, targetup to815. Finalchunk checkpoint/download still pending; no duplicates.
 
 - Corrected LoRA16 notebook imported through pinned publicURL0b3efb2; actualAX source cf7f042 and select_original_input verified. Draftsessionoff/failedVersion5terminal, handoffTrue applied. Actualsidebar freeT4x2 andInterneton, quota display05:28/30hrs. SaveVersion6 dialog SaveRunAllselected; finalSave submission NOTconfirmed due unreliable nativecontrols. No duplicate launched. Human finalSave may be required.
