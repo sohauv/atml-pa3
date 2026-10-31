@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- 31October18:30UTC actualVersion8Logs Running1023.2s, VERIFIED_INPUT_COPIES3, VERIFIED_RESTORE804successful/zero skips and START_BOUNDED_RECOVERY_FROM resume-0804-1793464816710527703. Preflight/inputfixes passed onKaggle; single ALL446-update completion job nowtrainingverified. Final1250output/downloadpending; no duplicate launched.
+
 - Patched preflight-first finish804 notebook imported intoactualKaggle; actualAX restore_verified_inputs functionverified,804inputstillattached,draftOFF,handoffTrue. SubmittedSaveRunAllVersion8 ONCE; actualCommitting...observed. Queued/GPUrestoreSTARTnotyetverified; do notduplicate.
 
 - SavedVersion7 failed BEFOREtraining at step804 strictinputcount assertion (actualsavedpage error). Latest804localbackup remains safe. Replaced restore with hash-pinned directory/RAW-ZIP discovery, accepting duplicatecopies onlyifall7expectedfiles match; copyonlypinnedfiles and complete markers last, neveroverwrite. MovedCPUpreflight BEFOREpackageinstall.7checkpoint/transferCPUtests passed0.685s; actual804rawZIP+twoextractedcopies preflight passed, all5cellscompile. Trainingrecipe/all446target unchanged. RetryGPU notyetlaunched.
