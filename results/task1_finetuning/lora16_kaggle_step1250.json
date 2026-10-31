@@ -1,0 +1,19 @@
+{
+  "method": "lora16",
+  "update": 1250,
+  "finished": true,
+  "successful_optimizer_updates": 1250,
+  "skipped_updates": 0,
+  "examples": 40000,
+  "checkpoint": "/kaggle/working/pa3/runs/lora16-20261030/step-1250",
+  "chunk_seconds": 5260.517752180001,
+  "wall_seconds": 14240.505097270998,
+  "trainable_parameters": 10092544,
+  "peak_gpu_gib": 9.224046230316162,
+  "checkpoint_bytes": 162071784,
+  "archive": "lora16-backup-step-1250.zip",
+  "archive_bytes": 446980133,
+  "archive_sha256": "4170aaf9efd6c446a8e3496ed77bef09381db8a97404f15f8b8b943c858643aa",
+  "local_download_verified": false,
+  "source": "Actual saved Kaggle Version8 notebook output"
+}

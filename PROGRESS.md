@@ -15,6 +15,8 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- LoRA16 actualVersion8 output completed1250successful/40000examples/zero skips,finished=true, finalchunk5260.51775218s,cumulative14240.505097271s,10092544trainable,peak9.224046230GiB. Actualsavedarchive lora16-backup-step-1250.zip446980133bytes SHA4170aaf9efd6c446a8e3496ed77bef09381db8a97404f15f8b8b943c858643aa. LOCALdownloadverificationpending; no trainingrerun needed. Evidence results/task1_finetuning/lora16_kaggle_step1250.json. Historical312625remainremote;9371250markersmustverifyinactualdownload.
+
 - 31October18:30UTC actualVersion8Logs Running1023.2s, VERIFIED_INPUT_COPIES3, VERIFIED_RESTORE804successful/zero skips and START_BOUNDED_RECOVERY_FROM resume-0804-1793464816710527703. Preflight/inputfixes passed onKaggle; single ALL446-update completion job nowtrainingverified. Final1250output/downloadpending; no duplicate launched.
 
 - Patched preflight-first finish804 notebook imported intoactualKaggle; actualAX restore_verified_inputs functionverified,804inputstillattached,draftOFF,handoffTrue. SubmittedSaveRunAllVersion8 ONCE; actualCommitting...observed. Queued/GPUrestoreSTARTnotyetverified; do notduplicate.
