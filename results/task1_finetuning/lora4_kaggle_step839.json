@@ -1,0 +1,25 @@
+{
+  "archive_sha256": "cd0d221a442aa3930668fe7e2cffb4d411334cddf74c0a67d09a152b642cc9ab",
+  "archive_bytes": 225867869,
+  "checkpoint": "lora4-recovery/resume-0839-1793399575007780443/",
+  "summary": {
+    "update": 839,
+    "examples": 26848,
+    "wall_seconds": 9896.897441972995,
+    "checkpoint_write_seconds": 0.194431612999324,
+    "inference_export_seconds": 0.046596954998676665,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 839,
+    "displacement_l2": null,
+    "trainable_parameters": 2523136,
+    "peak_gpu_gib": 9.096727848052979,
+    "checkpoint_bytes": 40961320
+  },
+  "required_checkpoints_verified": [
+    312,
+    625
+  ],
+  "remaining_updates": 411,
+  "verification": "Actual local download matches Kaggle SHA; ZIP CRC and all recovery files verified",
+  "stopping_reason": "Human requested stop after saving current run"
+}

@@ -13,7 +13,11 @@ Optional compression is tracked separately and excluded. Percentages are calcula
 by `python -m scripts.update_progress`; they are not estimates of time remaining.
 Fine-grained items intentionally include both implementation and required evidence.
 
-## Active free Kaggle work (30 October 2026)
+## Stopped for tonight (31 October 2026)
+
+- Humanrequestedstopaftercurrentcheckpoint. LoRA4 stoppedat839successfulupdates/26848examples/zero skips;411updatesremain to1250. Actuallocal outputs/kaggle/lora4-backup-step-0839.zip225867869bytes SHAcd0d221a442aa3930668fe7e2cffb4d411334cddf74c0a67d09a152b642cc9ab matchesKaggle; ZIPCRC/all4recoveryfiles/required312and625verified. Safecheckpointresume-0839-1793399575007780443. Evidence results/task1_finetuning/lora4_kaggle_step839.json. Noadditionaljoblaunched. IdleGPUshutdownnotverifiedbecauseKaggleAXunavailable; noUIresetperformed. Monitorbeingdeletedperhumanrequest. Overallmandatorycountsunchanged; partialtrainingisnotcomplete.
+
+### Prior run history
 
 - Step693 safelydownloaded:693successful/zero skips22176examples;188236634bytes SHAd369f8aee0a731f8d10f09f9dace05810d3014c181278253ce6203faa4061b99 matchedGPUoutput. LocalCRC/latest4recoveryfiles andrequired312/625verified. Evidence results/task1_finetuning/lora4_kaggle_step693.json. Next150additionalupdates/1800s launched onlyafterverifiedbackup fromresume-0693-1793397134175734237,actualSTARTconfirmed,targetup to843.
 
