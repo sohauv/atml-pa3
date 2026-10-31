@@ -15,6 +15,10 @@ Fine-grained items intentionally include both implementation and required eviden
 
 ## Continuation requested (31 October 2026)
 
+- SavedVersion7 failed BEFOREtraining at step804 strictinputcount assertion (actualsavedpage error). Latest804localbackup remains safe. Replaced restore with hash-pinned directory/RAW-ZIP discovery, accepting duplicatecopies onlyifall7expectedfiles match; copyonlypinnedfiles and complete markers last, neveroverwrite. MovedCPUpreflight BEFOREpackageinstall.7checkpoint/transferCPUtests passed0.685s; actual804rawZIP+twoextractedcopies preflight passed, all5cellscompile. Trainingrecipe/all446target unchanged. RetryGPU notyetlaunched.
+
+- FullLoRA16finish804 notebook imported intoactualKaggle draft and handoffTrueverified; draftsessionOFF. UploadData dialog open forclean804input. BrowseFiles click failed geometry afterfreshbinding; exactwindowRaise failedactivation, so no screenshot/blindfiletyping attempted. Requiredhumanselect/upload PRIVATE outputs/kaggle/pa3-lora16-step804-restore.zip, thenSaveRunAll. NoGPUjoblaunched; actual804localbackup safe.
+
 - LoRA16 step804 LOCAL VERIFIED:297984150bytes SHA521185d44f499c54cff30299af9d169a85d0d6839e9c6c227b04b34ef3342ace matches actualVersion6 output; CRC/all4recovery files verified;804successful/zero skips25728examples.446updatesremain. Prepared notebooks/pa3_kaggle_lora16_finish804.ipynb forALL446/10800s safety bound; actualCPUrestore804passed/all5cellscompile. Clean private input outputs/kaggle/pa3-lora16-step804-restore.zip148989066bytes7files SHA61990fb07643b5f7147d926ef4ba5a4cc28f0785812cf4ce970eeb71098ceefd. Historical312/625remainremote, not inlocalrestore. NewGPUcompletionrunnotyetlaunched.
 
 - HUMAN GLOBAL PREFERENCE: all future training continuations target completion (all remaining updates to prescribed endpoint), not150-update chunks. Preserve exact recipe, resume verifiedactualcheckpoint, retain a generous safety timeout and durable saved-version outputs/localverification. CurrentLoRA16 completed804, backup downloading; verifybeforeone446-update continuation to1250. Never equate timeout/partialrun withcompletion.
