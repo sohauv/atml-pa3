@@ -1,7 +1,7 @@
 # ATML PA3 progress
 
 <!-- SUMMARY:START -->
-**Overall verified completion: 76/148 mandatory requirements (51.4%).**
+**Overall verified completion: 79/148 mandatory requirements (53.4%).**
 <!-- SUMMARY:END -->
 
 ## Counting rule
@@ -14,6 +14,8 @@ by `python -m scripts.update_progress`; they are not estimates of time remaining
 Fine-grained items intentionally include both implementation and required evidence.
 
 ## Continuation requested (31 October 2026)
+
+- OPLoRA16 FINAL LOCAL VERIFIED: outputs/kaggle/oplora16-backup-step-1250.zip1794974145bytes SHA016656d7b2036af4cf959efdbff0ff1c9255e708e9d103550d3aa870fdca8574; CRC/all4recoveryfiles3126259371250passed. All1250contiguoustraininglogs,1250successful/zero skips40000examples; actualconfigrank16alpha32protection128verified. Runtime17581.5361226s,10092544trainable,peak9.508043766GiB,finalcheckpoint485156776bytes. Evidence results/task1_finetuning/oplora16_kaggle_step1250.json; remoteSHAcomparisonpending. FourmethodsFullFT/LoRA4/LoRA16/OPLoRA16trainingcomplete. L2SPandevaluations/diagnosticsstillpending. Monitoring remainsOFF perhumanrequest; no newGPUrunlaunched.
 
 - OPLoRA16 Version9 actualsavedLogs Running380.0s, VERIFIED_GPU2.6.0+cu124TeslaT4 and START_FULL_OPLORA16 originalcheckpoint/rank16alpha32protection128seed6304target1250. SinglefullbackgroundworkerSTARTverified. ExactSVDpreprocessing/optimizerprogress notyetseparatelyobserved; no stepcount/completionclaimed. FreeT4x2Interneton,quota04:18/30hrsdisplayedbeforelaunch. No duplicate launched.
 
@@ -147,12 +149,12 @@ Fine-grained items intentionally include both implementation and required eviden
 - [ ] T120 L2-SP independently restarts, peak LR 2e-5, lambda=1e-3, completed.
 - [ ] T121 L2-SP fixed starting reference; sum .5*distance-squared over unique parameters including bias/norm, tied parameters counted once, no averaging.
 - [ ] T122 L2-SP logs Omega/lambda-Omega/total objective/final displacement plus reference storage/transfer overhead.
-- [ ] T123 LoRA rank4/alpha8 and rank16/alpha32 are separate completed runs, peak LR2e-4.
+- [x] T123 LoRA rank4/alpha8 and rank16/alpha32 are separate completed runs, peak LR2e-4. Evidence: verified local1250 summaries and recovery archives; results/task1_finetuning/lora4_kaggle_step1250.json and lora16_kaggle_step1250.json; unchanged pinned trainer/config.
 - [ ] T124 LoRA backbone frozen FP16; FP32 random-A/zero-B adapters, dropout .05, no trainable bias.
 - [ ] T125 LoRA targets q/k/v/o/gate/up/down in every layer; record total adapter counts.
-- [ ] T126 OPLoRA rank16/alpha32/protection128, same LR/settings and initial unprojected factors as LoRA16, completed.
+- [x] T126 OPLoRA rank16/alpha32/protection128, same LR/settings and initial unprojected factors as LoRA16, completed. Evidence: actual1250 contiguous logs, zero skips and saved config in oplora16_kaggle_step1250.json; matching initial-factor CPU test passed.
 - [ ] T127 OPLoRA uses fixed leading FP32 U/V, factored two-sided projections, no dense projection matrices; numerical constraints verified.
-- [ ] T128 OPLoRA computes bases once, exports projected factors, records basis storage/preprocessing/export overhead.
+- [x] T128 OPLoRA computes bases once, exports projected factors, records basis storage/preprocessing/export overhead. Evidence: actual provenance basis_bytes/preprocessing_seconds and final inference_export_seconds in oplora16_kaggle_step1250.json; all projected exports verified and saved-basis resume CPU test passed.
 - [ ] T129 Merge each adapter into a fresh backbone and check merged/unmerged logits, using projected OPLoRA factors.
 
 ### Task 1: evaluation, diagnostics and evidence (pages 3-6)
