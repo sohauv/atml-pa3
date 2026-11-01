@@ -110,7 +110,8 @@ class Task1IntegrationTests(unittest.TestCase):
                   "updates": 4, "microbatch": 2, "accumulation": 16,
                   "warmup_updates": 1, "weight_decay": .01, "betas": [.9, .999],
                   "eps": 1e-8, "clip_norm": 1.0, "checkpoints": [2, 4],
-                  "methods": {"lora4": {"lr": .001, "rank": 4, "alpha": 8}}}
+                  "methods": {"lora4": {"lr": .001, "rank": 4, "alpha": 8},
+                              "l2sp": {"lr": 2e-5, "lambda": .001}}}
         class Tokenizer:
             pad_token_id = 0
         with tempfile.TemporaryDirectory() as temporary:
@@ -149,6 +150,13 @@ class Task1IntegrationTests(unittest.TestCase):
                 whole = train("lora4", root / "whole", config, data_dir=data)
                 part = train("lora4", root / "split", config, data_dir=data, max_updates=2)
                 resumed = train("lora4", root / "split", config, data_dir=data, resume=part["checkpoint"])
+                reference_l2sp = train("l2sp", root / "l2sp-device", config, data_dir=data)
+                offload_l2sp = train("l2sp", root / "l2sp-offload", config, data_dir=data,
+                                    memory_strategy="cpu-offload")
+                offload_part = train("l2sp", root / "l2sp-resume", config, data_dir=data,
+                                     memory_strategy="cpu-offload", max_updates=2)
+                offload_resumed = train("l2sp", root / "l2sp-resume", config, data_dir=data,
+                                        memory_strategy="cpu-offload", resume=offload_part["checkpoint"])
             self.assertTrue(whole["finished"])
             self.assertTrue(resumed["finished"])
             a = torch.load(Path(whole["checkpoint"]) / "recovery.pt", weights_only=False)
@@ -160,6 +168,15 @@ class Task1IntegrationTests(unittest.TestCase):
                     torch.testing.assert_close(a["optimizer"]["state"][index][name],
                                                b["optimizer"]["state"][index][name], atol=0, rtol=0)
             torch.testing.assert_close(a["rng"]["torch"], b["rng"]["torch"], atol=0, rtol=0)
+            l2sp_states = [torch.load(Path(result["checkpoint"]) / "recovery.pt", weights_only=False)
+                          for result in (reference_l2sp, offload_l2sp, offload_resumed)]
+            for actual in l2sp_states[1:]:
+                for name, expected in l2sp_states[0]["model"].items():
+                    torch.testing.assert_close(actual["model"][name], expected, atol=0, rtol=0)
+                for index, expected in l2sp_states[0]["optimizer"]["state"].items():
+                    for key in ("step", "exp_avg", "exp_avg_sq"):
+                        torch.testing.assert_close(actual["optimizer"]["state"][index][key],
+                                                   expected[key], atol=0, rtol=0)
 
 
 if __name__ == "__main__":

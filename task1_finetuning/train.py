@@ -60,7 +60,7 @@ def save_checkpoint(model, optimizer, scaler, path, *, update, config,
     displacement = None
     if reference is not None:
         with torch.no_grad():
-            distance = sum((p.float() - reference[n]).square().sum()
+            distance = sum((p.float() - reference[n].to(p.device)).square().sum()
                            for n, p in model.named_parameters())
         displacement = distance.sqrt().item()
     write_json(path / "summary.json", {
@@ -81,10 +81,14 @@ def save_checkpoint(model, optimizer, scaler, path, *, update, config,
 
 
 def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
-          max_seconds=1800, max_updates=None, commit=lambda: None):
+          max_seconds=1800, max_updates=None, commit=lambda: None, memory_strategy="device"):
     started = time.monotonic()
     if method not in config["methods"]:
         raise ValueError(method)
+    if memory_strategy not in {"device", "cpu-offload"}:
+        raise ValueError("Unknown training memory strategy")
+    if memory_strategy == "cpu-offload" and method != "l2sp":
+        raise ValueError("CPU offload is currently validated only for L2-SP")
     if config["microbatch"] != 2 or config["accumulation"] != 16:
         raise ValueError("Task 1 requires microbatch 2, accumulation 16")
     run_dir = Path(run_dir)
@@ -102,6 +106,8 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
     spec = config["methods"][method]
     resolved = {**config, "method": method, "method_config": spec,
                 "model_revision": meta["revisions"]["model"]}
+    if memory_strategy != "device":
+        resolved["memory_strategy"] = memory_strategy
     saved = None
     if resume:
         resume = Path(resume)
@@ -122,7 +128,8 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
     reference = None
     reference_started = time.monotonic()
     if method in ("full", "l2sp"):
-        reference = {n: p.detach().clone() for n, p in model.named_parameters()}
+        reference = {n: (p.detach().to("cpu", copy=True) if memory_strategy == "cpu-offload"
+                         else p.detach().clone()) for n, p in model.named_parameters()}
     torch.cuda.synchronize()
     reference_seconds = time.monotonic() - reference_started
     preprocessing = time.monotonic()
@@ -136,7 +143,11 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
                 parameter.data = parameter.data.half()
     torch.cuda.synchronize()
     preprocessing_seconds = time.monotonic() - preprocessing
-    optimizer = torch.optim.AdamW(parameter_groups(model, config["weight_decay"]),
+    optimizer_class = torch.optim.AdamW
+    if memory_strategy == "cpu-offload":
+        from common.offload import CPUOffloadedAdamW
+        optimizer_class = CPUOffloadedAdamW
+    optimizer = optimizer_class(parameter_groups(model, config["weight_decay"]),
                                  lr=spec["lr"], betas=tuple(config["betas"]), eps=config["eps"])
     scaler = torch.amp.GradScaler("cuda")
     update, previous_seconds, previous_peak_gib, skipped_updates = 0, 0.0, 0.0, 0
@@ -152,7 +163,8 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
         for p, state in optimizer.state.items():
             for key, value in state.items():
                 if isinstance(value, torch.Tensor) and key != "step":
-                    state[key] = value.to(device=p.device, dtype=torch.float32)
+                    state[key] = value.to(device="cpu" if memory_strategy == "cpu-offload" else p.device,
+                                          dtype=torch.float32)
         scaler.load_state_dict(saved["scaler"])
         restore_rng(saved["rng"])
         update = saved["update"]
@@ -169,7 +181,11 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
                    "torch": torch.__version__,
                    "reference_bytes": sum(p.numel() * p.element_size() for p in (reference or {}).values()),
                    "basis_bytes": sum(b.numel() * b.element_size() for n, b in model.named_buffers()
-                                      if n.endswith((".U", ".V")))})
+                                      if n.endswith((".U", ".V"))),
+                   "memory_strategy": memory_strategy,
+                   "reference_device": "cpu" if memory_strategy == "cpu-offload" else "cuda",
+                   "optimizer_state_device": "cpu" if memory_strategy == "cpu-offload" else "cuda",
+                   "optimizer_host_parameter_bytes": getattr(optimizer, "host_parameter_bytes", 0)})
     model.train()
     session_id = str(time.time_ns())
     gpu_name = torch.cuda.get_device_name(0)
@@ -211,9 +227,11 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
         if spec.get("lambda", 0):
             # Backpropagate parameterwise to avoid a second model-sized autograd graph.
             for name, p in model.named_parameters():
-                penalty = .5 * (p - reference[name]).square().sum()
+                reference_value = reference[name].to(p.device)
+                penalty = .5 * (p - reference_value).square().sum()
                 omega += penalty.detach().item()
                 scaler.scale(spec["lambda"] * penalty).backward()
+                del penalty, reference_value
         scaler.unscale_(optimizer)
         grad_norm = torch.nn.utils.clip_grad_norm_(
             [p for p in model.parameters() if p.requires_grad], config["clip_norm"])

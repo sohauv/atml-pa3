@@ -47,3 +47,19 @@ class CheckpointInputTests(unittest.TestCase):
                 restore_verified_inputs(root, root / "out", "resume-0804", {"run/resume-0804/complete.json": "0" * 64})
             with self.assertRaisesRegex(ValueError, "Unsafe"):
                 restore_verified_inputs(root, root / "out", "resume-0804", {"run/../complete.json": "0" * 64})
+
+    def test_evaluation_selects_exact_manifest_among_other_method_checkpoints(self):
+        with tempfile.TemporaryDirectory() as t, tempfile.TemporaryDirectory() as output_temp:
+            root = Path(t)
+            archive, expected = self.fixture(root)
+            with zipfile.ZipFile(archive) as z:
+                z.extractall(root / "different-method")
+            (root / "different-method/run/resume-0804/recovery.pt").write_bytes(b"another method")
+            result = restore_verified_inputs(root, Path(output_temp) / "valid", "resume-0804", expected,
+                                             match_manifest_only=True)
+            self.assertEqual((result / "recovery.pt").read_bytes(), b"optimizer RNG adapters")
+            wrong = {name: "0" * 64 for name in expected}
+            with self.assertRaisesRegex(ValueError, "matches the pinned"):
+                restore_verified_inputs(root, Path(output_temp) / "wrong", "resume-0804", wrong,
+                                        match_manifest_only=True)
+            self.assertFalse((Path(output_temp) / "wrong").exists())

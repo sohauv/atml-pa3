@@ -1,7 +1,7 @@
 """Restore a hash-pinned checkpoint from extracted or zipped Kaggle inputs."""
 
 
-def restore_verified_inputs(input_root, destination, checkpoint_name, expected):
+def restore_verified_inputs(input_root, destination, checkpoint_name, expected, *, match_manifest_only=False):
     import hashlib
     from pathlib import Path, PurePosixPath
     import shutil
@@ -29,8 +29,7 @@ def restore_verified_inputs(input_root, destination, checkpoint_name, expected):
                     candidates.append(("zip", archive, name[:-len(marker)]))
     if not candidates:
         raise ValueError(f"No extracted or zipped complete {checkpoint_name} input found")
-    # Every duplicate must match the entire pinned manifest before any write.
-    for kind, location, prefix in candidates:
+    def validate(kind, location, prefix):
         if kind == "directory":
             for name, digest in relative.items():
                 file = location / name
@@ -47,7 +46,20 @@ def restore_verified_inputs(input_root, destination, checkpoint_name, expected):
                         actual = hashlib.file_digest(stream, "sha256").hexdigest()
                     if actual != digest:
                         raise ValueError(f"Checkpoint checksum mismatch: {location}:{prefix + name}")
-    kind, location, prefix = candidates[0]
+    # Common names such as step-1250 may belong to other methods. Evaluation
+    # may select only exact manifest matches; training keeps strict duplicates.
+    verified = []
+    for candidate in candidates:
+        try:
+            validate(*candidate)
+        except (ValueError, KeyError, FileNotFoundError):
+            if not match_manifest_only:
+                raise
+        else:
+            verified.append(candidate)
+    if not verified:
+        raise ValueError(f"No {checkpoint_name} input matches the pinned checkpoint manifest")
+    kind, location, prefix = verified[0]
     destination.mkdir(parents=True)
     # Copy only pinned files; complete markers come after their recovery payloads.
     order = sorted(relative, key=lambda name: (name.endswith("/complete.json"), name))
@@ -64,5 +76,5 @@ def restore_verified_inputs(input_root, destination, checkpoint_name, expected):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 with source.open(prefix + name) as stream, target.open("xb") as output:
                     shutil.copyfileobj(stream, output)
-    print("VERIFIED_INPUT_COPIES", len(candidates), flush=True)
+    print("VERIFIED_INPUT_COPIES", len(verified), flush=True)
     return destination / checkpoint_name
