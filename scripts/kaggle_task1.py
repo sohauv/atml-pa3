@@ -56,6 +56,7 @@ def main():
     parser.add_argument("--work", default="/kaggle/working/pa3")
     parser.add_argument("--method", choices=["lora4", "lora16", "oplora16", "l2sp"], default="lora4")
     parser.add_argument("--memory-strategy", choices=["device", "cpu-offload"], default="device")
+    parser.add_argument("--compact-intermediates", action="store_true")
     parser.add_argument("--seconds", type=int, default=18000)
     parser.add_argument("--max-updates", type=int)
     parser.add_argument("--resume")
@@ -85,7 +86,7 @@ def main():
     write_json(Path(args.work) / f"{args.run_id}-environment.json", evidence)
     result = train(args.method, run, config, data_dir=data, resume=args.resume,
                    max_seconds=args.seconds, max_updates=args.max_updates,
-                   memory_strategy=args.memory_strategy)
+                   memory_strategy=args.memory_strategy, compact_intermediates=args.compact_intermediates)
     print(json.dumps(result, indent=2))
 
 

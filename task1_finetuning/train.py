@@ -33,7 +33,7 @@ def load_records(data_dir, expected=40000):
 
 def save_checkpoint(model, optimizer, scaler, path, *, update, config,
                     metadata, wall_seconds, reference, commit,
-                    previous_peak_gib=0.0, skipped_updates=0):
+                    previous_peak_gib=0.0, skipped_updates=0, model_snapshot_only=False):
     checkpoint_started = time.monotonic()
     path = Path(path)
     # Never overwrite a checkpoint, even on resume or an interrupted prior write.
@@ -44,7 +44,7 @@ def save_checkpoint(model, optimizer, scaler, path, *, update, config,
     state = {k: v.detach().cpu() for k, v in model.state_dict().items()
              if not adapter or k.endswith((".A", ".B", ".U", ".V"))}
     peak_gpu_gib = max(previous_peak_gib, torch.cuda.max_memory_allocated() / 2**30)
-    torch.save({"model": state, "optimizer": optimizer.state_dict(),
+    torch.save({"model": state, "optimizer": None if model_snapshot_only else optimizer.state_dict(),
                 "scaler": scaler.state_dict(), "rng": rng_state(),
                 "update": update, "data_position": update * 32,
                 "scheduler": {"next_update": update},
@@ -54,7 +54,7 @@ def save_checkpoint(model, optimizer, scaler, path, *, update, config,
     export_started = time.monotonic()
     if adapter:
         torch.save(export_factors(model), path / "projected_factors.pt")
-    else:
+    elif not model_snapshot_only:
         model.save_pretrained(path / "model", safe_serialization=True)
     export_seconds = time.monotonic() - export_started
     displacement = None
@@ -76,13 +76,15 @@ def save_checkpoint(model, optimizer, scaler, path, *, update, config,
         "checkpoint_bytes": sum(p.stat().st_size for p in path.rglob("*") if p.is_file()),
     })
     # A completion marker is written last. Readers ignore partial checkpoints.
-    write_json(path / "complete.json", {"update": update})
+    write_json(path / "complete.json", {"update": update, "resumable": not model_snapshot_only})
     commit()
 
 
 def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
-          max_seconds=1800, max_updates=None, commit=lambda: None, memory_strategy="device"):
+          max_seconds=1800, max_updates=None, commit=lambda: None, memory_strategy="device", compact_intermediates=False):
     started = time.monotonic()
+    if compact_intermediates and method != "l2sp":
+        raise ValueError("Compact intermediates are only supported for L2-SP")
     if method not in config["methods"]:
         raise ValueError(method)
     if memory_strategy not in {"device", "cpu-offload"}:
@@ -108,11 +110,15 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
                 "model_revision": meta["revisions"]["model"]}
     if memory_strategy != "device":
         resolved["memory_strategy"] = memory_strategy
+    if compact_intermediates:
+        resolved["compact_intermediates"] = True
     saved = None
     if resume:
         resume = Path(resume)
         if not (resume / "complete.json").exists():
             raise ValueError("Cannot resume an incomplete checkpoint")
+        if read_json(resume / "complete.json").get("resumable") is False:
+            raise ValueError("Intermediate weights-only checkpoint cannot resume optimizer state")
         saved = torch.load(resume / "recovery.pt", map_location="cpu", weights_only=False)
         if saved["config"] != resolved or saved["data_sha256"] != meta["sha256"]:
             raise ValueError("Resume config/data mismatch")
@@ -261,10 +267,11 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
                             update=update, config=resolved, metadata=meta,
                             wall_seconds=previous_seconds + time.monotonic() - started,
                             reference=reference, commit=commit,
-                            previous_peak_gib=previous_peak_gib, skipped_updates=skipped_updates)
+                            previous_peak_gib=previous_peak_gib, skipped_updates=skipped_updates,
+                            model_snapshot_only=compact_intermediates and update != config["updates"])
             last_saved = update
             last_checkpoint = checkpoint_path
-    if update != last_saved or last_checkpoint is None:
+    if update != last_saved or last_checkpoint is None or (compact_intermediates and update != config["updates"]):
         # Extra recovery checkpoints do not add evaluation conditions.
         checkpoint = run_dir / f"resume-{update:04d}-{time.time_ns()}"
         save_checkpoint(model, optimizer, scaler, checkpoint, update=update,

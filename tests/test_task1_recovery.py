@@ -70,6 +70,26 @@ class Task1IntegrationTests(unittest.TestCase):
                         torch.testing.assert_close(model(self.ids).logits, fresh(self.ids).logits,
                                                    atol=2e-5, rtol=2e-4)
 
+    def test_compact_intermediate_preserves_model_without_optimizer(self):
+        model = tiny_qwen()
+        optimizer = torch.optim.AdamW(model.parameters())
+        scaler = torch.amp.GradScaler("cpu")
+        with tempfile.TemporaryDirectory() as temporary:
+            cp = Path(temporary) / "step-0312"
+            with patch("torch.cuda.max_memory_allocated", return_value=0):
+                save_checkpoint(model, optimizer, scaler, cp, update=312,
+                                config={"method_config": {}}, metadata={"sha256": "unit"},
+                                wall_seconds=0, reference=None, commit=lambda: None,
+                                model_snapshot_only=True)
+            saved = torch.load(cp / "recovery.pt", weights_only=False)
+            self.assertIsNone(saved["optimizer"])
+            self.assertFalse((cp / "model").exists())
+            self.assertFalse(json.loads((cp / "complete.json").read_text())["resumable"])
+            fresh = tiny_qwen()
+            fresh.load_state_dict(saved["model"], strict=True)
+            for name, value in model.state_dict().items():
+                torch.testing.assert_close(value, fresh.state_dict()[name], atol=0, rtol=0)
+
     def test_adapter_checkpoint_preserves_rng_optimizer_and_projected_export(self):
         model = tiny_qwen()
         inject(model, 4, 8, 3)
