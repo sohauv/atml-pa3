@@ -190,13 +190,14 @@ class Task1IntegrationTests(unittest.TestCase):
             torch.testing.assert_close(a["rng"]["torch"], b["rng"]["torch"], atol=0, rtol=0)
             l2sp_states = [torch.load(Path(result["checkpoint"]) / "recovery.pt", weights_only=False)
                           for result in (reference_l2sp, offload_l2sp, offload_resumed)]
-            for actual in l2sp_states[1:]:
-                for name, expected in l2sp_states[0]["model"].items():
-                    torch.testing.assert_close(actual["model"][name], expected, atol=0, rtol=0)
-                for index, expected in l2sp_states[0]["optimizer"]["state"].items():
+            for expected_state, actual, atol, rtol in ((l2sp_states[0], l2sp_states[1], 2e-7, 2e-5),
+                                                       (l2sp_states[1], l2sp_states[2], 0, 0)):
+                for name, expected in expected_state["model"].items():
+                    torch.testing.assert_close(actual["model"][name], expected, atol=atol, rtol=rtol)
+                for index, expected in expected_state["optimizer"]["state"].items():
                     for key in ("step", "exp_avg", "exp_avg_sq"):
                         torch.testing.assert_close(actual["optimizer"]["state"][index][key],
-                                                   expected[key], atol=0, rtol=0)
+                                                   expected[key], atol=atol, rtol=rtol)
 
 
 if __name__ == "__main__":

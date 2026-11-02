@@ -64,3 +64,45 @@ def collate(records, pad_id, device="cuda"):
         labels[i, :n] = torch.tensor(row["labels"])
         mask[i, :n] = 1
     return {"input_ids": ids.to(device), "attention_mask": mask.to(device)}, labels.to(device)
+
+
+class _ChunkedCausalSum(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, logits, labels, chunk_tokens):
+        ctx.save_for_backward(logits, labels)
+        ctx.chunk_tokens = chunk_tokens
+        total = logits.new_zeros((), dtype=torch.float32)
+        for b in range(logits.shape[0]):
+            for start in range(0, logits.shape[1] - 1, chunk_tokens):
+                end = min(start + chunk_tokens, logits.shape[1] - 1)
+                total += F.cross_entropy(logits[b, start:end].float(), labels[b, start+1:end+1],
+                                         ignore_index=-100, reduction="sum")
+        return total
+
+    @staticmethod
+    def backward(ctx, upstream):
+        logits, labels = ctx.saved_tensors
+        gradient = torch.zeros_like(logits)
+        for b in range(logits.shape[0]):
+            for start in range(0, logits.shape[1] - 1, ctx.chunk_tokens):
+                end = min(start + ctx.chunk_tokens, logits.shape[1] - 1)
+                target = labels[b, start+1:end+1]
+                valid = target != -100
+                probabilities = logits[b, start:end].float().softmax(-1)
+                indices = torch.arange(end-start, device=logits.device)
+                probabilities[indices, target.clamp_min(0)] -= 1
+                probabilities *= valid[:, None]
+                probabilities *= upstream.float()
+                gradient[b, start:end] = probabilities.to(logits.dtype)
+        return gradient, None, None
+
+
+def chunked_causal_loss(logits, labels, chunk_tokens=32):
+    """Same summed shifted FP32 CE, with a bounded FP32 vocabulary workspace.
+
+    Retains original logits and allocates one output gradient; avoids full-sequence
+    FP32 logits/log-softmax tensors. First-order training gradients only.
+    """
+    if chunk_tokens < 1:
+        raise ValueError("chunk_tokens must be positive")
+    return _ChunkedCausalSum.apply(logits, labels, chunk_tokens)

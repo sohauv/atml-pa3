@@ -110,6 +110,7 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
                 "model_revision": meta["revisions"]["model"]}
     if memory_strategy != "device":
         resolved["memory_strategy"] = memory_strategy
+        resolved["loss_implementation"] = "chunked-fp32-ce-32"
     if compact_intermediates:
         resolved["compact_intermediates"] = True
     saved = None
@@ -225,7 +226,11 @@ def train(method, run_dir, config, *, data_dir="/data/task1", resume=None,
         for offset in range(0, 32, 2):
             batch, labels = collate(group[offset:offset + 2], tokenizer.pad_token_id)
             with torch.autocast("cuda", dtype=torch.float16):
-                loss = causal_loss(model(**batch).logits, labels)
+                if memory_strategy == "cpu-offload":
+                    from common.training import chunked_causal_loss
+                    loss = chunked_causal_loss(model(**batch).logits, labels)
+                else:
+                    loss = causal_loss(model(**batch).logits, labels)
             scaler.scale(loss / tokens).backward()
             loss_sum += loss.detach().item()
             del loss, batch, labels
