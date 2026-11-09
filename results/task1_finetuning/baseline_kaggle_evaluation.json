@@ -1,0 +1,55 @@
+{
+  "archive": "outputs\\kaggle\\baseline-final-evaluation-results.zip",
+  "sha256": "09937d27b8c00f3e2148883ee10dd5c16847cff177e98dd680ba38099b1edb43",
+  "zip_crc_verified": true,
+  "status": {
+    "returncode": 0,
+    "completed_tasks": [
+      "hellaswag",
+      "boolq",
+      "arc_easy",
+      "gsm8k_cot"
+    ],
+    "all_four_complete": true,
+    "checkpoint_update": 0,
+    "smoke_limit": null
+  },
+  "sample_counts": {
+    "hellaswag": 10042,
+    "boolq": 3270,
+    "arc_easy": 2376,
+    "gsm8k_cot": 1319
+  },
+  "scores": {
+    "results": {
+      "hellaswag": {
+        "alias": "hellaswag",
+        "acc,none": 0.37582154949213303,
+        "acc_stderr,none": 0.004833444556338864,
+        "acc_norm,none": 0.4731129257120096,
+        "acc_norm_stderr,none": 0.004982561815214062
+      },
+      "boolq": {
+        "alias": "boolq",
+        "acc,none": 0.6434250764525994,
+        "acc_stderr,none": 0.00837754809941546
+      },
+      "arc_easy": {
+        "alias": "arc_easy",
+        "acc,none": 0.6085858585858586,
+        "acc_stderr,none": 0.010014917532627792,
+        "acc_norm,none": 0.5593434343434344,
+        "acc_norm_stderr,none": 0.01018726463571219
+      },
+      "gsm8k_cot": {
+        "alias": "gsm8k_cot",
+        "exact_match,strict-match": 0.0,
+        "exact_match_stderr,strict-match": 0.0,
+        "exact_match,flexible-extract": 0.4336618650492798,
+        "exact_match_stderr,flexible-extract": 0.013650728047064692
+      }
+    },
+    "complete_split": true,
+    "smoke_only": false
+  }
+}

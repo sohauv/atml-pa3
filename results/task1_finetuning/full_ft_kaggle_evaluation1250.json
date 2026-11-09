@@ -1,0 +1,48 @@
+{
+  "archive": "outputs\\kaggle\\full-ft-final-evaluation-results.zip",
+  "sha256": "107e0f9f8c3ec6d2e4158dfe996569c580ff098e7f123e2ab8fab10b4d1ff339",
+  "status": {
+    "returncode": 0,
+    "completed_tasks": [
+      "hellaswag",
+      "boolq",
+      "arc_easy",
+      "gsm8k_cot"
+    ],
+    "all_four_complete": true,
+    "checkpoint_update": 1250,
+    "smoke_limit": null
+  },
+  "scores": {
+    "results": {
+      "hellaswag": {
+        "alias": "hellaswag",
+        "acc,none": 0.3743278231428002,
+        "acc_stderr,none": 0.004829598101635545,
+        "acc_norm,none": 0.4615614419438359,
+        "acc_norm_stderr,none": 0.004975014529648974
+      },
+      "boolq": {
+        "alias": "boolq",
+        "acc,none": 0.5801223241590214,
+        "acc_stderr,none": 0.008632045504781692
+      },
+      "arc_easy": {
+        "alias": "arc_easy",
+        "acc,none": 0.6679292929292929,
+        "acc_stderr,none": 0.009663817543072557,
+        "acc_norm,none": 0.6380471380471381,
+        "acc_norm_stderr,none": 0.009860991466688474
+      },
+      "gsm8k_cot": {
+        "alias": "gsm8k_cot",
+        "exact_match,strict-match": 0.0,
+        "exact_match_stderr,strict-match": 0.0,
+        "exact_match,flexible-extract": 0.6391205458680819,
+        "exact_match_stderr,flexible-extract": 0.013228626753925136
+      }
+    },
+    "complete_split": true,
+    "smoke_only": false
+  }
+}
