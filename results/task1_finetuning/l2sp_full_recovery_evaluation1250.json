@@ -1,0 +1,1030 @@
+{
+  "archive": "outputs\\kaggle\\l2sp-full-recovery-evaluation-results.zip",
+  "sha256": "df121e9f6d95f956dc538673b0c597cb9dd6e17ecd20e1c4ce58d09b2028c5ac",
+  "status": {
+    "completed": [
+      "diagnostics",
+      "qualitative",
+      "benchmarks"
+    ],
+    "complete": true,
+    "recovery_sha256": "babbee6109113dc9bcbf1fffeb75682824df0f9ea4a39749c5837a30dac3939e"
+  },
+  "scores": {
+    "results": {
+      "hellaswag": {
+        "alias": "hellaswag",
+        "acc,none": 0.37621987651862177,
+        "acc_stderr,none": 0.004834461997944986,
+        "acc_norm,none": 0.46335391356303524,
+        "acc_norm_stderr,none": 0.004976361454341516
+      },
+      "boolq": {
+        "alias": "boolq",
+        "acc,none": 0.6232415902140673,
+        "acc_stderr,none": 0.008475244400491348
+      },
+      "arc_easy": {
+        "alias": "arc_easy",
+        "acc,none": 0.6658249158249159,
+        "acc_stderr,none": 0.00967910603291896,
+        "acc_norm,none": 0.6338383838383839,
+        "acc_norm_stderr,none": 0.009885391390947702
+      },
+      "gsm8k_cot": {
+        "alias": "gsm8k_cot",
+        "exact_match,strict-match": 0.0,
+        "exact_match_stderr,strict-match": 0.0,
+        "exact_match,flexible-extract": 0.6474601971190296,
+        "exact_match_stderr,flexible-extract": 0.013159909755930324
+      }
+    },
+    "complete_split": true,
+    "smoke_only": false
+  },
+  "diagnostics": [
+    {
+      "layer": 0,
+      "rho_128": 0.13271228969097137,
+      "eta": 0.01113672275096178,
+      "activation_ratios": [
+        {
+          "task": "hellaswag",
+          "doc_id": 6773,
+          "ratio": 0.022722674533724785
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9504,
+          "ratio": 0.02452835999429226
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5932,
+          "ratio": 0.024027107283473015
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9605,
+          "ratio": 0.02489542029798031
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6699,
+          "ratio": 0.023900628089904785
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 8476,
+          "ratio": 0.023775741457939148
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6279,
+          "ratio": 0.02325698547065258
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6102,
+          "ratio": 0.023889925330877304
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2526,
+          "ratio": 0.02867444045841694
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9811,
+          "ratio": 0.02495410479605198
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 1515,
+          "ratio": 0.017142143100500107
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9048,
+          "ratio": 0.021767228841781616
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2799,
+          "ratio": 0.019596464931964874
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 4291,
+          "ratio": 0.024623889476060867
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 75,
+          "ratio": 0.01730530709028244
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5921,
+          "ratio": 0.02354562096297741
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2,
+          "ratio": 0.017462579533457756
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 4378,
+          "ratio": 0.024138232693076134
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6254,
+          "ratio": 0.02561231143772602
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 1814,
+          "ratio": 0.01782737299799919
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 7105,
+          "ratio": 0.024803264066576958
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 3678,
+          "ratio": 0.023238040506839752
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9065,
+          "ratio": 0.02356443740427494
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2061,
+          "ratio": 0.01937847025692463
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2044,
+          "ratio": 0.016943434253335
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 8586,
+          "ratio": 0.022531842812895775
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 3848,
+          "ratio": 0.024107882753014565
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5125,
+          "ratio": 0.02377242222428322
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9563,
+          "ratio": 0.025608468800783157
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9470,
+          "ratio": 0.02342967875301838
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2590,
+          "ratio": 0.0171936247497797
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6195,
+          "ratio": 0.02247472107410431
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 672,
+          "ratio": 0.04459158331155777
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 566,
+          "ratio": 0.044067081063985825
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 546,
+          "ratio": 0.044746093451976776
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 524,
+          "ratio": 0.04444554075598717
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1247,
+          "ratio": 0.04431404173374176
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 347,
+          "ratio": 0.04440774768590927
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1291,
+          "ratio": 0.044351041316986084
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 457,
+          "ratio": 0.0443425178527832
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1211,
+          "ratio": 0.044046081602573395
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 55,
+          "ratio": 0.044250376522541046
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1094,
+          "ratio": 0.044723328202962875
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1221,
+          "ratio": 0.04409845545887947
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1164,
+          "ratio": 0.04448976740241051
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 805,
+          "ratio": 0.044378187507390976
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 704,
+          "ratio": 0.04427999630570412
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 49,
+          "ratio": 0.04456956684589386
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 460,
+          "ratio": 0.04428425803780556
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 97,
+          "ratio": 0.04392790049314499
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1009,
+          "ratio": 0.044817838817834854
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 309,
+          "ratio": 0.043954428285360336
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 706,
+          "ratio": 0.04447546228766441
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 116,
+          "ratio": 0.04398076981306076
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 467,
+          "ratio": 0.04438085854053497
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 286,
+          "ratio": 0.04437712952494621
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 183,
+          "ratio": 0.044782768934965134
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 968,
+          "ratio": 0.044861651957035065
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 707,
+          "ratio": 0.04405265673995018
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 795,
+          "ratio": 0.04466106742620468
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 634,
+          "ratio": 0.043871842324733734
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1137,
+          "ratio": 0.04467719420790672
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1107,
+          "ratio": 0.04404131695628166
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1136,
+          "ratio": 0.04462717846035957
+        }
+      ]
+    },
+    {
+      "layer": 13,
+      "rho_128": 0.14984941482543945,
+      "eta": 0.013698158785700798,
+      "activation_ratios": [
+        {
+          "task": "hellaswag",
+          "doc_id": 6773,
+          "ratio": 0.0300535187125206
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9504,
+          "ratio": 0.02791234850883484
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5932,
+          "ratio": 0.024628618732094765
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9605,
+          "ratio": 0.02596527710556984
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6699,
+          "ratio": 0.02646857686340809
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 8476,
+          "ratio": 0.031032973900437355
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6279,
+          "ratio": 0.027529843151569366
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6102,
+          "ratio": 0.025442926213145256
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2526,
+          "ratio": 0.02945895679295063
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9811,
+          "ratio": 0.030083326622843742
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 1515,
+          "ratio": 0.026067407801747322
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9048,
+          "ratio": 0.02677273564040661
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2799,
+          "ratio": 0.02925017848610878
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 4291,
+          "ratio": 0.024809954687952995
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 75,
+          "ratio": 0.024920566007494926
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5921,
+          "ratio": 0.02949056588113308
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2,
+          "ratio": 0.025413116440176964
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 4378,
+          "ratio": 0.026751495897769928
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6254,
+          "ratio": 0.036610107868909836
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 1814,
+          "ratio": 0.02710375003516674
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 7105,
+          "ratio": 0.028000611811876297
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 3678,
+          "ratio": 0.029106242582201958
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9065,
+          "ratio": 0.02815261110663414
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2061,
+          "ratio": 0.02905726060271263
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2044,
+          "ratio": 0.02618524245917797
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 8586,
+          "ratio": 0.02563980408012867
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 3848,
+          "ratio": 0.02981150522828102
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5125,
+          "ratio": 0.029584961012005806
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9563,
+          "ratio": 0.033839695155620575
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9470,
+          "ratio": 0.0250870231539011
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2590,
+          "ratio": 0.026364607736468315
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6195,
+          "ratio": 0.026395505294203758
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 672,
+          "ratio": 0.04425926133990288
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 566,
+          "ratio": 0.046073734760284424
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 546,
+          "ratio": 0.046267930418252945
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 524,
+          "ratio": 0.04508717358112335
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1247,
+          "ratio": 0.04554315656423569
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 347,
+          "ratio": 0.04700426384806633
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1291,
+          "ratio": 0.04583859443664551
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 457,
+          "ratio": 0.044753383845090866
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1211,
+          "ratio": 0.046864382922649384
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 55,
+          "ratio": 0.04668233543634415
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1094,
+          "ratio": 0.04541085660457611
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1221,
+          "ratio": 0.044952500611543655
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1164,
+          "ratio": 0.04659222438931465
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 805,
+          "ratio": 0.046376049518585205
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 704,
+          "ratio": 0.046735979616642
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 49,
+          "ratio": 0.04541342332959175
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 460,
+          "ratio": 0.045815516263246536
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 97,
+          "ratio": 0.04489593952894211
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1009,
+          "ratio": 0.0441339910030365
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 309,
+          "ratio": 0.04630236700177193
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 706,
+          "ratio": 0.045168738812208176
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 116,
+          "ratio": 0.04488324746489525
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 467,
+          "ratio": 0.04590950161218643
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 286,
+          "ratio": 0.046976156532764435
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 183,
+          "ratio": 0.0429370179772377
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 968,
+          "ratio": 0.044049084186553955
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 707,
+          "ratio": 0.04539167881011963
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 795,
+          "ratio": 0.046656448394060135
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 634,
+          "ratio": 0.04660889878869057
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1137,
+          "ratio": 0.04472504183650017
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1107,
+          "ratio": 0.047339603304862976
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1136,
+          "ratio": 0.0451483316719532
+        }
+      ]
+    },
+    {
+      "layer": 27,
+      "rho_128": 0.10714542865753174,
+      "eta": 0.00786451157182455,
+      "activation_ratios": [
+        {
+          "task": "hellaswag",
+          "doc_id": 6773,
+          "ratio": 0.026146071031689644
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9504,
+          "ratio": 0.02586984634399414
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5932,
+          "ratio": 0.02574429102241993
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9605,
+          "ratio": 0.02686087228357792
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6699,
+          "ratio": 0.025159137323498726
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 8476,
+          "ratio": 0.025776393711566925
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6279,
+          "ratio": 0.025079088285565376
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6102,
+          "ratio": 0.026980401948094368
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2526,
+          "ratio": 0.02490120381116867
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9811,
+          "ratio": 0.027582431212067604
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 1515,
+          "ratio": 0.023782188072800636
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9048,
+          "ratio": 0.02595060132443905
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2799,
+          "ratio": 0.024951906874775887
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 4291,
+          "ratio": 0.025212127715349197
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 75,
+          "ratio": 0.025436902418732643
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5921,
+          "ratio": 0.02631421387195587
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2,
+          "ratio": 0.0223297867923975
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 4378,
+          "ratio": 0.027353690937161446
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6254,
+          "ratio": 0.02576959878206253
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 1814,
+          "ratio": 0.0234925989061594
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 7105,
+          "ratio": 0.028777984902262688
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 3678,
+          "ratio": 0.025667935609817505
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9065,
+          "ratio": 0.02541840448975563
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2061,
+          "ratio": 0.025055861100554466
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2044,
+          "ratio": 0.024952510371804237
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 8586,
+          "ratio": 0.026789400726556778
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 3848,
+          "ratio": 0.025853285565972328
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 5125,
+          "ratio": 0.02583940327167511
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9563,
+          "ratio": 0.028480863198637962
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 9470,
+          "ratio": 0.026341289281845093
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 2590,
+          "ratio": 0.023637110367417336
+        },
+        {
+          "task": "hellaswag",
+          "doc_id": 6195,
+          "ratio": 0.0253310464322567
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 672,
+          "ratio": 0.017592109739780426
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 566,
+          "ratio": 0.0174931138753891
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 546,
+          "ratio": 0.02156422659754753
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 524,
+          "ratio": 0.02359047532081604
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1247,
+          "ratio": 0.01849219761788845
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 347,
+          "ratio": 0.019219638779759407
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1291,
+          "ratio": 0.01775042712688446
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 457,
+          "ratio": 0.018456745892763138
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1211,
+          "ratio": 0.019360600039362907
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 55,
+          "ratio": 0.023929066956043243
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1094,
+          "ratio": 0.0208053607493639
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1221,
+          "ratio": 0.016660677269101143
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1164,
+          "ratio": 0.020332643762230873
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 805,
+          "ratio": 0.02151503786444664
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 704,
+          "ratio": 0.016871253028512
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 49,
+          "ratio": 0.018551984801888466
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 460,
+          "ratio": 0.020242827013134956
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 97,
+          "ratio": 0.01989065110683441
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1009,
+          "ratio": 0.016721701249480247
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 309,
+          "ratio": 0.01857541874051094
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 706,
+          "ratio": 0.016725704073905945
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 116,
+          "ratio": 0.0167013481259346
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 467,
+          "ratio": 0.019510088488459587
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 286,
+          "ratio": 0.02289024367928505
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 183,
+          "ratio": 0.01726263202726841
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 968,
+          "ratio": 0.019996654242277145
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 707,
+          "ratio": 0.018183330073952675
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 795,
+          "ratio": 0.02169167809188366
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 634,
+          "ratio": 0.01719551719725132
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1137,
+          "ratio": 0.01905393972992897
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1107,
+          "ratio": 0.017656058073043823
+        },
+        {
+          "task": "gsm8k_cot",
+          "doc_id": 1136,
+          "ratio": 0.018909426406025887
+        }
+      ]
+    }
+  ],
+  "qualitative_responses": 24,
+  "annotation_subset": 6
+}

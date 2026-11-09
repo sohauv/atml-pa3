@@ -1,0 +1,74 @@
+{
+  "returncode": 0,
+  "status": {
+    "method": "l2sp",
+    "update": 1250,
+    "finished": true,
+    "checkpoint": "/kaggle/working/pa3/runs/l2sp-full-recovery-1250/step-1250",
+    "seconds": 3775.4946521970005
+  },
+  "milestone_verified": true,
+  "target_update": 1250,
+  "latest_summary": {
+    "update": 1250,
+    "examples": 40000,
+    "wall_seconds": 14737.126849258999,
+    "checkpoint_write_seconds": 34.468137752000075,
+    "inference_export_seconds": 9.896829893999893,
+    "skipped_updates": 0,
+    "successful_optimizer_updates": 1250,
+    "displacement_l2": 6.267396926879883,
+    "trainable_parameters": 596049920,
+    "peak_gpu_gib": 7.486386775970459,
+    "checkpoint_bytes": 10159540811
+  },
+  "required_markers_present": {
+    "312": false,
+    "625": false,
+    "937": false,
+    "1250": true
+  },
+  "raw_output_files": {
+    "pa3/runs/l2sp-full-recovery-1250/sessions.jsonl": {
+      "bytes": 561,
+      "sha256": "1ea79f7ee06769b55eacb99b711db369e6f31ba5bbc1795097f495ca51c9bcd5"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/status.json": {
+      "bytes": 171,
+      "sha256": "aa003759a8cd3182d1c4d3cfb7d0706825064bac963dbf8cd46216c73961c37a"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/step-1250/complete.json": {
+      "bytes": 41,
+      "sha256": "21081dc8f3a8cc655dd068d649d6457b566c79acba28ad4eac9395eeb9b15c6b"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/step-1250/model/config.json": {
+      "bytes": 727,
+      "sha256": "49dd17253de7b258c853a249af8a5058b180d2c325a852c78d713c0e6f8bd1be"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/step-1250/model/generation_config.json": {
+      "bytes": 214,
+      "sha256": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/step-1250/model/model.safetensors": {
+      "bytes": 2384234968,
+      "sha256": "8e28b6639fb89f823c0b7fc4c47b15c0b3fc2291e27a16c8c9c8123d578685d3"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/step-1250/recovery.pt": {
+      "bytes": 7775304902,
+      "sha256": "babbee6109113dc9bcbf1fffeb75682824df0f9ea4a39749c5837a30dac3939e"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/step-1250/summary.json": {
+      "bytes": 391,
+      "sha256": "a17ff8bcfca8fc7273a703d3d4466654bd5eb3315577227efed1a6fc5a2a16b4"
+    },
+    "pa3/runs/l2sp-full-recovery-1250/train.jsonl": {
+      "bytes": 103321,
+      "sha256": "9585e15060ff3415079d674dea7cfb76316957a5f81f6d237654b2c5d188ac92"
+    }
+  },
+  "note": "Preserve raw checkpoint directories in saved version outputs. No duplicate weight ZIP; download required files and verify manifest before declaring local preservation.",
+  "original_model_export_sha256": "5c3d06e9184b506d58de756ef2c040e6821cc7064d4f34507014cd387c1b1050",
+  "model_export_sha256_matches_original": false,
+  "local_download_verified": true,
+  "archive": "outputs/kaggle/l2sp-recovery-1250.zip"
+}
