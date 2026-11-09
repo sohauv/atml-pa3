@@ -189,16 +189,6 @@ Completed per-question live calls are reused on resume; the shared initial answe
 is charged to both parallel/refinement strategies. Plot and table tools consume
 actual saved results and never fill absent measurements.
 
-## Validation
-
-```powershell
-.\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
-```
-
-Tests exercise budget refusal/locking, token-weighted accumulation, projected
-adapter geometry and merge equivalence, padding, and gold-free candidate selection.
-GPU validation and full experiment results are recorded separately from CPU tests.
-
 ## Sources and attribution
 
 - Assignment manual, model/dataset identities, hyperparameters and protocols.
