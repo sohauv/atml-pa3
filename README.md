@@ -55,10 +55,3 @@ data before held-out evaluation.
   from Emergent Misalignment, used as directed by the manual. The exact downloaded
   commit and hash are in the adjacent provenance JSON. Its judging configuration
   is not executed; the assignment calls for greedy responses and manual annotation.
-
-Training/adapters/selection implementations directly implement the assignment's
-equations; no paper implementation has been copied. Preserve source attribution
-when adding external code. The manual permits coding assistance but prohibits
-generative AI from writing report language, interpretation or analysis. The PDF
-report must be written by the student; machine-readable results and plotting code
-support that work.
