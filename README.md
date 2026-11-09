@@ -5,8 +5,7 @@ Final experiment evidence is grouped by task under `results/`.
 
 ## Environment
 
-Dependency versions are in `requirements.txt`, `requirements-dev.txt`, and
-`requirements-analysis.txt`. The saved results can be inspected directly.
+Install the pinned dependencies with `python -m pip install -r requirements.txt`. The saved results can be inspected directly.
 
 ## Methodology
 
