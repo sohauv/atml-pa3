@@ -67,9 +67,7 @@ do not add evaluation conditions. Skipped AMP updates are logged explicitly.
 Only complete-split evaluations count as assignment results. Limited evaluations
 are smoke checks and are labeled as such. GSM8K uses the non-thinking chat template;
 likelihood benchmarks use stock completion prompts. No external judge API is used.
-Task 2 and Task 3 code is implemented and has CPU fixture/integration tests;
-pretrained GPU experiments and complete-split evaluations are tracked separately
-in `PROGRESS.md`. A passing CPU test is not a completed experiment.
+Saved experiment metrics are under `results/`.
 
 ## Detached experiment queue
 
