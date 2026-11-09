@@ -1,6 +1,6 @@
 # LoRA4 saved background continuation
 
-Use `pa3_kaggle_lora4_resume839.ipynb` for one bounded continuation from the
+Use the [archived LoRA4 step-839 notebook](https://github.com/sohauv/atml-pa3/blob/624ad38668aab69456b658252639e99244416b10/notebooks/pa3_kaggle_lora4_resume839.ipynb) for one bounded continuation from the
 verified step-839 checkpoint. It keeps the original source commit, packages,
 training recipe, optimizer/scaler/RNG state and training-data checksum.
 
